@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://sportsgameodds.com/docs/data-types/periods -->
+<html lang="en-US" dir="ltr" class="dark mac"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Periods Data Types | SportsGameOdds API</title>
+    
+    <meta name="generator" content="VitePress v1.5.0">
+    <style cssr-id="vueuc/binder">.v-binder-follower-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: auto;
+}
+
+.v-binder-follower-content {
+  position: absolute;
+  z-index: auto;
+}
+
+.v-binder-follower-content > * {
+  pointer-events: all;
+}</style><style cssr-id="n-global">body {
+
+ margin: 0;
+ font-size: 14px;
+ font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+ line-height: 1.6;
+ -webkit-text-size-adjust: 100%;
+ -webkit-tap-highlight-color: transparent;
+
+}
+
+body input {
+
+ font-family: inherit;
+ font-size: inherit;
+ 
+}</style><style cssr-id="n-popover">.n-popover {
+
+ transition:
+ box-shadow .3s var(--n-bezier),
+ background-color .3s var(--n-bezier),
+ color .3s var(--n-bezier);
+ position: relative;
+ font-size: var(--n-font-size);
+ color: var(--n-text-color);
+ box-shadow: var(--n-box-shadow);
+ word-break: break-word;
+ 
+}
+
+.n-popover > .n-scrollbar {
+
+ height: inherit;
+ max-height: inherit;
+ 
+}
+
+.n-popover:not(.n-popover--raw) {
+
+ background-color: var(--n-color);
+ border-radius: var(--n-border-radius);
+ 
+}
+
+.n-popover:not(.n-popover--raw):not(.n-popover--scrollable):not(.n-popover--show-header-or-footer) {
+padding: var(--n-padding);
+}
+
+.n-popover .n-popover__header {
+
+ padding: var(--n-padding);
+ border-bottom: 1px solid var(--n-divider-color);
+ transition: border-color .3s var(--n-bezier);
+ 
+}
+
+.n-popover .n-popover__footer {
+
+ padding: var(--n-padding);
+ border-top: 1px solid var(--n-divider-color);
+ transition: border-color .3s var(--n-bezier);
+ 
+}
+
+.n-popover.n-popover--scrollable .n-popover__content, .n-popover.n-popover--show-header-or-footer .n-popover__content {
+
+ padding: var(--n-padding);
+ 
+}
+
+.n-popover-shared {
+
+ transform-origin: inherit;
+ 
+}
+
+.n-popover-shared .n-popover-arrow-wrapper {
+
+ position: absolute;
+ overflow: hidden;
+ pointer-events: none;
+ 
+}
+
+.n-popover-shared .n-popover-arrow-wrapper .n-popover-arrow {
+
+ transition: background-color .3s var(--n-bezier);
+ position: absolute;
+ display: block;
+ width: calc(var(--n-arrow-height) * 1.414);
+ height: calc(var(--n-arrow-height) * 1.414);
+ box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
+ transform: rotate(45deg);
+ background-color: var(--n-color);
+ pointer-events: all;
+ 
+}
+
+.n-popover-shared.popover-transition-enter-from, .n-popover-shared.popover-transition-leave-to {
+
+ opacity: 0;
+ transform: scale(.85);
+ 
+}
+
+.n-popover-shared.popover-transition-enter-to, .n-popover-shared.popover-transition-leave-from {
+
+ transform: scale(1);
+ opacity: 1;
+ 
+}
+
+.n-popover-shared.popover-transition-enter-active {
+
+ transition:
+ box-shadow .3s var(--n-bezier),
+ background-color .3s var(--n-bezier),
+ color .3s var(--n-bezier),
+ opacity .15s var(--n-bezier-ease-out),
+ transform .15s var(--n-bezier-ease-out);
+ 
+}
+
+.n-popover-shared.popover-transition-leave-active {
+
+ transition:
+ box-shadow .3s var(--n-bezier),
+ background-color .3s var(--n-bezier),
+ color .3s var(--n-bezier),
+ opacity .15s var(--n-bezier-ease-in),
+ transform .15s var(--n-bezier-ease-in);
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared {
+
+ margin-bottom: var(--n-space);
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-bottom: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ top: 100%;
+ bottom: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ top: calc(var(--n-arrow-height) * 1.414 / -2);
+ left: calc(var(--n-arrow-offset) - var(--v-offset-left));
+ 
+}
+
+[v-placement="top"] > .n-popover-shared {
+
+ margin-bottom: var(--n-space);
+ 
+}
+
+[v-placement="top"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-bottom: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="top"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ top: 100%;
+ bottom: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ top: calc(var(--n-arrow-height) * 1.414 / -2);
+ transform: translateX(calc(var(--n-arrow-height) * 1.414 / -2)) rotate(45deg);
+ left: 50%;
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared {
+
+ margin-bottom: var(--n-space);
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-bottom: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ top: 100%;
+ bottom: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ top: calc(var(--n-arrow-height) * 1.414 / -2);
+ right: calc(var(--n-arrow-offset) + var(--v-offset-left));
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared {
+
+ margin-top: var(--n-space);
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-top: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ bottom: 100%;
+ top: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ bottom: calc(var(--n-arrow-height) * 1.414 / -2);
+ left: calc(var(--n-arrow-offset) - var(--v-offset-left));
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared {
+
+ margin-top: var(--n-space);
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-top: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ bottom: 100%;
+ top: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ bottom: calc(var(--n-arrow-height) * 1.414 / -2);
+ transform: translateX(calc(var(--n-arrow-height) * 1.414 / -2)) rotate(45deg);
+ left: 50%;
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared {
+
+ margin-top: var(--n-space);
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-top: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ bottom: 100%;
+ top: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ bottom: calc(var(--n-arrow-height) * 1.414 / -2);
+ right: calc(var(--n-arrow-offset) + var(--v-offset-left));
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared {
+
+ margin-right: var(--n-space);
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-right: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ left: 100%;
+ right: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ left: calc(var(--n-arrow-height) * 1.414 / -2);
+ top: calc(var(--n-arrow-offset-vertical) - var(--v-offset-top));
+ 
+}
+
+[v-placement="left"] > .n-popover-shared {
+
+ margin-right: var(--n-space);
+ 
+}
+
+[v-placement="left"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-right: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="left"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ left: 100%;
+ right: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ left: calc(var(--n-arrow-height) * 1.414 / -2);
+ transform: translateY(calc(var(--n-arrow-height) * 1.414 / -2)) rotate(45deg);
+ top: 50%;
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared {
+
+ margin-right: var(--n-space);
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-right: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ left: 100%;
+ right: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ left: calc(var(--n-arrow-height) * 1.414 / -2);
+ bottom: calc(var(--n-arrow-offset-vertical) + var(--v-offset-top));
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared {
+
+ margin-left: var(--n-space);
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-left: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ right: 100%;
+ left: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ right: calc(var(--n-arrow-height) * 1.414 / -2);
+ top: calc(var(--n-arrow-offset-vertical) - var(--v-offset-top));
+ 
+}
+
+[v-placement="right"] > .n-popover-shared {
+
+ margin-left: var(--n-space);
+ 
+}
+
+[v-placement="right"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-left: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="right"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ right: 100%;
+ left: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ right: calc(var(--n-arrow-height) * 1.414 / -2);
+ transform: translateY(calc(var(--n-arrow-height) * 1.414 / -2)) rotate(45deg);
+ top: 50%;
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared {
+
+ margin-left: var(--n-space);
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-left: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ right: 100%;
+ left: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ right: calc(var(--n-arrow-height) * 1.414 / -2);
+ bottom: calc(var(--n-arrow-offset-vertical) + var(--v-offset-top));
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+top: calc(max(calc((var(--v-target-height, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset-vertical)) - var(--v-offset-top));
+}
+
+[v-placement="left-start"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+top: calc(max(calc((var(--v-target-height, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset-vertical)) - var(--v-offset-top));
+}
+
+[v-placement="top-end"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+right: calc(max(calc((var(--v-target-width, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset)) + var(--v-offset-left));
+}
+
+[v-placement="bottom-end"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+right: calc(max(calc((var(--v-target-width, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset)) + var(--v-offset-left));
+}
+
+[v-placement="right-end"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+bottom: calc(max(calc((var(--v-target-height, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset-vertical)) + var(--v-offset-top));
+}
+
+[v-placement="left-end"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+bottom: calc(max(calc((var(--v-target-height, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset-vertical)) + var(--v-offset-top));
+}
+
+[v-placement="top-start"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+left: calc(max(calc((var(--v-target-width, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset)) - var(--v-offset-left));
+}
+
+[v-placement="bottom-start"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+left: calc(max(calc((var(--v-target-width, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset)) - var(--v-offset-left));
+}</style><link rel="preload stylesheet" href="https://sportsgameodds.com/docs/assets/style.BrBfoeiL.css" as="style">
+    <link rel="preload stylesheet" href="https://sportsgameodds.com/docs/vp-icons.css" as="style">
+    
+    <script type="module" src="./periodId_files/app.C-BfqjSW.js"></script>
+    <link rel="preload" href="https://sportsgameodds.com/docs/assets/inter-roman-latin.Di8DUHzh.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/framework.Dj6vamG2.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/commonjsHelpers.Cpj98o6Y.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/theme.C9jxvqu3.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/katex.DCmpTppl.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/dagre-4EVJKHTY.dRin0HhY.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/c4Diagram-6F5ED5ID.D8qeSzOF.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/flowDiagram-7ASYPVHJ.Cw5JNpIP.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/erDiagram-6RL3IURR.PeW5N5U_.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/gitGraphDiagram-NRZ2UAAF.8wRE2uZ8.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/ganttDiagram-NTVNEXSI.CFQScyWy.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/infoDiagram-A4XQUW5V.B09shxFx.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/pieDiagram-YF2LJOPJ.CehWDJci.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/quadrantDiagram-OS5C2QUG.DGmhKBIh.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/xychartDiagram-6QU3TZC5.CU4L7J6c.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/requirementDiagram-MIRIMTAZ.DewPKyE1.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/sequenceDiagram-G6AWOVSC.BqsYR8Ye.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/classDiagram-LNE6IOMH.D00ZjEpt.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/classDiagram-v2-MQ7JQ4JX.D00ZjEpt.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/stateDiagram-MAYHULR4.DiE8K_rJ.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/stateDiagram-v2-4JROLMXI.DoYyTMWS.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/journeyDiagram-G5WM74LC.Cj7r4l3X.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/timeline-definition-U7ZMHBDA.VRDkhbAo.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/mindmap-definition-GWI6TPTV.DHYzsjxX.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/kanban-definition-QRCXZQQD.C1AxTcAd.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/sankeyDiagram-Y46BX6SQ.C8jbAr-w.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/diagram-QW4FP2JN.BDvWfSqu.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/blockDiagram-ZHA2E4KO.BfBp7xaD.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/architectureDiagram-UYN6MBPD.zTgJmY33.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/virtual_mermaid-config.Bt8rYrxQ.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/introduction.md.BN42DcIu.lean.js">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://sportsgameodds.com/apple-touch-icon.png?v=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://sportsgameodds.com/favicon-32x32.png?v=1">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://sportsgameodds.com/favicon-16x16.png?v=1">
+    <link rel="mask-icon" href="https://sportsgameodds.com/safari-pinned-tab.svg?v=1" color="#081910">
+    <link rel="shortcut icon" href="https://sportsgameodds.com/favicon.ico?v=1">
+    <link rel="manifest" href="https://sportsgameodds.com/site.webmanifest?v=1">
+    <meta name="msapplication-TileColor" content="#081910">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png?v=1">
+    <meta name="theme-color" content="#081910">
+    <meta name="description" content="Understand the periods data types supported by the ours Odds API. Get detailed information on each period type.">
+    <meta name="title" content="SportsGameOdds API Documentation and Guides">
+    <meta name="robots" content="index, follow">
+    <meta name="og:locale" content="en_US">
+    <meta name="og:type" content="website">
+    <meta name="og:url" content="https://sportsgameodds.com/docs/">
+    <meta name="og:image" content="https://sportsgameodds.com/wp-content/uploads/2024/05/sgochip.png">
+    <meta name="og:type" content="website">
+    <meta name="og:site_name" content="SportsGameOdds API Documentation">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SportsGameOdds API">
+    <meta name="twitter:description" content="Explore the SportsGameOdds API documentation for detailed guides, tutorials, and resources to help you make the most of our betting odds API platform.">
+    <meta name="twitter:image" content="https://sportsgameodds.com/wp-content/uploads/2024/05/sgochip.png">
+    <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"dark",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
+    <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+  <script id="simplify-jobs-page-script" src="chrome-extension://pbanhockgagggenencehbnadejlgchfc/js/pageScript.bundle.js"></script><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/index.md.DLkzk2k6.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/explorer.md.CPWQIj1m.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/reference.md.B1Tth4OH.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/v1_introduction.md.C0Sv04RU.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/setup_getting-started.md.Bx2ts3oV.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/setup_rate-limiting.md.CU96lOtx.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_data-batches.md.Cv8nE1sV.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_handling-odds.md.G11CC-v6.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_fetching-teams.md.CPju1e69.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_response-speed.md.IRCCW57e.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_more-examples.md.BHXW0aTV.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_markets.md.CxrZAa0X.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_bookmakers.md.CWZLLw4K.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_sports.md.BRzy1o9U.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_leagues.md.CZBMM_G2.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_stats.md.zRRA4EJM.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_stat-entity.md.uUUhVmHZ.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_periods.md.DKi39JkS.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_types-and-sides.md.BvizJfL1.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_odds.md.Dm4eXean.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/info_consensus-odds.md.FY-bpKxS.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/info_v1-to-v2.md.CRydxNDa.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/help.md.BOyXe8Pn.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/faq.md.DtGGSiEu.js"><link href="chrome-extension://alhgpfoeiimagjlnfekdhkjlkiomcapa/js/css/inject.css" rel="stylesheet" type="text/css" data-apio="true"><link data-apio="true" rel="stylesheet" type="text/css" href="chrome-extension://alhgpfoeiimagjlnfekdhkjlkiomcapa/js/css/a_chrome-extension_inject_global_module_scss.css"></head>
+  <body>
+    <div id="app"><div class="Layout" data-v-c4daae71=""><!--[--><!--]--><!--[--><span tabindex="-1" data-v-b22defb4=""></span><a href="https://sportsgameodds.com/docs/data-types/periods#VPContent" class="VPSkipLink visually-hidden" data-v-b22defb4=""> Skip to content </a><!--]--><!----><header class="VPNav" data-v-c4daae71="" data-v-a46e73f0=""><div class="VPNavBar has-sidebar" data-v-a46e73f0="" data-v-bb7529ee=""><div class="wrapper" data-v-bb7529ee=""><div class="container" data-v-bb7529ee=""><div class="title" data-v-bb7529ee=""><div class="VPNavBarTitle has-sidebar" data-v-bb7529ee="" data-v-5622a072=""><a class="title" href="https://sportsgameodds.com/docs/" data-v-5622a072=""><!--[--><!--]--><!--[--><img class="VPImage logo" src="./periodId_files/sgo-logo-small.png" alt="" data-v-4d414b82=""><!--]--><span data-v-5622a072="">SportsGameOdds API</span><!--[--><!--]--></a></div></div><div class="content" data-v-bb7529ee=""><div class="content-body" data-v-bb7529ee=""><!--[--><!--]--><div class="VPNavBarSearch search" data-v-bb7529ee=""><!--[--><!----><div id="local-search"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><span class="DocSearch-Button-Container"><span class="vp-icon DocSearch-Search-Icon"></span><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key"></kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button></div><!--]--></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-bb7529ee="" data-v-1143729c=""><span id="main-nav-aria-label" class="visually-hidden" data-v-1143729c="">Main Navigation</span><!--[--><a data-v-8dbce4d0="" data-v-1143729c="" class="VPLink link vp-external-link-icon VPNavBarMenuLink" href="https://sportsgameodds.com/" target="_blank" rel="noreferrer" tabindex="0"><span data-v-8dbce4d0="">Website</span></a><a data-v-8dbce4d0="" data-v-1143729c="" class="VPLink link VPNavBarMenuLink" href="https://sportsgameodds.com/docs/introduction" tabindex="0"><span data-v-8dbce4d0="">Guides</span></a><a data-v-8dbce4d0="" data-v-1143729c="" class="VPLink link VPNavBarMenuLink" href="https://sportsgameodds.com/docs/explorer" tabindex="0"><span data-v-8dbce4d0="">Explorer</span></a><a data-v-8dbce4d0="" data-v-1143729c="" class="VPLink link VPNavBarMenuLink" href="https://sportsgameodds.com/docs/reference" tabindex="0"><span data-v-8dbce4d0="">Reference</span></a><div data-v-40e55da0="" data-v-1143729c="" class="VPFlyout VPNavBarMenuGroup"><button data-v-40e55da0="" type="button" class="button" aria-haspopup="true" aria-expanded="false"><span data-v-40e55da0="" class="text"><!----><span data-v-40e55da0="">v2</span><span data-v-40e55da0="" class="vpi-chevron-down text-icon"></span></span></button><div data-v-40e55da0="" class="menu"><!----></div></div><!--]--></nav><!----><div class="VPNavBarAppearance appearance" data-v-bb7529ee="" data-v-123fcb2f=""><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title="Switch to light theme" aria-checked="true" data-v-123fcb2f="" data-v-fa1daf57="" data-v-7012e5dd=""><span class="check" data-v-7012e5dd=""><span class="icon" data-v-7012e5dd=""><!--[--><span class="vpi-sun sun" data-v-fa1daf57=""></span><span class="vpi-moon moon" data-v-fa1daf57=""></span><!--]--></span></span></button></div><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-bb7529ee="" data-v-08b35e6f="" data-v-f2234a39=""><!--[--><a class="VPSocialLink no-icon" href="https://github.com/SportsGameOdds/sportsgameodds" aria-label="github" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-github"></span></a><a class="VPSocialLink no-icon" href="https://x.com/SportsGameOdds" aria-label="x" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-x"></span></a><a class="VPSocialLink no-icon" href="https://discord.gg/HhP9E7ZZaE" aria-label="discord" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-discord"></span></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-bb7529ee="" data-v-0c845e5d="" data-v-40e55da0=""><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-40e55da0=""><span class="vpi-more-horizontal icon" data-v-40e55da0=""></span></button><div class="menu" data-v-40e55da0=""><div class="VPMenu" data-v-40e55da0="" data-v-39eca401=""><!----><!--[--><!--[--><!----><div class="group" data-v-0c845e5d=""><div class="item appearance" data-v-0c845e5d=""><p class="label" data-v-0c845e5d="">Appearance</p><div class="appearance-action" data-v-0c845e5d=""><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title="Switch to light theme" aria-checked="true" data-v-0c845e5d="" data-v-fa1daf57="" data-v-7012e5dd=""><span class="check" data-v-7012e5dd=""><span class="icon" data-v-7012e5dd=""><!--[--><span class="vpi-sun sun" data-v-fa1daf57=""></span><span class="vpi-moon moon" data-v-fa1daf57=""></span><!--]--></span></span></button></div></div></div><div class="group" data-v-0c845e5d=""><div class="item social-links" data-v-0c845e5d=""><div class="VPSocialLinks social-links-list" data-v-0c845e5d="" data-v-f2234a39=""><!--[--><a class="VPSocialLink no-icon" href="https://github.com/SportsGameOdds/sportsgameodds" aria-label="github" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-github"></span></a><a class="VPSocialLink no-icon" href="https://x.com/SportsGameOdds" aria-label="x" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-x"></span></a><a class="VPSocialLink no-icon" href="https://discord.gg/HhP9E7ZZaE" aria-label="discord" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-discord"></span></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-bb7529ee="" data-v-670493dd=""><span class="container" data-v-670493dd=""><span class="top" data-v-670493dd=""></span><span class="middle" data-v-670493dd=""></span><span class="bottom" data-v-670493dd=""></span></span></button></div></div></div></div><div class="divider" data-v-bb7529ee=""><div class="divider-line" data-v-bb7529ee=""></div></div></div><!----></header><div class="VPLocalNav has-sidebar empty" data-v-c4daae71="" data-v-9d8129cc=""><div class="container" data-v-9d8129cc=""><button class="menu" aria-expanded="false" aria-controls="VPSidebarNav" data-v-9d8129cc=""><span class="vpi-align-left menu-icon" data-v-9d8129cc=""></span><span class="menu-text" data-v-9d8129cc="">Docs</span></button><div class="VPLocalNavOutlineDropdown" style="--vp-vh:0px;" data-v-9d8129cc="" data-v-d1de893e=""><button data-v-d1de893e=""> </button><!----></div></div></div><aside class="VPSidebar" data-v-c4daae71="" data-v-12a40e3d=""><div class="curtain" data-v-12a40e3d=""></div><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-12a40e3d=""><span class="visually-hidden" id="sidebar-aria-label" data-v-12a40e3d=""> Sidebar Navigation </span><!--[--><!--]--><!--[--><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><!----><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/reference" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Reference</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/explorer" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Data Explorer</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><div class="item" role="button" tabindex="0" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><h2 class="text" data-v-10acf738="">Basics</h2><!----></div><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/introduction" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Introduction</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/setup/getting-started" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Getting Started</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/setup/rate-limiting" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Rate Limiting</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><div class="item" role="button" tabindex="0" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><h2 class="text" data-v-10acf738="">Guides</h2><!----></div><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/data-batches" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Getting Data in Batches</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/handling-odds" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Handling Odds</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/fetching-teams" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Fetching Teams</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/response-speed" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Improving Response Times</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/more-examples" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">More Examples</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0 has-active" data-v-ec086cd5="" data-v-10acf738=""><div class="item" role="button" tabindex="0" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><h2 class="text" data-v-10acf738="">Data Types</h2><!----></div><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/markets" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Markets</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/bookmakers" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Bookmakers (bookmakerID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/sports" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Sports (sportID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/leagues" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Leagues (leagueID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/stats" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Stats (statID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/stat-entity" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Stat Entity (statEntityID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link is-active has-active" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/periods" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Periods (periodID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/types-and-sides" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Bet Types &amp; Sides (betTypeID &amp; sideID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/odds" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Putting it Together (oddID)</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><div class="item" role="button" tabindex="0" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><h2 class="text" data-v-10acf738="">Other Info</h2><!----></div><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/info/consensus-odds" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Consensus Odds</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/info/v1-to-v2" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Upgrading to v2</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><!----><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/faq" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">FAQ</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link vp-external-link-icon link" href="https://sportsgameodds.com/contact-us/" target="_blank" rel="noreferrer" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Get Help</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link vp-external-link-icon link" href="https://sportsgameodds.com/" target="_blank" rel="noreferrer" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Website</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><!--]--><!--[--><!--]--></nav></aside><div class="VPContent has-sidebar" id="VPContent" data-v-c4daae71="" data-v-d2aef184=""><div class="VPDoc has-sidebar has-aside" data-v-d2aef184="" data-v-ef3a4dda=""><!--[--><!--]--><div class="container" data-v-ef3a4dda=""><div class="aside" data-v-ef3a4dda=""><div class="aside-curtain" data-v-ef3a4dda=""></div><div class="aside-container" data-v-ef3a4dda=""><div class="aside-content" data-v-ef3a4dda=""><div class="VPDocAside" data-v-ef3a4dda="" data-v-79cae1a0=""><!--[--><!--]--><!--[--><!--]--><nav aria-labelledby="doc-outline-aria-label" class="VPDocAsideOutline" data-v-79cae1a0="" data-v-dfbd9fb8=""><div class="content" data-v-dfbd9fb8=""><div class="outline-marker" data-v-dfbd9fb8="" style="top: 33px; opacity: 0;"></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-dfbd9fb8="">On this page</div><ul class="VPDocOutlineItem root" data-v-dfbd9fb8="" data-v-da421f78=""><!--[--><!--]--></ul></div></nav><!--[--><!--]--><div class="spacer" data-v-79cae1a0=""></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-ef3a4dda=""><div class="content-container" data-v-ef3a4dda=""><!--[--><!--]--><main class="main" data-v-ef3a4dda=""><div style="position:relative;" class="vp-doc _docs_data-types_periods" data-v-ef3a4dda=""><div><h1 id="periods" tabindex="-1">Periods <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/periods#periods" aria-label="Permalink to &quot;Periods&quot;">​</a></h1><p>A period corresponds to a unit of time in a sport or league that covers the portion of an event. Each sport has its own periods. Different odds can correspond to different periods. Each period for each sport is listed below.</p><table tabindex="0"><thead><tr><th>Name</th><th>periodID</th></tr></thead><tbody><tr><td>Full Event</td><td><code>game</code></td></tr><tr><td>1st Half</td><td><code>1h</code></td></tr><tr><td>2nd Half</td><td><code>2h</code></td></tr><tr><td>1st Quarter</td><td><code>1q</code></td></tr><tr><td>2nd Quarter</td><td><code>2q</code></td></tr><tr><td>3rd Quarter</td><td><code>3q</code></td></tr><tr><td>4th Quarter</td><td><code>4q</code></td></tr><tr><td>1st 3 Quarters</td><td><code>1qx3</code></td></tr><tr><td>1st Period</td><td><code>1p</code></td></tr><tr><td>2nd Period</td><td><code>2p</code></td></tr><tr><td>3rd Period</td><td><code>3p</code></td></tr><tr><td>1st Inning</td><td><code>1i</code></td></tr><tr><td>2nd Inning</td><td><code>2i</code></td></tr><tr><td>3rd Inning</td><td><code>3i</code></td></tr><tr><td>4th Inning</td><td><code>4i</code></td></tr><tr><td>5th Inning</td><td><code>5i</code></td></tr><tr><td>6th Inning</td><td><code>6i</code></td></tr><tr><td>7th Inning</td><td><code>7i</code></td></tr><tr><td>8th Inning</td><td><code>8i</code></td></tr><tr><td>9th Inning</td><td><code>9i</code></td></tr><tr><td>1st 3 Innings</td><td><code>1ix3</code></td></tr><tr><td>1st 5 Innings</td><td><code>1ix5</code></td></tr><tr><td>1st 7 Innings</td><td><code>1ix7</code></td></tr><tr><td>1st Set</td><td><code>1s</code></td></tr><tr><td>2nd Set</td><td><code>2s</code></td></tr><tr><td>3rd Set</td><td><code>3s</code></td></tr><tr><td>4th Set</td><td><code>4s</code></td></tr><tr><td>5th Set</td><td><code>5s</code></td></tr><tr><td>1st Round</td><td><code>1r</code></td></tr><tr><td>2nd Round</td><td><code>2r</code></td></tr><tr><td>3rd Round</td><td><code>3r</code></td></tr><tr><td>4th Round</td><td><code>4r</code></td></tr><tr><td>5th Round</td><td><code>5r</code></td></tr><tr><td>6th Round</td><td><code>6r</code></td></tr><tr><td>7th Round</td><td><code>7r</code></td></tr><tr><td>8th Round</td><td><code>8r</code></td></tr><tr><td>9th Round</td><td><code>9r</code></td></tr><tr><td>10th Round</td><td><code>10r</code></td></tr><tr><td>11th Round</td><td><code>11r</code></td></tr><tr><td>12th Round</td><td><code>12r</code></td></tr><tr><td>1st 2 Rounds</td><td><code>1rx2</code></td></tr><tr><td>1st Minute</td><td><code>1m</code></td></tr><tr><td>1st 4 Minutes</td><td><code>1mx4</code></td></tr><tr><td>1st 5 Minutes</td><td><code>1mx5</code></td></tr><tr><td>1st 8 Minutes</td><td><code>1mx8</code></td></tr><tr><td>1st 10 Minutes</td><td><code>1mx10</code></td></tr><tr><td>Regulation</td><td><code>reg</code></td></tr><tr><td>Extra Time</td><td><code>ot</code></td></tr><tr><td>Penalty Shootout</td><td><code>so</code></td></tr></tbody></table></div></div></main><footer class="VPDocFooter" data-v-ef3a4dda="" data-v-07d71ff1=""><!--[--><!--]--><!----><nav class="prev-next" aria-labelledby="doc-footer-aria-label" data-v-07d71ff1=""><span class="visually-hidden" id="doc-footer-aria-label" data-v-07d71ff1="">Pager</span><div class="pager" data-v-07d71ff1=""><a class="VPLink link pager-link prev" href="https://sportsgameodds.com/docs/data-types/stat-entity" data-v-07d71ff1=""><!--[--><span class="desc" data-v-07d71ff1="">Previous page</span><span class="title" data-v-07d71ff1="">Stat Entity (statEntityID)</span><!--]--></a></div><div class="pager" data-v-07d71ff1=""><a class="VPLink link pager-link next" href="https://sportsgameodds.com/docs/data-types/types-and-sides" data-v-07d71ff1=""><!--[--><span class="desc" data-v-07d71ff1="">Next page</span><span class="title" data-v-07d71ff1="">Bet Types &amp; Sides (betTypeID &amp; sideID)</span><!--]--></a></div></nav></footer><!--[--><!--]--></div></div></div><!--[--><!--]--></div></div><footer class="VPFooter has-sidebar" data-v-c4daae71="" data-v-e3157d6d=""><div class="container" data-v-e3157d6d=""><!----><p class="copyright" data-v-e3157d6d="">Copyright (c) 2024</p></div></footer><!--[--><!--]--></div></div>
+    <script>window.__VP_HASH_MAP__=JSON.parse("{\"data-types_bookmakers.md\":\"CWZLLw4K\",\"data-types_leagues.md\":\"CZBMM_G2\",\"data-types_markets.md\":\"CxrZAa0X\",\"data-types_odds.md\":\"Dm4eXean\",\"data-types_periods.md\":\"DKi39JkS\",\"data-types_sports.md\":\"BRzy1o9U\",\"data-types_stat-entity.md\":\"uUUhVmHZ\",\"data-types_stats.md\":\"zRRA4EJM\",\"data-types_types-and-sides.md\":\"BvizJfL1\",\"explorer.md\":\"CPWQIj1m\",\"faq.md\":\"DtGGSiEu\",\"guides_data-batches.md\":\"Cv8nE1sV\",\"guides_fetching-teams.md\":\"CPju1e69\",\"guides_handling-odds.md\":\"G11CC-v6\",\"guides_more-examples.md\":\"BHXW0aTV\",\"guides_response-speed.md\":\"IRCCW57e\",\"help.md\":\"BOyXe8Pn\",\"index.md\":\"DLkzk2k6\",\"info_consensus-odds.md\":\"FY-bpKxS\",\"info_v1-to-v2.md\":\"CRydxNDa\",\"introduction.md\":\"BN42DcIu\",\"reference.md\":\"B1Tth4OH\",\"setup_getting-started.md\":\"Bx2ts3oV\",\"setup_rate-limiting.md\":\"CU96lOtx\",\"v1_data-types_bookmakers.md\":\"CSx4sXgz\",\"v1_data-types_leagues.md\":\"IfNjqPob\",\"v1_data-types_markets.md\":\"B7VeUS3V\",\"v1_data-types_odds.md\":\"DRwcbf7i\",\"v1_data-types_periods.md\":\"CJaNWJCG\",\"v1_data-types_sports.md\":\"_tBicMbv\",\"v1_data-types_stat-entity.md\":\"CqDGveE9\",\"v1_data-types_stats.md\":\"B06mTQFr\",\"v1_data-types_types-and-sides.md\":\"CeEztzDY\",\"v1_explorer.md\":\"Bp0CLP15\",\"v1_faq.md\":\"CY8iYWKE\",\"v1_guides_data-batches.md\":\"Bzz_GiPX\",\"v1_guides_fetching-teams.md\":\"C0_dhKSR\",\"v1_guides_handling-odds.md\":\"D9mZdJ9H\",\"v1_guides_more-examples.md\":\"CndG4Foo\",\"v1_guides_response-speed.md\":\"DCm3v1xn\",\"v1_help.md\":\"DqWZkSRU\",\"v1_index.md\":\"BNm_UJ_Q\",\"v1_info_consensus-odds.md\":\"YVpwxVBx\",\"v1_info_v1-to-v2.md\":\"Coq47Ae9\",\"v1_introduction.md\":\"C0Sv04RU\",\"v1_reference.md\":\"B26FLrsR\",\"v1_setup_getting-started.md\":\"BmUYPpH_\",\"v1_setup_rate-limiting.md\":\"BQDQaQd7\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"en-US\",\"dir\":\"ltr\",\"title\":\"SportsGameOdds API\",\"description\":\"Explore the SportsGameOdds API Documentation for detailed guides, tutorials, and resources to make the most of our betting odds API platform. Start learning today!\",\"base\":\"/docs/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":\"dark\",\"themeConfig\":{\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/SportsGameOdds/sportsgameodds\"},{\"icon\":\"x\",\"link\":\"https://x.com/SportsGameOdds\"},{\"icon\":\"discord\",\"link\":\"https://discord.gg/HhP9E7ZZaE\"}],\"logo\":\"sgo-logo-small.png\",\"nav\":[{\"text\":\"Website\",\"link\":\"https://sportsgameodds.com\"},{\"text\":\"Guides\",\"link\":\"/introduction\"},{\"text\":\"Explorer\",\"link\":\"/explorer\"},{\"text\":\"Reference\",\"link\":\"/reference\"},{\"text\":\"Version\",\"items\":[{\"text\":\"v2\",\"link\":\"/v2\"},{\"text\":\"v1\",\"link\":\"/v1\"}]}],\"footer\":{\"message\":\"\",\"copyright\":\"Copyright (c) 2024\"},\"search\":{\"provider\":\"local\"},\"outline\":\"deep\",\"sidebarMenuLabel\":\"Docs\",\"returnToTopLabel\":\" \",\"sidebar\":{\"/\":[{\"text\":\"Reference\",\"link\":\"/reference\"},{\"text\":\"Data Explorer\",\"link\":\"/explorer\"},{\"text\":\"Basics\",\"items\":[{\"text\":\"Introduction\",\"link\":\"/introduction\"},{\"text\":\"Getting Started\",\"link\":\"/setup/getting-started\"},{\"text\":\"Rate Limiting\",\"link\":\"/setup/rate-limiting\"}]},{\"text\":\"Guides\",\"items\":[{\"text\":\"Getting Data in Batches\",\"link\":\"/guides/data-batches\"},{\"text\":\"Handling Odds\",\"link\":\"/guides/handling-odds\"},{\"text\":\"Fetching Teams\",\"link\":\"/guides/fetching-teams\"},{\"text\":\"Improving Response Times\",\"link\":\"/guides/response-speed\"},{\"text\":\"More Examples\",\"link\":\"/guides/more-examples\"}]},{\"text\":\"Data Types\",\"items\":[{\"text\":\"Markets\",\"link\":\"/data-types/markets\"},{\"text\":\"Bookmakers (bookmakerID)\",\"link\":\"/data-types/bookmakers\"},{\"text\":\"Sports (sportID)\",\"link\":\"/data-types/sports\"},{\"text\":\"Leagues (leagueID)\",\"link\":\"/data-types/leagues\"},{\"text\":\"Stats (statID)\",\"link\":\"/data-types/stats\"},{\"text\":\"Stat Entity (statEntityID)\",\"link\":\"/data-types/stat-entity\"},{\"text\":\"Periods (periodID)\",\"link\":\"/data-types/periods\"},{\"text\":\"Bet Types & Sides (betTypeID & sideID)\",\"link\":\"/data-types/types-and-sides\"},{\"text\":\"Putting it Together (oddID)\",\"link\":\"/data-types/odds\"}]},{\"text\":\"Other Info\",\"items\":[{\"text\":\"Consensus Odds\",\"link\":\"/info/consensus-odds\"},{\"text\":\"Upgrading to v2\",\"link\":\"/info/v1-to-v2\"}]},{\"text\":\"FAQ\",\"link\":\"/faq\"},{\"text\":\"Get Help\",\"link\":\"https://sportsgameodds.com/contact-us/\"},{\"text\":\"Website\",\"link\":\"https://sportsgameodds.com\"}],\"/v2/\":[{\"text\":\"Reference\",\"link\":\"/v2/reference\"},{\"text\":\"Data Explorer\",\"link\":\"/v2/explorer\"},{\"text\":\"Basics\",\"items\":[{\"text\":\"Introduction\",\"link\":\"/v2/introduction\"},{\"text\":\"Getting Started\",\"link\":\"/v2/setup/getting-started\"},{\"text\":\"Rate Limiting\",\"link\":\"/v2/setup/rate-limiting\"}]},{\"text\":\"Guides\",\"items\":[{\"text\":\"Getting Data in Batches\",\"link\":\"/v2/guides/data-batches\"},{\"text\":\"Handling Odds\",\"link\":\"/v2/guides/handling-odds\"},{\"text\":\"Fetching Teams\",\"link\":\"/v2/guides/fetching-teams\"},{\"text\":\"Improving Response Times\",\"link\":\"/v2/guides/response-speed\"},{\"text\":\"More Examples\",\"link\":\"/v2/guides/more-examples\"}]},{\"text\":\"Data Types\",\"items\":[{\"text\":\"Markets\",\"link\":\"/v2/data-types/markets\"},{\"text\":\"Bookmakers (bookmakerID)\",\"link\":\"/v2/data-types/bookmakers\"},{\"text\":\"Sports (sportID)\",\"link\":\"/v2/data-types/sports\"},{\"text\":\"Leagues (leagueID)\",\"link\":\"/v2/data-types/leagues\"},{\"text\":\"Stats (statID)\",\"link\":\"/v2/data-types/stats\"},{\"text\":\"Stat Entity (statEntityID)\",\"link\":\"/v2/data-types/stat-entity\"},{\"text\":\"Periods (periodID)\",\"link\":\"/v2/data-types/periods\"},{\"text\":\"Bet Types & Sides (betTypeID & sideID)\",\"link\":\"/v2/data-types/types-and-sides\"},{\"text\":\"Putting it Together (oddID)\",\"link\":\"/v2/data-types/odds\"}]},{\"text\":\"Other Info\",\"items\":[{\"text\":\"Consensus Odds\",\"link\":\"/v2/info/consensus-odds\"},{\"text\":\"Upgrading to v2\",\"link\":\"/v2/info/v1-to-v2\"}]},{\"text\":\"FAQ\",\"link\":\"/v2/faq\"},{\"text\":\"Get Help\",\"link\":\"https://sportsgameodds.com/contact-us/\"},{\"text\":\"Website\",\"link\":\"https://sportsgameodds.com\"}],\"/v1/\":[{\"text\":\"Reference\",\"link\":\"/v1/reference\"},{\"text\":\"Data Explorer\",\"link\":\"/v1/explorer\"},{\"text\":\"Basics\",\"items\":[{\"text\":\"Introduction\",\"link\":\"/v1/introduction\"},{\"text\":\"Getting Started\",\"link\":\"/v1/setup/getting-started\"},{\"text\":\"Rate Limiting\",\"link\":\"/v1/setup/rate-limiting\"}]},{\"text\":\"Guides\",\"items\":[{\"text\":\"Getting Data in Batches\",\"link\":\"/v1/guides/data-batches\"},{\"text\":\"Handling Odds\",\"link\":\"/v1/guides/handling-odds\"},{\"text\":\"Fetching Teams\",\"link\":\"/v1/guides/fetching-teams\"},{\"text\":\"Improving Response Times\",\"link\":\"/v1/guides/response-speed\"},{\"text\":\"More Examples\",\"link\":\"/v1/guides/more-examples\"}]},{\"text\":\"Data Types\",\"items\":[{\"text\":\"Markets\",\"link\":\"/v1/data-types/markets\"},{\"text\":\"Bookmakers (bookmakerID)\",\"link\":\"/v1/data-types/bookmakers\"},{\"text\":\"Sports (sportID)\",\"link\":\"/v1/data-types/sports\"},{\"text\":\"Leagues (leagueID)\",\"link\":\"/v1/data-types/leagues\"},{\"text\":\"Stats (statID)\",\"link\":\"/v1/data-types/stats\"},{\"text\":\"Stat Entity (statEntityID)\",\"link\":\"/v1/data-types/stat-entity\"},{\"text\":\"Periods (periodID)\",\"link\":\"/v1/data-types/periods\"},{\"text\":\"Bet Types & Sides (betTypeID & sideID)\",\"link\":\"/v1/data-types/types-and-sides\"},{\"text\":\"Putting it Together (oddID)\",\"link\":\"/v1/data-types/odds\"}]},{\"text\":\"Other Info\",\"items\":[{\"text\":\"Consensus Odds\",\"link\":\"/v1/info/consensus-odds\"},{\"text\":\"Upgrading to v2\",\"link\":\"/v1/info/v1-to-v2\"}]},{\"text\":\"FAQ\",\"link\":\"/v1/faq\"},{\"text\":\"Get Help\",\"link\":\"https://sportsgameodds.com/contact-us/\"},{\"text\":\"Website\",\"link\":\"https://sportsgameodds.com\"}]}},\"locales\":{},\"scrollOffset\":134,\"cleanUrls\":true}");</script>
+    
+  
+<div style="position: relative;" id="zp-9-3-3-apollo-root-apollo_everywhere"><div class="zp" data-has-tooltip-listener=""><div></div><div class="x_b61J5" data-disable-focus-trap="true"></div><div class="x_dQldU" aria-live="polite" aria-atomic="true" data-disable-focus-trap="true"></div><span data-name="tooltip-listener" aria-hidden="true" style="display: none;"></span></div></div></body><div id="select-text-to-keyword" data-v-app=""><!----><section class="fh-w-1 fh=h-1" style="position: fixed; z-index: 2147483647; left: 877.688px; top: 738.5px;"></section><!----></div></html>

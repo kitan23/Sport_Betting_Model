@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://sportsgameodds.com/docs/data-types/stats -->
+<html lang="en-US" dir="ltr" class="dark mac"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Stats Data Types | SportsGameOdds API</title>
+    
+    <meta name="generator" content="VitePress v1.5.0">
+    <style cssr-id="vueuc/binder">.v-binder-follower-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: auto;
+}
+
+.v-binder-follower-content {
+  position: absolute;
+  z-index: auto;
+}
+
+.v-binder-follower-content > * {
+  pointer-events: all;
+}</style><style cssr-id="n-global">body {
+
+ margin: 0;
+ font-size: 14px;
+ font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+ line-height: 1.6;
+ -webkit-text-size-adjust: 100%;
+ -webkit-tap-highlight-color: transparent;
+
+}
+
+body input {
+
+ font-family: inherit;
+ font-size: inherit;
+ 
+}</style><style cssr-id="n-popover">.n-popover {
+
+ transition:
+ box-shadow .3s var(--n-bezier),
+ background-color .3s var(--n-bezier),
+ color .3s var(--n-bezier);
+ position: relative;
+ font-size: var(--n-font-size);
+ color: var(--n-text-color);
+ box-shadow: var(--n-box-shadow);
+ word-break: break-word;
+ 
+}
+
+.n-popover > .n-scrollbar {
+
+ height: inherit;
+ max-height: inherit;
+ 
+}
+
+.n-popover:not(.n-popover--raw) {
+
+ background-color: var(--n-color);
+ border-radius: var(--n-border-radius);
+ 
+}
+
+.n-popover:not(.n-popover--raw):not(.n-popover--scrollable):not(.n-popover--show-header-or-footer) {
+padding: var(--n-padding);
+}
+
+.n-popover .n-popover__header {
+
+ padding: var(--n-padding);
+ border-bottom: 1px solid var(--n-divider-color);
+ transition: border-color .3s var(--n-bezier);
+ 
+}
+
+.n-popover .n-popover__footer {
+
+ padding: var(--n-padding);
+ border-top: 1px solid var(--n-divider-color);
+ transition: border-color .3s var(--n-bezier);
+ 
+}
+
+.n-popover.n-popover--scrollable .n-popover__content, .n-popover.n-popover--show-header-or-footer .n-popover__content {
+
+ padding: var(--n-padding);
+ 
+}
+
+.n-popover-shared {
+
+ transform-origin: inherit;
+ 
+}
+
+.n-popover-shared .n-popover-arrow-wrapper {
+
+ position: absolute;
+ overflow: hidden;
+ pointer-events: none;
+ 
+}
+
+.n-popover-shared .n-popover-arrow-wrapper .n-popover-arrow {
+
+ transition: background-color .3s var(--n-bezier);
+ position: absolute;
+ display: block;
+ width: calc(var(--n-arrow-height) * 1.414);
+ height: calc(var(--n-arrow-height) * 1.414);
+ box-shadow: 0 0 8px 0 rgba(0, 0, 0, .12);
+ transform: rotate(45deg);
+ background-color: var(--n-color);
+ pointer-events: all;
+ 
+}
+
+.n-popover-shared.popover-transition-enter-from, .n-popover-shared.popover-transition-leave-to {
+
+ opacity: 0;
+ transform: scale(.85);
+ 
+}
+
+.n-popover-shared.popover-transition-enter-to, .n-popover-shared.popover-transition-leave-from {
+
+ transform: scale(1);
+ opacity: 1;
+ 
+}
+
+.n-popover-shared.popover-transition-enter-active {
+
+ transition:
+ box-shadow .3s var(--n-bezier),
+ background-color .3s var(--n-bezier),
+ color .3s var(--n-bezier),
+ opacity .15s var(--n-bezier-ease-out),
+ transform .15s var(--n-bezier-ease-out);
+ 
+}
+
+.n-popover-shared.popover-transition-leave-active {
+
+ transition:
+ box-shadow .3s var(--n-bezier),
+ background-color .3s var(--n-bezier),
+ color .3s var(--n-bezier),
+ opacity .15s var(--n-bezier-ease-in),
+ transform .15s var(--n-bezier-ease-in);
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared {
+
+ margin-bottom: var(--n-space);
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-bottom: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ top: 100%;
+ bottom: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top-start"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ top: calc(var(--n-arrow-height) * 1.414 / -2);
+ left: calc(var(--n-arrow-offset) - var(--v-offset-left));
+ 
+}
+
+[v-placement="top"] > .n-popover-shared {
+
+ margin-bottom: var(--n-space);
+ 
+}
+
+[v-placement="top"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-bottom: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="top"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ top: 100%;
+ bottom: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ top: calc(var(--n-arrow-height) * 1.414 / -2);
+ transform: translateX(calc(var(--n-arrow-height) * 1.414 / -2)) rotate(45deg);
+ left: 50%;
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared {
+
+ margin-bottom: var(--n-space);
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-bottom: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ top: 100%;
+ bottom: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="top-end"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ top: calc(var(--n-arrow-height) * 1.414 / -2);
+ right: calc(var(--n-arrow-offset) + var(--v-offset-left));
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared {
+
+ margin-top: var(--n-space);
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-top: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ bottom: 100%;
+ top: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom-start"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ bottom: calc(var(--n-arrow-height) * 1.414 / -2);
+ left: calc(var(--n-arrow-offset) - var(--v-offset-left));
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared {
+
+ margin-top: var(--n-space);
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-top: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ bottom: 100%;
+ top: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ bottom: calc(var(--n-arrow-height) * 1.414 / -2);
+ transform: translateX(calc(var(--n-arrow-height) * 1.414 / -2)) rotate(45deg);
+ left: 50%;
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared {
+
+ margin-top: var(--n-space);
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-top: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ bottom: 100%;
+ top: auto;
+ height: var(--n-space-arrow);
+ 
+}
+
+[v-placement="bottom-end"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ bottom: calc(var(--n-arrow-height) * 1.414 / -2);
+ right: calc(var(--n-arrow-offset) + var(--v-offset-left));
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared {
+
+ margin-right: var(--n-space);
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-right: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ left: 100%;
+ right: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left-start"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ left: calc(var(--n-arrow-height) * 1.414 / -2);
+ top: calc(var(--n-arrow-offset-vertical) - var(--v-offset-top));
+ 
+}
+
+[v-placement="left"] > .n-popover-shared {
+
+ margin-right: var(--n-space);
+ 
+}
+
+[v-placement="left"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-right: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="left"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ left: 100%;
+ right: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ left: calc(var(--n-arrow-height) * 1.414 / -2);
+ transform: translateY(calc(var(--n-arrow-height) * 1.414 / -2)) rotate(45deg);
+ top: 50%;
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared {
+
+ margin-right: var(--n-space);
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-right: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ left: 100%;
+ right: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="left-end"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ left: calc(var(--n-arrow-height) * 1.414 / -2);
+ bottom: calc(var(--n-arrow-offset-vertical) + var(--v-offset-top));
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared {
+
+ margin-left: var(--n-space);
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-left: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ right: 100%;
+ left: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ right: calc(var(--n-arrow-height) * 1.414 / -2);
+ top: calc(var(--n-arrow-offset-vertical) - var(--v-offset-top));
+ 
+}
+
+[v-placement="right"] > .n-popover-shared {
+
+ margin-left: var(--n-space);
+ 
+}
+
+[v-placement="right"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-left: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="right"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ right: 100%;
+ left: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ right: calc(var(--n-arrow-height) * 1.414 / -2);
+ transform: translateY(calc(var(--n-arrow-height) * 1.414 / -2)) rotate(45deg);
+ top: 50%;
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared {
+
+ margin-left: var(--n-space);
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared.n-popover-shared--show-arrow {
+
+ margin-left: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared.n-popover-shared--overlap {
+
+ margin: 0;
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared > .n-popover-arrow-wrapper {
+
+ right: 0;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ right: 100%;
+ left: auto;
+ width: var(--n-space-arrow);
+ 
+}
+
+[v-placement="right-end"] > .n-popover-shared > .n-popover-arrow-wrapper .n-popover-arrow {
+
+ right: calc(var(--n-arrow-height) * 1.414 / -2);
+ bottom: calc(var(--n-arrow-offset-vertical) + var(--v-offset-top));
+ 
+}
+
+[v-placement="right-start"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+top: calc(max(calc((var(--v-target-height, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset-vertical)) - var(--v-offset-top));
+}
+
+[v-placement="left-start"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+top: calc(max(calc((var(--v-target-height, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset-vertical)) - var(--v-offset-top));
+}
+
+[v-placement="top-end"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+right: calc(max(calc((var(--v-target-width, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset)) + var(--v-offset-left));
+}
+
+[v-placement="bottom-end"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+right: calc(max(calc((var(--v-target-width, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset)) + var(--v-offset-left));
+}
+
+[v-placement="right-end"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+bottom: calc(max(calc((var(--v-target-height, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset-vertical)) + var(--v-offset-top));
+}
+
+[v-placement="left-end"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+bottom: calc(max(calc((var(--v-target-height, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset-vertical)) + var(--v-offset-top));
+}
+
+[v-placement="top-start"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+left: calc(max(calc((var(--v-target-width, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset)) - var(--v-offset-left));
+}
+
+[v-placement="bottom-start"] > .n-popover-shared.n-popover-shared--center-arrow .n-popover-arrow {
+left: calc(max(calc((var(--v-target-width, 0px) - var(--n-arrow-height) * 1.414) / 2), var(--n-arrow-offset)) - var(--v-offset-left));
+}</style><link rel="preload stylesheet" href="https://sportsgameodds.com/docs/assets/style.BrBfoeiL.css" as="style">
+    <link rel="preload stylesheet" href="https://sportsgameodds.com/docs/vp-icons.css" as="style">
+    
+    <script type="module" src="./statId_files/app.C-BfqjSW.js"></script>
+    <link rel="preload" href="https://sportsgameodds.com/docs/assets/inter-roman-latin.Di8DUHzh.woff2" as="font" type="font/woff2" crossorigin="">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/framework.Dj6vamG2.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/commonjsHelpers.Cpj98o6Y.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/theme.C9jxvqu3.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/katex.DCmpTppl.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/dagre-4EVJKHTY.dRin0HhY.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/c4Diagram-6F5ED5ID.D8qeSzOF.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/flowDiagram-7ASYPVHJ.Cw5JNpIP.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/erDiagram-6RL3IURR.PeW5N5U_.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/gitGraphDiagram-NRZ2UAAF.8wRE2uZ8.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/ganttDiagram-NTVNEXSI.CFQScyWy.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/infoDiagram-A4XQUW5V.B09shxFx.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/pieDiagram-YF2LJOPJ.CehWDJci.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/quadrantDiagram-OS5C2QUG.DGmhKBIh.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/xychartDiagram-6QU3TZC5.CU4L7J6c.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/requirementDiagram-MIRIMTAZ.DewPKyE1.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/sequenceDiagram-G6AWOVSC.BqsYR8Ye.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/classDiagram-LNE6IOMH.D00ZjEpt.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/classDiagram-v2-MQ7JQ4JX.D00ZjEpt.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/stateDiagram-MAYHULR4.DiE8K_rJ.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/stateDiagram-v2-4JROLMXI.DoYyTMWS.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/journeyDiagram-G5WM74LC.Cj7r4l3X.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/timeline-definition-U7ZMHBDA.VRDkhbAo.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/mindmap-definition-GWI6TPTV.DHYzsjxX.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/kanban-definition-QRCXZQQD.C1AxTcAd.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/sankeyDiagram-Y46BX6SQ.C8jbAr-w.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/diagram-QW4FP2JN.BDvWfSqu.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/blockDiagram-ZHA2E4KO.BfBp7xaD.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/architectureDiagram-UYN6MBPD.zTgJmY33.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/chunks/virtual_mermaid-config.Bt8rYrxQ.js">
+    <link rel="modulepreload" href="https://sportsgameodds.com/docs/assets/introduction.md.BN42DcIu.lean.js">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://sportsgameodds.com/apple-touch-icon.png?v=1">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://sportsgameodds.com/favicon-32x32.png?v=1">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://sportsgameodds.com/favicon-16x16.png?v=1">
+    <link rel="mask-icon" href="https://sportsgameodds.com/safari-pinned-tab.svg?v=1" color="#081910">
+    <link rel="shortcut icon" href="https://sportsgameodds.com/favicon.ico?v=1">
+    <link rel="manifest" href="https://sportsgameodds.com/site.webmanifest?v=1">
+    <meta name="msapplication-TileColor" content="#081910">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png?v=1">
+    <meta name="theme-color" content="#081910">
+    <meta name="description" content="Get detailed information on the stats data types provided by the Sports Game Odds API. Access comprehensive stats for accurate analysis.">
+    <meta name="title" content="SportsGameOdds API Documentation and Guides">
+    <meta name="robots" content="index, follow">
+    <meta name="og:locale" content="en_US">
+    <meta name="og:type" content="website">
+    <meta name="og:url" content="https://sportsgameodds.com/docs/">
+    <meta name="og:image" content="https://sportsgameodds.com/wp-content/uploads/2024/05/sgochip.png">
+    <meta name="og:type" content="website">
+    <meta name="og:site_name" content="SportsGameOdds API Documentation">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SportsGameOdds API">
+    <meta name="twitter:description" content="Explore the SportsGameOdds API documentation for detailed guides, tutorials, and resources to help you make the most of our betting odds API platform.">
+    <meta name="twitter:image" content="https://sportsgameodds.com/wp-content/uploads/2024/05/sgochip.png">
+    <script id="check-dark-mode">(()=>{const e=localStorage.getItem("vitepress-theme-appearance")||"dark",a=window.matchMedia("(prefers-color-scheme: dark)").matches;(!e||e==="auto"?a:e==="dark")&&document.documentElement.classList.add("dark")})();</script>
+    <script id="check-mac-os">document.documentElement.classList.toggle("mac",/Mac|iPhone|iPod|iPad/i.test(navigator.platform));</script>
+  <script id="simplify-jobs-page-script" src="chrome-extension://pbanhockgagggenencehbnadejlgchfc/js/pageScript.bundle.js"></script><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/index.md.DLkzk2k6.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/explorer.md.CPWQIj1m.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/reference.md.B1Tth4OH.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/v1_introduction.md.C0Sv04RU.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/setup_getting-started.md.Bx2ts3oV.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/setup_rate-limiting.md.CU96lOtx.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_data-batches.md.Cv8nE1sV.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_handling-odds.md.G11CC-v6.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_fetching-teams.md.CPju1e69.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_response-speed.md.IRCCW57e.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/guides_more-examples.md.BHXW0aTV.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_markets.md.CxrZAa0X.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_bookmakers.md.CWZLLw4K.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_sports.md.BRzy1o9U.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_leagues.md.CZBMM_G2.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_stats.md.zRRA4EJM.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_stat-entity.md.uUUhVmHZ.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_periods.md.DKi39JkS.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_types-and-sides.md.BvizJfL1.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/data-types_odds.md.Dm4eXean.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/info_consensus-odds.md.FY-bpKxS.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/info_v1-to-v2.md.CRydxNDa.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/help.md.BOyXe8Pn.js"><link rel="prefetch" href="https://sportsgameodds.com/docs/assets/faq.md.DtGGSiEu.js"><link href="chrome-extension://alhgpfoeiimagjlnfekdhkjlkiomcapa/js/css/inject.css" rel="stylesheet" type="text/css" data-apio="true"><link data-apio="true" rel="stylesheet" type="text/css" href="chrome-extension://alhgpfoeiimagjlnfekdhkjlkiomcapa/js/css/a_chrome-extension_inject_global_module_scss.css"></head>
+  <body>
+    <div id="app"><div class="Layout" data-v-c4daae71=""><!--[--><!--]--><!--[--><span tabindex="-1" data-v-b22defb4=""></span><a href="https://sportsgameodds.com/docs/data-types/stats#VPContent" class="VPSkipLink visually-hidden" data-v-b22defb4=""> Skip to content </a><!--]--><!----><header class="VPNav" data-v-c4daae71="" data-v-a46e73f0=""><div class="VPNavBar has-sidebar" data-v-a46e73f0="" data-v-bb7529ee=""><div class="wrapper" data-v-bb7529ee=""><div class="container" data-v-bb7529ee=""><div class="title" data-v-bb7529ee=""><div class="VPNavBarTitle has-sidebar" data-v-bb7529ee="" data-v-5622a072=""><a class="title" href="https://sportsgameodds.com/docs/" data-v-5622a072=""><!--[--><!--]--><!--[--><img class="VPImage logo" src="./statId_files/sgo-logo-small.png" alt="" data-v-4d414b82=""><!--]--><span data-v-5622a072="">SportsGameOdds API</span><!--[--><!--]--></a></div></div><div class="content" data-v-bb7529ee=""><div class="content-body" data-v-bb7529ee=""><!--[--><!--]--><div class="VPNavBarSearch search" data-v-bb7529ee=""><!--[--><!----><div id="local-search"><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><span class="DocSearch-Button-Container"><span class="vp-icon DocSearch-Search-Icon"></span><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key"></kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button></div><!--]--></div><nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" data-v-bb7529ee="" data-v-1143729c=""><span id="main-nav-aria-label" class="visually-hidden" data-v-1143729c="">Main Navigation</span><!--[--><a data-v-8dbce4d0="" data-v-1143729c="" class="VPLink link vp-external-link-icon VPNavBarMenuLink" href="https://sportsgameodds.com/" target="_blank" rel="noreferrer" tabindex="0"><span data-v-8dbce4d0="">Website</span></a><a data-v-8dbce4d0="" data-v-1143729c="" class="VPLink link VPNavBarMenuLink" href="https://sportsgameodds.com/docs/introduction" tabindex="0"><span data-v-8dbce4d0="">Guides</span></a><a data-v-8dbce4d0="" data-v-1143729c="" class="VPLink link VPNavBarMenuLink" href="https://sportsgameodds.com/docs/explorer" tabindex="0"><span data-v-8dbce4d0="">Explorer</span></a><a data-v-8dbce4d0="" data-v-1143729c="" class="VPLink link VPNavBarMenuLink" href="https://sportsgameodds.com/docs/reference" tabindex="0"><span data-v-8dbce4d0="">Reference</span></a><div data-v-40e55da0="" data-v-1143729c="" class="VPFlyout VPNavBarMenuGroup"><button data-v-40e55da0="" type="button" class="button" aria-haspopup="true" aria-expanded="false"><span data-v-40e55da0="" class="text"><!----><span data-v-40e55da0="">v2</span><span data-v-40e55da0="" class="vpi-chevron-down text-icon"></span></span></button><div data-v-40e55da0="" class="menu"><!----></div></div><!--]--></nav><!----><div class="VPNavBarAppearance appearance" data-v-bb7529ee="" data-v-123fcb2f=""><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title="Switch to light theme" aria-checked="true" data-v-123fcb2f="" data-v-fa1daf57="" data-v-7012e5dd=""><span class="check" data-v-7012e5dd=""><span class="icon" data-v-7012e5dd=""><!--[--><span class="vpi-sun sun" data-v-fa1daf57=""></span><span class="vpi-moon moon" data-v-fa1daf57=""></span><!--]--></span></span></button></div><div class="VPSocialLinks VPNavBarSocialLinks social-links" data-v-bb7529ee="" data-v-08b35e6f="" data-v-f2234a39=""><!--[--><a class="VPSocialLink no-icon" href="https://github.com/SportsGameOdds/sportsgameodds" aria-label="github" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-github"></span></a><a class="VPSocialLink no-icon" href="https://x.com/SportsGameOdds" aria-label="x" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-x"></span></a><a class="VPSocialLink no-icon" href="https://discord.gg/HhP9E7ZZaE" aria-label="discord" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-discord"></span></a><!--]--></div><div class="VPFlyout VPNavBarExtra extra" data-v-bb7529ee="" data-v-0c845e5d="" data-v-40e55da0=""><button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation" data-v-40e55da0=""><span class="vpi-more-horizontal icon" data-v-40e55da0=""></span></button><div class="menu" data-v-40e55da0=""><div class="VPMenu" data-v-40e55da0="" data-v-39eca401=""><!----><!--[--><!--[--><!----><div class="group" data-v-0c845e5d=""><div class="item appearance" data-v-0c845e5d=""><p class="label" data-v-0c845e5d="">Appearance</p><div class="appearance-action" data-v-0c845e5d=""><button class="VPSwitch VPSwitchAppearance" type="button" role="switch" title="Switch to light theme" aria-checked="true" data-v-0c845e5d="" data-v-fa1daf57="" data-v-7012e5dd=""><span class="check" data-v-7012e5dd=""><span class="icon" data-v-7012e5dd=""><!--[--><span class="vpi-sun sun" data-v-fa1daf57=""></span><span class="vpi-moon moon" data-v-fa1daf57=""></span><!--]--></span></span></button></div></div></div><div class="group" data-v-0c845e5d=""><div class="item social-links" data-v-0c845e5d=""><div class="VPSocialLinks social-links-list" data-v-0c845e5d="" data-v-f2234a39=""><!--[--><a class="VPSocialLink no-icon" href="https://github.com/SportsGameOdds/sportsgameodds" aria-label="github" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-github"></span></a><a class="VPSocialLink no-icon" href="https://x.com/SportsGameOdds" aria-label="x" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-x"></span></a><a class="VPSocialLink no-icon" href="https://discord.gg/HhP9E7ZZaE" aria-label="discord" target="_blank" rel="noopener" data-v-f2234a39="" data-v-fbf39218=""><span class="vpi-social-discord"></span></a><!--]--></div></div></div><!--]--><!--]--></div></div></div><!--[--><!--]--><button type="button" class="VPNavBarHamburger hamburger" aria-label="mobile navigation" aria-expanded="false" aria-controls="VPNavScreen" data-v-bb7529ee="" data-v-670493dd=""><span class="container" data-v-670493dd=""><span class="top" data-v-670493dd=""></span><span class="middle" data-v-670493dd=""></span><span class="bottom" data-v-670493dd=""></span></span></button></div></div></div></div><div class="divider" data-v-bb7529ee=""><div class="divider-line" data-v-bb7529ee=""></div></div></div><!----></header><div class="VPLocalNav has-sidebar" data-v-c4daae71="" data-v-9d8129cc=""><div class="container" data-v-9d8129cc=""><button class="menu" aria-expanded="false" aria-controls="VPSidebarNav" data-v-9d8129cc=""><span class="vpi-align-left menu-icon" data-v-9d8129cc=""></span><span class="menu-text" data-v-9d8129cc="">Docs</span></button><div class="VPLocalNavOutlineDropdown" style="--vp-vh:0px;" data-v-9d8129cc="" data-v-d1de893e=""><button data-v-d1de893e="" class=""><span data-v-d1de893e="" class="menu-text">On this page</span><span data-v-d1de893e="" class="vpi-chevron-right icon"></span></button><!----></div></div></div><aside class="VPSidebar" data-v-c4daae71="" data-v-12a40e3d=""><div class="curtain" data-v-12a40e3d=""></div><nav class="nav" id="VPSidebarNav" aria-labelledby="sidebar-aria-label" tabindex="-1" data-v-12a40e3d=""><span class="visually-hidden" id="sidebar-aria-label" data-v-12a40e3d=""> Sidebar Navigation </span><!--[--><!--]--><!--[--><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><!----><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/reference" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Reference</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/explorer" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Data Explorer</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><div class="item" role="button" tabindex="0" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><h2 class="text" data-v-10acf738="">Basics</h2><!----></div><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/introduction" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Introduction</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/setup/getting-started" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Getting Started</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/setup/rate-limiting" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Rate Limiting</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><div class="item" role="button" tabindex="0" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><h2 class="text" data-v-10acf738="">Guides</h2><!----></div><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/data-batches" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Getting Data in Batches</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/handling-odds" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Handling Odds</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/fetching-teams" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Fetching Teams</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/response-speed" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Improving Response Times</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/guides/more-examples" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">More Examples</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0 has-active" data-v-ec086cd5="" data-v-10acf738=""><div class="item" role="button" tabindex="0" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><h2 class="text" data-v-10acf738="">Data Types</h2><!----></div><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/markets" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Markets</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/bookmakers" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Bookmakers (bookmakerID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/sports" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Sports (sportID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/leagues" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Leagues (leagueID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link is-active has-active" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/stats" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Stats (statID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/stat-entity" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Stat Entity (statEntityID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/periods" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Periods (periodID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/types-and-sides" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Bet Types &amp; Sides (betTypeID &amp; sideID)</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/data-types/odds" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Putting it Together (oddID)</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><div class="item" role="button" tabindex="0" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><h2 class="text" data-v-10acf738="">Other Info</h2><!----></div><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/info/consensus-odds" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Consensus Odds</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/info/v1-to-v2" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Upgrading to v2</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><div class="group" data-v-ec086cd5=""><section class="VPSidebarItem level-0" data-v-ec086cd5="" data-v-10acf738=""><!----><div class="items" data-v-10acf738=""><!--[--><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link link" href="https://sportsgameodds.com/docs/faq" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">FAQ</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link vp-external-link-icon link" href="https://sportsgameodds.com/contact-us/" target="_blank" rel="noreferrer" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Get Help</p><!--]--></a><!----></div><!----></div><div class="VPSidebarItem level-1 is-link" data-v-10acf738=""><div class="item" data-v-10acf738=""><div class="indicator" data-v-10acf738=""></div><a class="VPLink link vp-external-link-icon link" href="https://sportsgameodds.com/" target="_blank" rel="noreferrer" data-v-10acf738=""><!--[--><p class="text" data-v-10acf738="">Website</p><!--]--></a><!----></div><!----></div><!--]--></div></section></div><!--]--><!--[--><!--]--></nav></aside><div class="VPContent has-sidebar" id="VPContent" data-v-c4daae71="" data-v-d2aef184=""><div class="VPDoc has-sidebar has-aside" data-v-d2aef184="" data-v-ef3a4dda=""><!--[--><!--]--><div class="container" data-v-ef3a4dda=""><div class="aside" data-v-ef3a4dda=""><div class="aside-curtain" data-v-ef3a4dda=""></div><div class="aside-container" data-v-ef3a4dda=""><div class="aside-content" data-v-ef3a4dda=""><div class="VPDocAside" data-v-ef3a4dda="" data-v-79cae1a0=""><!--[--><!--]--><!--[--><!--]--><nav aria-labelledby="doc-outline-aria-label" class="VPDocAsideOutline has-outline" data-v-79cae1a0="" data-v-dfbd9fb8=""><div class="content" data-v-dfbd9fb8=""><div class="outline-marker" data-v-dfbd9fb8="" style="top: 71px; opacity: 1;"></div><div aria-level="2" class="outline-title" id="doc-outline-aria-label" role="heading" data-v-dfbd9fb8="">On this page</div><ul class="VPDocOutlineItem root" data-v-dfbd9fb8="" data-v-da421f78=""><!--[--><li data-v-da421f78=""><a data-v-da421f78="" class="outline-link" href="https://sportsgameodds.com/docs/data-types/stats#baseball" title="Baseball">Baseball</a><!----></li><li data-v-da421f78=""><a data-v-da421f78="" class="outline-link active" href="https://sportsgameodds.com/docs/data-types/stats#football" title="Football">Football</a><!----></li><li data-v-da421f78=""><a data-v-da421f78="" class="outline-link" href="https://sportsgameodds.com/docs/data-types/stats#basketball" title="Basketball">Basketball</a><!----></li><li data-v-da421f78=""><a data-v-da421f78="" class="outline-link" href="https://sportsgameodds.com/docs/data-types/stats#hockey" title="Hockey">Hockey</a><!----></li><li data-v-da421f78=""><a data-v-da421f78="" class="outline-link" href="https://sportsgameodds.com/docs/data-types/stats#soccer" title="Soccer">Soccer</a><!----></li><li data-v-da421f78=""><a data-v-da421f78="" class="outline-link" href="https://sportsgameodds.com/docs/data-types/stats#handball" title="Handball">Handball</a><!----></li><li data-v-da421f78=""><a data-v-da421f78="" class="outline-link" href="https://sportsgameodds.com/docs/data-types/stats#tennis" title="Tennis">Tennis</a><!----></li><li data-v-da421f78=""><a data-v-da421f78="" class="outline-link" href="https://sportsgameodds.com/docs/data-types/stats#golf" title="Golf">Golf</a><!----></li><!--]--></ul></div></nav><!--[--><!--]--><div class="spacer" data-v-79cae1a0=""></div><!--[--><!--]--><!----><!--[--><!--]--><!--[--><!--]--></div></div></div></div><div class="content" data-v-ef3a4dda=""><div class="content-container" data-v-ef3a4dda=""><!--[--><!--]--><main class="main" data-v-ef3a4dda=""><div style="position:relative;" class="vp-doc _docs_data-types_stats" data-v-ef3a4dda=""><div><h1 id="stats" tabindex="-1">Stats <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/stats#stats" aria-label="Permalink to &quot;Stats&quot;">​</a></h1><div class="note custom-block github-alert"><p class="custom-block-title">NOTE</p><p>The data on this page may be outdated. For the most up-to-date list of <code>statID</code> values for each sport, please call the <code>/stats</code> endpoint</p></div><p>A statID corresponds to a specific statistic or value. Each sport has its own set of supported statIDs.</p><p>When looking at the <code>results</code> object of an Event, the statID allows you to find a specific stat value for a team or player.</p><p>When looking at odds data, each item (betting option) will contain a statID corresponding to the stat which will determine the outcome of the bet.</p><p>All sports contain the statID <code>points</code>. This will always correspond to the stat which determines the winner of a game/match. The <code>points</code> statID is applied even in sports where the word “points” isn’t used to describe that stat. For example, we commonly use the term runs for baseball but the <code>statID</code> for Runs is still <code>points</code>. Different types or prop bets also all have their own statIDs. Below you’ll find a list of supported statID values for each sport.</p><h2 id="baseball" tabindex="-1">Baseball <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/stats#baseball" aria-label="Permalink to &quot;Baseball&quot;">​</a></h2><ul><li><strong>Runs</strong><ul><li><strong>statID:</strong> <code>points</code></li><li><strong>description:</strong> Runs scored</li></ul></li><li><strong>Doubles</strong><ul><li><strong>statID:</strong> <code>batting_doubles</code></li><li><strong>description:</strong> Doubles</li></ul></li><li><strong>Home Runs</strong><ul><li><strong>statID:</strong> <code>batting_triples</code></li><li><strong>description:</strong> Triples</li></ul></li><li><strong>Home Runs</strong><ul><li><strong>statID:</strong> <code>batting_homeRuns</code></li><li><strong>description:</strong> Home runs</li></ul></li><li><strong>Strikeouts</strong><ul><li><strong>statID:</strong> <code>batting_strikeouts</code></li><li><strong>description:</strong> Strike outs</li></ul></li><li><strong>Walks</strong><ul><li><strong>statID:</strong> <code>batting_basesOnBalls</code></li><li><strong>description:</strong> Base on balls</li></ul></li><li><strong>Hits</strong><ul><li><strong>statID:</strong> <code>batting_hits</code></li><li><strong>description:</strong> Hits</li></ul></li><li><strong>Batting Average</strong><ul><li><strong>statID:</strong> <code>batting_battingAvg</code></li><li><strong>description:</strong> Batting average</li></ul></li><li><strong>On-Base %</strong><ul><li><strong>statID:</strong> <code>batting_onBasePercent</code></li><li><strong>description:</strong> On-base percentage</li></ul></li><li><strong>Slugging %</strong><ul><li><strong>statID:</strong> <code>batting_sluggingPercent</code></li><li><strong>description:</strong> Slugging percentage</li></ul></li><li><strong>On-Base + Slugging %</strong><ul><li><strong>statID:</strong> <code>batting_OPS</code></li><li><strong>description:</strong> On-base plus slugging</li></ul></li><li><strong>Runs Batted In</strong><ul><li><strong>statID:</strong> <code>batting_RBI</code></li><li><strong>description:</strong> Runs batted in</li></ul></li><li><strong>At Bats</strong><ul><li><strong>statID:</strong> <code>batting_atBats</code></li><li><strong>description:</strong> At bats</li></ul></li><li><strong>Left on Base</strong><ul><li><strong>statID:</strong> <code>batting_leftOnBase</code></li><li><strong>description:</strong> Left on base</li></ul></li><li><strong>Fly Outs</strong><ul><li><strong>statID:</strong> <code>batting_flyOuts</code></li><li><strong>description:</strong> Fly outs</li></ul></li><li><strong>Ground Outs</strong><ul><li><strong>statID:</strong> <code>batting_groundOuts</code></li><li><strong>description:</strong> Ground outs</li></ul></li><li><strong>Hit by Pitch</strong><ul><li><strong>statID:</strong> <code>batting_hitByPitch</code></li><li><strong>description:</strong> Hit by pitch</li></ul></li><li><strong>Caught Stealing</strong><ul><li><strong>statID:</strong> <code>batting_caughtStealing</code></li><li><strong>description:</strong> Caught stealing</li></ul></li><li><strong>Stolen Bases</strong><ul><li><strong>statID:</strong> <code>batting_stolenBases</code></li><li><strong>description:</strong> Stolen bases</li></ul></li><li><strong>Sacrifice Bunts</strong><ul><li><strong>statID:</strong> <code>batting_sacrificeBunts</code></li><li><strong>description:</strong> Sacrifice bunts</li></ul></li><li><strong>Sacrifice Flies</strong><ul><li><strong>statID:</strong> <code>batting_sacrificeFlies</code></li><li><strong>description:</strong> Sacrifice flies</li></ul></li><li><strong>Runs Allowed</strong><ul><li><strong>statID:</strong> <code>pitching_runsAllowed</code></li><li><strong>description:</strong> Runs allowed</li></ul></li><li><strong>Home Runs Allowed</strong><ul><li><strong>statID:</strong> <code>pitching_homeRunsAllowed</code></li><li><strong>description:</strong> Home runs allowed</li></ul></li><li><strong>Strikeouts</strong><ul><li><strong>statID:</strong> <code>pitching_strikeouts</code></li><li><strong>description:</strong> Strikeouts</li></ul></li><li><strong>Walks</strong><ul><li><strong>statID:</strong> <code>pitching_basesOnBalls</code></li><li><strong>description:</strong> Walks allowed</li></ul></li><li><strong>Hits Allowed</strong><ul><li><strong>statID:</strong> <code>pitching_hits</code></li><li><strong>description:</strong> Hits allowed</li></ul></li><li><strong>ERA</strong><ul><li><strong>statID:</strong> <code>pitching_ERA</code></li><li><strong>description:</strong> Earned run average</li></ul></li><li><strong>Innings Pitched</strong><ul><li><strong>statID:</strong> <code>pitching_inningsPitched</code></li><li><strong>description:</strong> Innings pitched</li></ul></li><li><strong>Earned Runs</strong><ul><li><strong>statID:</strong> <code>pitching_earnedRuns</code></li><li><strong>description:</strong> Earned runs allowed</li></ul></li><li><strong>Batters Faced</strong><ul><li><strong>statID:</strong> <code>pitching_battersFaced</code></li><li><strong>description:</strong> Batters faced</li></ul></li><li><strong>Outs</strong><ul><li><strong>statID:</strong> <code>pitching_outs</code></li><li><strong>description:</strong> Outs recorded</li></ul></li><li><strong>Pitches Thrown</strong><ul><li><strong>statID:</strong> <code>pitching_pitchesThrown</code></li><li><strong>description:</strong> Pitches thrown</li></ul></li><li><strong>Strikes Thrown</strong><ul><li><strong>statID:</strong> <code>pitching_strikesThrown</code></li><li><strong>description:</strong> Strikes thrown</li></ul></li><li><strong>Errors</strong><ul><li><strong>statID:</strong> <code>fielding_errors</code></li><li><strong>description:</strong> Errors</li></ul></li><li><strong>Assists</strong><ul><li><strong>statID:</strong> <code>fielding_assists</code></li><li><strong>description:</strong> Assists</li></ul></li><li><strong>Put Outs</strong><ul><li><strong>statID:</strong> <code>fielding_putOuts</code></li><li><strong>description:</strong> Put outs</li></ul></li><li><strong>Largest Lead</strong><ul><li><strong>statID:</strong> <code>largestLead</code></li><li><strong>description:</strong> Largest lead held during the game</li></ul></li><li><strong>Innings in Lead</strong><ul><li><strong>statID:</strong> <code>inningsInLead</code></li><li><strong>description:</strong> Number of innings the team was in the lead</li></ul></li><li><strong>Times Tied</strong><ul><li><strong>statID:</strong> <code>timesTied</code></li><li><strong>description:</strong> Number of times the game was tied (excluding the start)</li></ul></li><li><strong>Lead Changes</strong><ul><li><strong>statID:</strong> <code>leadChanges</code></li><li><strong>description:</strong> Number of times the winning team changed</li></ul></li></ul><h2 id="football" tabindex="-1">Football <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/stats#football" aria-label="Permalink to &quot;Football&quot;">​</a></h2><ul><li><strong>Points</strong><ul><li><strong>statID:</strong> <code>points</code></li><li><strong>description:</strong> Points scored</li></ul></li><li><strong>Touchdowns</strong><ul><li><strong>statID:</strong> <code>touchdowns</code></li><li><strong>description:</strong> Total Touchdowns</li></ul></li><li><strong>Yards</strong><ul><li><strong>statID:</strong> <code>yards</code></li><li><strong>description:</strong> Total Yards (net)</li></ul></li><li><strong>First Downs</strong><ul><li><strong>statID:</strong> <code>firstDowns</code></li><li><strong>description:</strong> Total First Downs</li></ul></li><li><strong>Turnovers</strong><ul><li><strong>statID:</strong> <code>turnovers</code></li><li><strong>description:</strong> Total Turnovers</li></ul></li><li><strong>Fumbles</strong><ul><li><strong>statID:</strong> <code>fumbles</code></li><li><strong>description:</strong> Number of fumbles committed by the offense and special teams</li></ul></li><li><strong>Fumbles Lost</strong><ul><li><strong>statID:</strong> <code>fumblesLost</code></li><li><strong>description:</strong> Fumbles lost</li></ul></li><li><strong>Num. Penalties</strong><ul><li><strong>statID:</strong> <code>penalty_count</code></li><li><strong>description:</strong> Number of penalties incurred</li></ul></li><li><strong>Penalty Yards</strong><ul><li><strong>statID:</strong> <code>penalty_yards</code></li><li><strong>description:</strong> Number of yards penalized</li></ul></li><li><strong>Penalty First Downs</strong><ul><li><strong>statID:</strong> <code>penalty_firstDowns</code></li><li><strong>description:</strong> Number of first downs achieved by penalty</li></ul></li><li><strong>Field Goal Blocks</strong><ul><li><strong>statID:</strong> <code>fieldGoalBlocks</code></li><li><strong>description:</strong> Number of field goal attempts successfully blocked</li></ul></li><li><strong>Punt Blocks</strong><ul><li><strong>statID:</strong> <code>puntBlocks</code></li><li><strong>description:</strong> Number of punt attempts successfully blocked</li></ul></li><li><strong>Red Zone Trips</strong><ul><li><strong>statID:</strong> <code>offense_redZoneTrips</code></li><li><strong>description:</strong> Number of times the offense has entered the red zone</li></ul></li><li><strong>Red Zone Touchdowns</strong><ul><li><strong>statID:</strong> <code>offense_redZoneTouchdowns</code></li><li><strong>description:</strong> Number of times the offense has scored a touchdown in the red zone</li></ul></li><li><strong>Drives</strong><ul><li><strong>statID:</strong> <code>offense_drives</code></li><li><strong>description:</strong> Number of offensive drives</li></ul></li><li><strong>Plays</strong><ul><li><strong>statID:</strong> <code>offense_plays</code></li><li><strong>description:</strong> Number of offensive plays ran</li></ul></li><li><strong>Yards Per Play</strong><ul><li><strong>statID:</strong> <code>offense_yardsPerPlay</code></li><li><strong>description:</strong> Average net yards gained per offensive play</li></ul></li><li><strong>Time of Possession (Sec.)</strong><ul><li><strong>statID:</strong> <code>offense_secondsOfPossession</code></li><li><strong>description:</strong> Time of possession (seconds)</li></ul></li><li><strong>Time of Possession (Min.)</strong><ul><li><strong>statID:</strong> <code>offense_minutesOfPossession</code></li><li><strong>description:</strong> Time of possession (minutes)</li></ul></li><li><strong>Third Down Attempts</strong><ul><li><strong>statID:</strong> <code>offense_thirdDownAttempts</code></li><li><strong>description:</strong> Number of third down attempts</li></ul></li><li><strong>Third Down Conversions</strong><ul><li><strong>statID:</strong> <code>offense_thirdDownConversions</code></li><li><strong>description:</strong> Number of third down conversions</li></ul></li><li><strong>Third Down Efficiency</strong><ul><li><strong>statID:</strong> <code>offense_thirdDownEfficiency</code></li><li><strong>description:</strong> Third down efficiency</li></ul></li><li><strong>Fourth Down Attempts</strong><ul><li><strong>statID:</strong> <code>offense_fourthDownAttempts</code></li><li><strong>description:</strong> Number of fourth down attempts</li></ul></li><li><strong>Fourth Down Conversions</strong><ul><li><strong>statID:</strong> <code>offense_fourthDownConversions</code></li><li><strong>description:</strong> Number of fourth down conversions</li></ul></li><li><strong>Fourth Down Efficiency</strong><ul><li><strong>statID:</strong> <code>offense_fourthDownEfficiency</code></li><li><strong>description:</strong> Fourth down efficiency</li></ul></li><li><strong>Receiving Touchdowns</strong><ul><li><strong>statID:</strong> <code>receiving_touchdowns</code></li><li><strong>description:</strong> Receiving touchdowns</li></ul></li><li><strong>Receiving Yards</strong><ul><li><strong>statID:</strong> <code>receiving_yards</code></li><li><strong>description:</strong> Receiving yards</li></ul></li><li><strong>Receptions</strong><ul><li><strong>statID:</strong> <code>receiving_receptions</code></li><li><strong>description:</strong> Receptions</li></ul></li><li><strong>Targets</strong><ul><li><strong>statID:</strong> <code>receiving_targets</code></li><li><strong>description:</strong> Targets</li></ul></li><li><strong>Yards After Catch</strong><ul><li><strong>statID:</strong> <code>receiving_yardsAfterCatch</code></li><li><strong>description:</strong> Yards after catch</li></ul></li><li><strong>Receiving First Downs</strong><ul><li><strong>statID:</strong> <code>receiving_firstDowns</code></li><li><strong>description:</strong> Receiving first downs</li></ul></li><li><strong>Longest Reception</strong><ul><li><strong>statID:</strong> <code>receiving_longestReception</code></li><li><strong>description:</strong> Longest reception</li></ul></li><li><strong>Yards Per Reception</strong><ul><li><strong>statID:</strong> <code>receiving_yardsPerReception</code></li><li><strong>description:</strong> Yards per reception</li></ul></li><li><strong>Two Point Conversions</strong><ul><li><strong>statID:</strong> <code>receiving_twoPointConversions</code></li><li><strong>description:</strong> Two point conversions</li></ul></li><li><strong>Rushing Touchdowns</strong><ul><li><strong>statID:</strong> <code>rushing_touchdowns</code></li><li><strong>description:</strong> Rushing touchdowns</li></ul></li><li><strong>Rushing Yards</strong><ul><li><strong>statID:</strong> <code>rushing_yards</code></li><li><strong>description:</strong> Rushing yards</li></ul></li><li><strong>Rushing Attempts</strong><ul><li><strong>statID:</strong> <code>rushing_attempts</code></li><li><strong>description:</strong> Rushing attempts</li></ul></li><li><strong>Rushing First Downs</strong><ul><li><strong>statID:</strong> <code>rushing_firstDowns</code></li><li><strong>description:</strong> Rushing first downs</li></ul></li><li><strong>Longest Rush</strong><ul><li><strong>statID:</strong> <code>rushing_longestRush</code></li><li><strong>description:</strong> Longest rush</li></ul></li><li><strong>Rush Yards Per Attempt</strong><ul><li><strong>statID:</strong> <code>rushing_yardsPerAttempt</code></li><li><strong>description:</strong> Yards per attempt</li></ul></li><li><strong>Rush Yards After Contact</strong><ul><li><strong>statID:</strong> <code>rushing_yardsAfterContact</code></li><li><strong>description:</strong> Yards after contact</li></ul></li><li><strong>Rush Two Point Conversions</strong><ul><li><strong>statID:</strong> <code>rushing_twoPointConversions</code></li><li><strong>description:</strong> Two point conversions (rushing)</li></ul></li><li><strong>Passing Attempts</strong><ul><li><strong>statID:</strong> <code>passing_attempts</code></li><li><strong>description:</strong> Passing attempts</li></ul></li><li><strong>Passing Completions</strong><ul><li><strong>statID:</strong> <code>passing_completions</code></li><li><strong>description:</strong> Passing completions</li></ul></li><li><strong>Passing Yards</strong><ul><li><strong>statID:</strong> <code>passing_yards</code></li><li><strong>description:</strong> Passing yards</li></ul></li><li><strong>Passing First Downs</strong><ul><li><strong>statID:</strong> <code>passing_firstDowns</code></li><li><strong>description:</strong> Passing first downs</li></ul></li><li><strong>Sack Yards Lost</strong><ul><li><strong>statID:</strong> <code>passing_sackYards</code></li><li><strong>description:</strong> Yards lost due to sacks</li></ul></li><li><strong>Net Yards</strong><ul><li><strong>statID:</strong> <code>passing_netYards</code></li><li><strong>description:</strong> Net passing yards (yards - sack yards)</li></ul></li><li><strong>Interceptions</strong><ul><li><strong>statID:</strong> <code>passing_interceptions</code></li><li><strong>description:</strong> Number of interceptions thrown</li></ul></li><li><strong>Longest Completion</strong><ul><li><strong>statID:</strong> <code>passing_longestCompletion</code></li><li><strong>description:</strong> Longest completion</li></ul></li><li><strong>Sacks Taken</strong><ul><li><strong>statID:</strong> <code>passing_sacksTaken</code></li><li><strong>description:</strong> Sacks taken</li></ul></li><li><strong>Passing Touchdowns</strong><ul><li><strong>statID:</strong> <code>passing_touchdowns</code></li><li><strong>description:</strong> Touchdowns thrown</li></ul></li><li><strong>Yards Per Attempt</strong><ul><li><strong>statID:</strong> <code>passing_yardsPerAttempt</code></li><li><strong>description:</strong> Yards per attempt</li></ul></li><li><strong>Yards Per Completion</strong><ul><li><strong>statID:</strong> <code>passing_yardsPerCompletion</code></li><li><strong>description:</strong> Yards per completion</li></ul></li><li><strong>Passer Rating</strong><ul><li><strong>statID:</strong> <code>passing_passerRating</code></li><li><strong>description:</strong> Passer rating</li></ul></li><li><strong>Pass Two Point Conversions</strong><ul><li><strong>statID:</strong> <code>passing_twoPointConversions</code></li><li><strong>description:</strong> Two point conversions (passing)</li></ul></li><li><strong>Tackles</strong><ul><li><strong>statID:</strong> <code>defense_tackles</code></li><li><strong>description:</strong> Tackles (half point for assisted)</li></ul></li><li><strong>Combined Tackles</strong><ul><li><strong>statID:</strong> <code>defense_combinedTackles</code></li><li><strong>description:</strong> Number of combined (solo + assisted) tackles</li></ul></li><li><strong>Solo Tackles</strong><ul><li><strong>statID:</strong> <code>defense_soloTackles</code></li><li><strong>description:</strong> Number of solo (unassisted) tackles</li></ul></li><li><strong>Assisted Tackles</strong><ul><li><strong>statID:</strong> <code>defense_assistedTackles</code></li><li><strong>description:</strong> Number of assisted tackles</li></ul></li><li><strong>Sacks</strong><ul><li><strong>statID:</strong> <code>defense_sacks</code></li><li><strong>description:</strong> Sacks</li></ul></li><li><strong>Tackles for Loss</strong><ul><li><strong>statID:</strong> <code>defense_tacklesForLoss</code></li><li><strong>description:</strong> Tackles for loss</li></ul></li><li><strong>Passes Defended</strong><ul><li><strong>statID:</strong> <code>defense_passesDefended</code></li><li><strong>description:</strong> Passes defended</li></ul></li><li><strong>QB Hits</strong><ul><li><strong>statID:</strong> <code>defense_qbHits</code></li><li><strong>description:</strong> Quarterback hits</li></ul></li><li><strong>Interceptions</strong><ul><li><strong>statID:</strong> <code>defense_interceptions</code></li><li><strong>description:</strong> Interceptions recovered</li></ul></li><li><strong>Pick Sixes</strong><ul><li><strong>statID:</strong> <code>defense_pickSixes</code></li><li><strong>description:</strong> Interceptions returned for touchdowns</li></ul></li><li><strong>Fumbles Forced</strong><ul><li><strong>statID:</strong> <code>defense_fumblesForced</code></li><li><strong>description:</strong> Fumbles forced</li></ul></li><li><strong>Fumbles Recovered</strong><ul><li><strong>statID:</strong> <code>defense_fumblesRecovered</code></li><li><strong>description:</strong> Fumbles recovered</li></ul></li><li><strong>Scoop and Scores</strong><ul><li><strong>statID:</strong> <code>defense_scoopAndScores</code></li><li><strong>description:</strong> Fumbles returned for touchdowns</li></ul></li><li><strong>Defensive Safeties</strong><ul><li><strong>statID:</strong> <code>defense_safeties</code></li><li><strong>description:</strong> Safeties</li></ul></li><li><strong>Kickoff Returns</strong><ul><li><strong>statID:</strong> <code>kickoffReturn_numReturns</code></li><li><strong>description:</strong> Kickoffs returned</li></ul></li><li><strong>Kickoff Return Yards</strong><ul><li><strong>statID:</strong> <code>kickoffReturn_yards</code></li><li><strong>description:</strong> Kickoff return yards</li></ul></li><li><strong>Kickoff Return Touchdowns</strong><ul><li><strong>statID:</strong> <code>kickoffReturn_touchdowns</code></li><li><strong>description:</strong> Kickoff return touchdowns</li></ul></li><li><strong>Longest Kickoff Return</strong><ul><li><strong>statID:</strong> <code>kickoffReturn_longestReturn</code></li><li><strong>description:</strong> Longest kickoff return</li></ul></li><li><strong>Kickoff Return Yards Per Return</strong><ul><li><strong>statID:</strong> <code>kickOffReturn_yardsPerReturn</code></li><li><strong>description:</strong> Yards per kickoff return</li></ul></li><li><strong>Punt Returns</strong><ul><li><strong>statID:</strong> <code>puntReturn_numReturns</code></li><li><strong>description:</strong> Punts returned</li></ul></li><li><strong>Punt Return Yards</strong><ul><li><strong>statID:</strong> <code>puntReturn_yards</code></li><li><strong>description:</strong> Punt return yards</li></ul></li><li><strong>Punt Return Touchdowns</strong><ul><li><strong>statID:</strong> <code>puntReturn_touchdowns</code></li><li><strong>description:</strong> Punt return touchdowns</li></ul></li><li><strong>Longest Punt Return</strong><ul><li><strong>statID:</strong> <code>puntReturn_longestReturn</code></li><li><strong>description:</strong> Longest punt return</li></ul></li><li><strong>Punt Return Yards Per Return</strong><ul><li><strong>statID:</strong> <code>puntReturn_yardsPerReturn</code></li><li><strong>description:</strong> Yards per punt return</li></ul></li><li><strong>Punts</strong><ul><li><strong>statID:</strong> <code>punting_numPunts</code></li><li><strong>description:</strong> Number of punts</li></ul></li><li><strong>Punting Yards</strong><ul><li><strong>statID:</strong> <code>punting_yards</code></li><li><strong>description:</strong> Total punting yards (gross)</li></ul></li><li><strong>Net Punting Yards</strong><ul><li><strong>statID:</strong> <code>punting_netYards</code></li><li><strong>description:</strong> Net punting yards (after returns)</li></ul></li><li><strong>Punting Yards Per Punt</strong><ul><li><strong>statID:</strong> <code>punting_yardsPerPunt</code></li><li><strong>description:</strong> Average yards per punt</li></ul></li><li><strong>Longest Punt</strong><ul><li><strong>statID:</strong> <code>punting_longestPunt</code></li><li><strong>description:</strong> Longest punt</li></ul></li><li><strong>Punts Inside 20</strong><ul><li><strong>statID:</strong> <code>punting_puntsInside20</code></li><li><strong>description:</strong> Punts inside the 20 yard line</li></ul></li><li><strong>Punts for Touchback</strong><ul><li><strong>statID:</strong> <code>punting_puntsForTouchback</code></li><li><strong>description:</strong> Punts for touchback</li></ul></li><li><strong>Punts for Fair Catch</strong><ul><li><strong>statID:</strong> <code>punting_puntsForFairCatch</code></li><li><strong>description:</strong> Punts for fair catch</li></ul></li><li><strong>Blocked Punts</strong><ul><li><strong>statID:</strong> <code>punting_puntsBlocked</code></li><li><strong>description:</strong> Number of punt attempts blocked by the other team</li></ul></li><li><strong>Field Goal Attempts</strong><ul><li><strong>statID:</strong> <code>fieldGoals_attempts</code></li><li><strong>description:</strong> Field goal attempts</li></ul></li><li><strong>Field Goals Made</strong><ul><li><strong>statID:</strong> <code>fieldGoals_made</code></li><li><strong>description:</strong> Field goals made</li></ul></li><li><strong>Field Goal Percentage</strong><ul><li><strong>statID:</strong> <code>fieldGoals_percentMade</code></li><li><strong>description:</strong> Field goal percentage</li></ul></li><li><strong>Longest Field Goal Made</strong><ul><li><strong>statID:</strong> <code>fieldGoals_longestMade</code></li><li><strong>description:</strong> Longest field goal made</li></ul></li><li><strong>Longest Field Goal Attempt</strong><ul><li><strong>statID:</strong> <code>fieldGoals_longestAttempt</code></li><li><strong>description:</strong> Longest field goal attempt</li></ul></li><li><strong>1-19 Yard FGs Made</strong><ul><li><strong>statID:</strong> <code>fieldGoals_1to19YardsMade</code></li><li><strong>description:</strong> Number of 1-19 yard field goals made</li></ul></li><li><strong>20-29 Yard FGs Made</strong><ul><li><strong>statID:</strong> <code>fieldGoals_20to29YardsMade</code></li><li><strong>description:</strong> Number of 20-29 yard field goals made</li></ul></li><li><strong>30-39 Yard FGs Made</strong><ul><li><strong>statID:</strong> <code>fieldGoals_30to39YardsMade</code></li><li><strong>description:</strong> Number of 30-39 yard field goals made</li></ul></li><li><strong>undefined</strong><ul><li><strong>statID:</strong> <code>fieldGoals_40to49YardsMade</code></li><li><strong>description:</strong> Number of 40-49 yard field goals made</li></ul></li><li><strong>50+ Yard FGs Made</strong><ul><li><strong>statID:</strong> <code>fieldGoals_50PlusYardsMade</code></li><li><strong>description:</strong> Number of 50+ yard field goals made</li></ul></li><li><strong>Field Goal Attempts Blocked</strong><ul><li><strong>statID:</strong> <code>fieldGoals_attemptsBlocked</code></li><li><strong>description:</strong> Number of field goal attempts blocked by the other team</li></ul></li><li><strong>Extra Points Made</strong><ul><li><strong>statID:</strong> <code>extraPoints_kicksMade</code></li><li><strong>description:</strong> Extra points made</li></ul></li><li><strong>Extra Point Attempts</strong><ul><li><strong>statID:</strong> <code>extraPoints_kickAttempts</code></li><li><strong>description:</strong> Extra point attempts</li></ul></li><li><strong>Largest Lead</strong><ul><li><strong>statID:</strong> <code>largestLead</code></li><li><strong>description:</strong> Largest lead held during the game</li></ul></li><li><strong>Seconds In Lead</strong><ul><li><strong>statID:</strong> <code>secondsInLead</code></li><li><strong>description:</strong> Number of game clock seconds team was winning</li></ul></li><li><strong>Minutes In Lead</strong><ul><li><strong>statID:</strong> <code>minutesInLead</code></li><li><strong>description:</strong> Number of game clock minutes team was winning</li></ul></li><li><strong>Longest Scoring Run</strong><ul><li><strong>statID:</strong> <code>longestScoringRun</code></li><li><strong>description:</strong> Longest run of unanswered points</li></ul></li><li><strong>Times Tied</strong><ul><li><strong>statID:</strong> <code>timesTied</code></li><li><strong>description:</strong> Number of times the game was tied (excluding the start)</li></ul></li><li><strong>Lead Changes</strong><ul><li><strong>statID:</strong> <code>leadChanges</code></li><li><strong>description:</strong> Number of times the winning team changed</li></ul></li></ul><h2 id="basketball" tabindex="-1">Basketball <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/stats#basketball" aria-label="Permalink to &quot;Basketball&quot;">​</a></h2><ul><li><strong>Points</strong><ul><li><strong>statID:</strong> <code>points</code></li><li><strong>description:</strong> Points</li></ul></li><li><strong>Blocks</strong><ul><li><strong>statID:</strong> <code>blocks</code></li><li><strong>description:</strong> Blocks</li></ul></li><li><strong>Steals</strong><ul><li><strong>statID:</strong> <code>steals</code></li><li><strong>description:</strong> Steals</li></ul></li><li><strong>Assists</strong><ul><li><strong>statID:</strong> <code>assists</code></li><li><strong>description:</strong> Assists</li></ul></li><li><strong>Rebounds</strong><ul><li><strong>statID:</strong> <code>rebounds</code></li><li><strong>description:</strong> Rebounds</li></ul></li><li><strong>Offensive Rebounds</strong><ul><li><strong>statID:</strong> <code>offensiveRebounds</code></li><li><strong>description:</strong> Offensive rebounds</li></ul></li><li><strong>Defensive Rebounds</strong><ul><li><strong>statID:</strong> <code>defensiveRebounds</code></li><li><strong>description:</strong> Defensive rebounds</li></ul></li><li><strong>Turnovers</strong><ul><li><strong>statID:</strong> <code>turnovers</code></li><li><strong>description:</strong> Turnovers committed</li></ul></li><li><strong>Fouls</strong><ul><li><strong>statID:</strong> <code>fouls</code></li><li><strong>description:</strong> Fouls committed</li></ul></li><li><strong>Field Goals Made</strong><ul><li><strong>statID:</strong> <code>fieldGoalsMade</code></li><li><strong>description:</strong> Field goals made</li></ul></li><li><strong>Field Goals Attempted</strong><ul><li><strong>statID:</strong> <code>fieldGoalsAttempted</code></li><li><strong>description:</strong> Field goals attempted</li></ul></li><li><strong>Field Goal Percentage</strong><ul><li><strong>statID:</strong> <code>fieldGoalPercent</code></li><li><strong>description:</strong> Field goal shooting percentage</li></ul></li><li><strong>Three Pointers Made</strong><ul><li><strong>statID:</strong> <code>threePointersMade</code></li><li><strong>description:</strong> Three pointers made</li></ul></li><li><strong>Three Pointers Attempted</strong><ul><li><strong>statID:</strong> <code>threePointersAttempted</code></li><li><strong>description:</strong> Three pointers attempted</li></ul></li><li><strong>Three Pointer Percentage</strong><ul><li><strong>statID:</strong> <code>threePointerPercent</code></li><li><strong>description:</strong> Three pointer shooting percentage</li></ul></li><li><strong>Two Pointers Attempted</strong><ul><li><strong>statID:</strong> <code>twoPointersAttempted</code></li><li><strong>description:</strong> Two pointers attempted</li></ul></li><li><strong>Two Pointers Made</strong><ul><li><strong>statID:</strong> <code>twoPointersMade</code></li><li><strong>description:</strong> Two pointers made</li></ul></li><li><strong>Two Pointer Percentage</strong><ul><li><strong>statID:</strong> <code>twoPointerPercent</code></li><li><strong>description:</strong> Two pointer percentage</li></ul></li><li><strong>Free Throws Made</strong><ul><li><strong>statID:</strong> <code>freeThrowsMade</code></li><li><strong>description:</strong> Free throws made</li></ul></li><li><strong>Free Throws Attempted</strong><ul><li><strong>statID:</strong> <code>freeThrowsAttempted</code></li><li><strong>description:</strong> Free throws attempted</li></ul></li><li><strong>Free Throw Percentage</strong><ul><li><strong>statID:</strong> <code>freeThrowPercent</code></li><li><strong>description:</strong> Free throw percentage</li></ul></li><li><strong>Points In The Paint</strong><ul><li><strong>statID:</strong> <code>pointsInPaint</code></li><li><strong>description:</strong> Points in the paint</li></ul></li><li><strong>Points Off Turnovers</strong><ul><li><strong>statID:</strong> <code>pointsOffTurnovers</code></li><li><strong>description:</strong> Points off of turnovers</li></ul></li><li><strong>Second Chance Points</strong><ul><li><strong>statID:</strong> <code>secondChancePoints</code></li><li><strong>description:</strong> Points scored after an offensive rebound</li></ul></li><li><strong>Fast Break Points</strong><ul><li><strong>statID:</strong> <code>fastBreakPoints</code></li><li><strong>description:</strong> Fast break points</li></ul></li><li><strong>Seconds Played</strong><ul><li><strong>statID:</strong> <code>secondsPlayed</code></li><li><strong>description:</strong> Seconds played</li></ul></li><li><strong>Minutes Played</strong><ul><li><strong>statID:</strong> <code>minutesPlayed</code></li><li><strong>description:</strong> Minutes played</li></ul></li><li><strong>Plus/Minus</strong><ul><li><strong>statID:</strong> <code>plusMinus</code></li><li><strong>description:</strong> Net score change while on the court</li></ul></li><li><strong>Largest Lead</strong><ul><li><strong>statID:</strong> <code>largestLead</code></li><li><strong>description:</strong> Largest lead held during the game</li></ul></li><li><strong>Seconds In Lead</strong><ul><li><strong>statID:</strong> <code>secondsInLead</code></li><li><strong>description:</strong> Number of game clock seconds team was winning</li></ul></li><li><strong>Minutes In Lead</strong><ul><li><strong>statID:</strong> <code>minutesInLead</code></li><li><strong>description:</strong> Number of game clock minutes team was winning</li></ul></li><li><strong>Longest Scoring Run</strong><ul><li><strong>statID:</strong> <code>longestScoringRun</code></li><li><strong>description:</strong> Longest run of unanswered points</li></ul></li><li><strong>Times Tied</strong><ul><li><strong>statID:</strong> <code>timesTied</code></li><li><strong>description:</strong> Number of times the game was tied (excluding the start)</li></ul></li><li><strong>Lead Changes</strong><ul><li><strong>statID:</strong> <code>leadChanges</code></li><li><strong>description:</strong> Number of times the winning team changed</li></ul></li></ul><h2 id="hockey" tabindex="-1">Hockey <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/stats#hockey" aria-label="Permalink to &quot;Hockey&quot;">​</a></h2><ul><li><strong>Goals</strong><ul><li><strong>statID:</strong> <code>points</code></li><li><strong>description:</strong> Goals scored</li></ul></li><li><strong>Assists</strong><ul><li><strong>statID:</strong> <code>assists</code></li><li><strong>description:</strong> Assists</li></ul></li><li><strong>Shots</strong><ul><li><strong>statID:</strong> <code>shots</code></li><li><strong>description:</strong> Shots taken</li></ul></li><li><strong>Shots On Goal</strong><ul><li><strong>statID:</strong> <code>shots_onGoal</code></li><li><strong>description:</strong> Shots on goal</li></ul></li><li><strong>Hits</strong><ul><li><strong>statID:</strong> <code>hits</code></li><li><strong>description:</strong> Hits</li></ul></li><li><strong>Blocked Shots</strong><ul><li><strong>statID:</strong> <code>blockedShots</code></li><li><strong>description:</strong> Blocked shots</li></ul></li><li><strong>Penalty Seconds</strong><ul><li><strong>statID:</strong> <code>penaltySeconds</code></li><li><strong>description:</strong> Number of seconds spent in the penalty box</li></ul></li><li><strong>Penalty Minutes</strong><ul><li><strong>statID:</strong> <code>penaltyMinutes</code></li><li><strong>description:</strong> Number of minutes spent in the penalty box</li></ul></li><li><strong>Giveaways</strong><ul><li><strong>statID:</strong> <code>giveaways</code></li><li><strong>description:</strong> Giveaways</li></ul></li><li><strong>Takeaways</strong><ul><li><strong>statID:</strong> <code>takeaways</code></li><li><strong>description:</strong> Takeaways</li></ul></li><li><strong>Power Play Count</strong><ul><li><strong>statID:</strong> <code>powerPlay_count</code></li><li><strong>description:</strong> Power play count</li></ul></li><li><strong>Short Handed Count</strong><ul><li><strong>statID:</strong> <code>shortHanded_count</code></li><li><strong>description:</strong> Short handed count</li></ul></li><li><strong>Power Play Goals</strong><ul><li><strong>statID:</strong> <code>powerPlay_goals</code></li><li><strong>description:</strong> Power play goals</li></ul></li><li><strong>Power Play Assists</strong><ul><li><strong>statID:</strong> <code>powerPlay_assists</code></li><li><strong>description:</strong> Power play assists</li></ul></li><li><strong>Short Handed Goals</strong><ul><li><strong>statID:</strong> <code>shortHanded_goals</code></li><li><strong>description:</strong> Short handed goals</li></ul></li><li><strong>Short Handed Assists</strong><ul><li><strong>statID:</strong> <code>shortHanded_assists</code></li><li><strong>description:</strong> Short handed assists</li></ul></li><li><strong>Even Strength Goals</strong><ul><li><strong>statID:</strong> <code>evenStrength_goals</code></li><li><strong>description:</strong> Even strength goals</li></ul></li><li><strong>Even Strength Assists</strong><ul><li><strong>statID:</strong> <code>evenStrength_assists</code></li><li><strong>description:</strong> Even strength assists</li></ul></li><li><strong>Faceoffs Won</strong><ul><li><strong>statID:</strong> <code>faceOffs_won</code></li><li><strong>description:</strong> Faceoffs won</li></ul></li><li><strong>Faceoffs Lost</strong><ul><li><strong>statID:</strong> <code>faceOffs_lost</code></li><li><strong>description:</strong> Faceoffs lost</li></ul></li><li><strong>Faceoffs Taken</strong><ul><li><strong>statID:</strong> <code>faceOffs_taken</code></li><li><strong>description:</strong> Faceoffs taken</li></ul></li><li><strong>Goals Against</strong><ul><li><strong>statID:</strong> <code>goalie_goalsAgainst</code></li><li><strong>description:</strong> Goals against</li></ul></li><li><strong>Saves</strong><ul><li><strong>statID:</strong> <code>goalie_saves</code></li><li><strong>description:</strong> Saves</li></ul></li><li><strong>Short Handed Saves</strong><ul><li><strong>statID:</strong> <code>goalie_shortHanded_saves</code></li><li><strong>description:</strong> Short handed saves</li></ul></li><li><strong>Even Strength Saves</strong><ul><li><strong>statID:</strong> <code>goalie_evenStrength_saves</code></li><li><strong>description:</strong> Even strength saves</li></ul></li><li><strong>Power Play Saves</strong><ul><li><strong>statID:</strong> <code>goalie_powerPlay_saves</code></li><li><strong>description:</strong> Power play saves</li></ul></li><li><strong>Shots Against</strong><ul><li><strong>statID:</strong> <code>goalie_shotsAgainst</code></li><li><strong>description:</strong> Shots against</li></ul></li><li><strong>Short Handed Shots Against</strong><ul><li><strong>statID:</strong> <code>goalie_shortHanded_shotsAgainst</code></li><li><strong>description:</strong> Short handed shots against</li></ul></li><li><strong>Even Strength Shots Against</strong><ul><li><strong>statID:</strong> <code>goalie_evenStrength_shotsAgainst</code></li><li><strong>description:</strong> Even strength shots against</li></ul></li><li><strong>Power Play Shots Against</strong><ul><li><strong>statID:</strong> <code>goalie_powerPlay_shotsAgainst</code></li><li><strong>description:</strong> Power play shots against</li></ul></li><li><strong>Save Percentage</strong><ul><li><strong>statID:</strong> <code>goalie_savePercent</code></li><li><strong>description:</strong> Save percentage</li></ul></li><li><strong>Seconds Played</strong><ul><li><strong>statID:</strong> <code>secondsPlayed</code></li><li><strong>description:</strong> Seconds played</li></ul></li><li><strong>Minutes Played</strong><ul><li><strong>statID:</strong> <code>minutesPlayed</code></li><li><strong>description:</strong> Minutes played</li></ul></li><li><strong>Plus/Minus</strong><ul><li><strong>statID:</strong> <code>plusMinus</code></li><li><strong>description:</strong> Net score change while player was playing</li></ul></li><li><strong>Largest Lead</strong><ul><li><strong>statID:</strong> <code>largestLead</code></li><li><strong>description:</strong> Largest lead held during the game</li></ul></li><li><strong>Seconds In Lead</strong><ul><li><strong>statID:</strong> <code>secondsInLead</code></li><li><strong>description:</strong> Number of game clock seconds team was winning</li></ul></li><li><strong>Minutes In Lead</strong><ul><li><strong>statID:</strong> <code>minutesInLead</code></li><li><strong>description:</strong> Number of game clock minutes team was winning</li></ul></li><li><strong>Longest Scoring Run</strong><ul><li><strong>statID:</strong> <code>longestScoringRun</code></li><li><strong>description:</strong> Longest run of unanswered goals</li></ul></li><li><strong>Times Tied</strong><ul><li><strong>statID:</strong> <code>timesTied</code></li><li><strong>description:</strong> Number of times the game was tied (excluding the start)</li></ul></li><li><strong>Lead Changes</strong><ul><li><strong>statID:</strong> <code>leadChanges</code></li><li><strong>description:</strong> Number of times the winning team changed</li></ul></li></ul><h2 id="soccer" tabindex="-1">Soccer <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/stats#soccer" aria-label="Permalink to &quot;Soccer&quot;">​</a></h2><ul><li><strong>Goals</strong><ul><li><strong>statID:</strong> <code>points</code></li><li><strong>description:</strong> Goals scored</li></ul></li><li><strong>Assists</strong><ul><li><strong>statID:</strong> <code>assists</code></li><li><strong>description:</strong> Assists</li></ul></li><li><strong>Shots</strong><ul><li><strong>statID:</strong> <code>shots</code></li><li><strong>description:</strong> Shots</li></ul></li><li><strong>Shots On Goal</strong><ul><li><strong>statID:</strong> <code>shots_onGoal</code></li><li><strong>description:</strong> Shots on goal</li></ul></li><li><strong>Shots Off Goal</strong><ul><li><strong>statID:</strong> <code>shots_offGoal</code></li><li><strong>description:</strong> Shots off goal</li></ul></li><li><strong>Shots Hit Crossbar</strong><ul><li><strong>statID:</strong> <code>shots_hitCrossbar</code></li><li><strong>description:</strong> Shots that hit the crossbar</li></ul></li><li><strong>Shots Inside Box</strong><ul><li><strong>statID:</strong> <code>shots_insideBox</code></li><li><strong>description:</strong> Shots inside box</li></ul></li><li><strong>Shots Outside Box</strong><ul><li><strong>statID:</strong> <code>shots_outsideBox</code></li><li><strong>description:</strong> Shots outside box</li></ul></li><li><strong>Shots Blocked</strong><ul><li><strong>statID:</strong> <code>shots_blocked</code></li><li><strong>description:</strong> Shots that were blocked by the opposing team</li></ul></li><li><strong>Touches</strong><ul><li><strong>statID:</strong> <code>touches</code></li><li><strong>description:</strong> Touches</li></ul></li><li><strong>Clearances</strong><ul><li><strong>statID:</strong> <code>clearances</code></li><li><strong>description:</strong> Clearances</li></ul></li><li><strong>Corner Kicks</strong><ul><li><strong>statID:</strong> <code>cornerKicks</code></li><li><strong>description:</strong> Corner kicks</li></ul></li><li><strong>Throw Ins</strong><ul><li><strong>statID:</strong> <code>throwIns</code></li><li><strong>description:</strong> Throw-ins</li></ul></li><li><strong>Passes Attempted</strong><ul><li><strong>statID:</strong> <code>passes_attempted</code></li><li><strong>description:</strong> Passes attempted</li></ul></li><li><strong>Passes Accurate</strong><ul><li><strong>statID:</strong> <code>passes_accurate</code></li><li><strong>description:</strong> Passes accurate</li></ul></li><li><strong>Passes Inaccurate</strong><ul><li><strong>statID:</strong> <code>passes_inaccurate</code></li><li><strong>description:</strong> Passes inaccurate</li></ul></li><li><strong>Pass Accuracy</strong><ul><li><strong>statID:</strong> <code>passes_percent</code></li><li><strong>description:</strong> Pass accuracy percentage</li></ul></li><li><strong>Long Balls Attempted</strong><ul><li><strong>statID:</strong> <code>longBalls_attempted</code></li><li><strong>description:</strong> Long balls attempted</li></ul></li><li><strong>Accurate Long Balls</strong><ul><li><strong>statID:</strong> <code>longBalls_accurate</code></li><li><strong>description:</strong> Number of accurate long balls</li></ul></li><li><strong>Inaccurate Long Balls</strong><ul><li><strong>statID:</strong> <code>longBalls_inaccurate</code></li><li><strong>description:</strong> Number of inaccurate long balls</li></ul></li><li><strong>Long Ball Accuracy</strong><ul><li><strong>statID:</strong> <code>longBalls_percent</code></li><li><strong>description:</strong> Long ball accuracy percentage</li></ul></li><li><strong>Crosses Attempted</strong><ul><li><strong>statID:</strong> <code>crosses_attempted</code></li><li><strong>description:</strong> Crosses attempted</li></ul></li><li><strong>Accurate Crosses</strong><ul><li><strong>statID:</strong> <code>crosses_accurate</code></li><li><strong>description:</strong> Number of accurate crosses</li></ul></li><li><strong>Inaccurate Crosses</strong><ul><li><strong>statID:</strong> <code>crosses_inaccurate</code></li><li><strong>description:</strong> Number of inaccurate crosses</li></ul></li><li><strong>Cross Accuracy</strong><ul><li><strong>statID:</strong> <code>crosses_percent</code></li><li><strong>description:</strong> Cross accuracy percentage</li></ul></li><li><strong>Duels Attempted</strong><ul><li><strong>statID:</strong> <code>duels_attempted</code></li><li><strong>description:</strong> Number of duels attempted</li></ul></li><li><strong>Duels Won</strong><ul><li><strong>statID:</strong> <code>duels_won</code></li><li><strong>description:</strong> Number of duels won</li></ul></li><li><strong>Duels Lost</strong><ul><li><strong>statID:</strong> <code>duels_lost</code></li><li><strong>description:</strong> Number of duels lost</li></ul></li><li><strong>Duel Win Percentage</strong><ul><li><strong>statID:</strong> <code>duels_percent</code></li><li><strong>description:</strong> Duel win percentage</li></ul></li><li><strong>Aerials Attempted</strong><ul><li><strong>statID:</strong> <code>aerials_attempted</code></li><li><strong>description:</strong> Number of aerials attempted</li></ul></li><li><strong>Aerials Won</strong><ul><li><strong>statID:</strong> <code>aerials_won</code></li><li><strong>description:</strong> Number of aerials won</li></ul></li><li><strong>Aerials Lost</strong><ul><li><strong>statID:</strong> <code>aerials_lost</code></li><li><strong>description:</strong> Number of aerials lost</li></ul></li><li><strong>Aerial Win Percentage</strong><ul><li><strong>statID:</strong> <code>aerials_percent</code></li><li><strong>description:</strong> Aerial win percentage</li></ul></li><li><strong>Dribbles Attempted</strong><ul><li><strong>statID:</strong> <code>dribbles_attempted</code></li><li><strong>description:</strong> Number of dribbles/take-ons attempted (offense)</li></ul></li><li><strong>Dribbles Won</strong><ul><li><strong>statID:</strong> <code>dribbles_won</code></li><li><strong>description:</strong> Number of dribbles/take-ons won (offense)</li></ul></li><li><strong>Dribbles Lost</strong><ul><li><strong>statID:</strong> <code>dribbles_lost</code></li><li><strong>description:</strong> Number of dribbles/take-ons lost (offense)</li></ul></li><li><strong>Dribble Win Percentage</strong><ul><li><strong>statID:</strong> <code>dribbles_percent</code></li><li><strong>description:</strong> Dribble/take-on win percentage (offense)</li></ul></li><li><strong>Defensive Dribbles Contested</strong><ul><li><strong>statID:</strong> <code>defense_dribbles_contested</code></li><li><strong>description:</strong> Number of dribbles/take-ons contested (defense)</li></ul></li><li><strong>Defensive Dribbles Won</strong><ul><li><strong>statID:</strong> <code>defense_dribbles_won</code></li><li><strong>description:</strong> Number of dribbles/take-ons won (defense)</li></ul></li><li><strong>Defensive Dribbles Lost</strong><ul><li><strong>statID:</strong> <code>defense_dribbles_lost</code></li><li><strong>description:</strong> Number of dribbles/take-ons lost (defense)</li></ul></li><li><strong>Defensive Dribble Win Percentage (Defense)</strong><ul><li><strong>statID:</strong> <code>defense_dribbles_percent</code></li><li><strong>description:</strong> Dribble/take-on win percentage (defense)</li></ul></li><li><strong>Tackles</strong><ul><li><strong>statID:</strong> <code>tackles</code></li><li><strong>description:</strong> Number of tackles</li></ul></li><li><strong>Interceptions</strong><ul><li><strong>statID:</strong> <code>interceptions</code></li><li><strong>description:</strong> Number of interceptions</li></ul></li><li><strong>Blocks</strong><ul><li><strong>statID:</strong> <code>blocks</code></li><li><strong>description:</strong> Number of blocked shots</li></ul></li><li><strong>Dispossessed</strong><ul><li><strong>statID:</strong> <code>disposessed</code></li><li><strong>description:</strong> Number of times dispossessed</li></ul></li><li><strong>Fouls Drawn</strong><ul><li><strong>statID:</strong> <code>foulsDrawn</code></li><li><strong>description:</strong> Number of fouls drawn</li></ul></li><li><strong>Fouls Committed</strong><ul><li><strong>statID:</strong> <code>fouls</code></li><li><strong>description:</strong> Number of fouls committed</li></ul></li><li><strong>Offsides</strong><ul><li><strong>statID:</strong> <code>offsides</code></li><li><strong>description:</strong> Number of times called for offsides</li></ul></li><li><strong>Free Kicks</strong><ul><li><strong>statID:</strong> <code>freeKicks</code></li><li><strong>description:</strong> Number of free kicks</li></ul></li><li><strong>Yellow Cards</strong><ul><li><strong>statID:</strong> <code>yellowCards</code></li><li><strong>description:</strong> Number of yellow cards received</li></ul></li><li><strong>Red Cards</strong><ul><li><strong>statID:</strong> <code>redCards</code></li><li><strong>description:</strong> Number of red cards received</li></ul></li><li><strong>Penalties Committed</strong><ul><li><strong>statID:</strong> <code>penaltiesCommitted</code></li><li><strong>description:</strong> Number of penalties committed (for penalty kicks)</li></ul></li><li><strong>Penalty Kicks Taken</strong><ul><li><strong>statID:</strong> <code>penaltyKicks_taken</code></li><li><strong>description:</strong> Number of penalty kicks taken</li></ul></li><li><strong>Penalty Kicks Made</strong><ul><li><strong>statID:</strong> <code>penaltyKicks_made</code></li><li><strong>description:</strong> Number of penalty kicks made</li></ul></li><li><strong>Penalty Kicks Missed</strong><ul><li><strong>statID:</strong> <code>penaltyKicks_missed</code></li><li><strong>description:</strong> Number of penalty kicks missed</li></ul></li><li><strong>Penalty Kick Accuracy</strong><ul><li><strong>statID:</strong> <code>penaltyKicks_percent</code></li><li><strong>description:</strong> Penalty kick accuracy percentage</li></ul></li><li><strong>Goals Against</strong><ul><li><strong>statID:</strong> <code>goalie_goalsAgainst</code></li><li><strong>description:</strong> Number of goals allowed</li></ul></li><li><strong>Saves</strong><ul><li><strong>statID:</strong> <code>goalie_saves</code></li><li><strong>description:</strong> Number of saves</li></ul></li><li><strong>Shots Against</strong><ul><li><strong>statID:</strong> <code>goalie_shotsAgainst</code></li><li><strong>description:</strong> Number of shots against</li></ul></li><li><strong>Save Percentage</strong><ul><li><strong>statID:</strong> <code>goalie_savePercent</code></li><li><strong>description:</strong> Goalie save percentage</li></ul></li><li><strong>Penalty Kicks Saved</strong><ul><li><strong>statID:</strong> <code>goalie_penaltyKicksSaved</code></li><li><strong>description:</strong> Number of penalty kicks saved</li></ul></li><li><strong>Inside Box Saves</strong><ul><li><strong>statID:</strong> <code>goalie_insideBox_saves</code></li><li><strong>description:</strong> Number of saves inside the box</li></ul></li><li><strong>Goal Kicks</strong><ul><li><strong>statID:</strong> <code>goalie_goalKicks</code></li><li><strong>description:</strong> Number of goal kicks</li></ul></li><li><strong>Seconds Played</strong><ul><li><strong>statID:</strong> <code>secondsPlayed</code></li><li><strong>description:</strong> Seconds played</li></ul></li><li><strong>Minutes Played</strong><ul><li><strong>statID:</strong> <code>minutesPlayed</code></li><li><strong>description:</strong> Minutes played</li></ul></li><li><strong>Plus/Minus</strong><ul><li><strong>statID:</strong> <code>plusMinus</code></li><li><strong>description:</strong> Net score change while player was playing</li></ul></li><li><strong>Player Rating</strong><ul><li><strong>statID:</strong> <code>playerRating</code></li><li><strong>description:</strong> Player rating</li></ul></li><li><strong>Largest Lead</strong><ul><li><strong>statID:</strong> <code>largestLead</code></li><li><strong>description:</strong> Largest lead held during the game</li></ul></li><li><strong>Seconds In Lead</strong><ul><li><strong>statID:</strong> <code>secondsInLead</code></li><li><strong>description:</strong> Number of game clock seconds team was winning</li></ul></li><li><strong>Minutes In Lead</strong><ul><li><strong>statID:</strong> <code>minutesInLead</code></li><li><strong>description:</strong> Number of game clock minutes team was winning</li></ul></li><li><strong>Possession Percentage</strong><ul><li><strong>statID:</strong> <code>possessionPercent</code></li><li><strong>description:</strong> Percentage of time the team had possession of the ball</li></ul></li><li><strong>Longest Scoring Run</strong><ul><li><strong>statID:</strong> <code>longestScoringRun</code></li><li><strong>description:</strong> Longest run of unanswered goals</li></ul></li><li><strong>Times Tied</strong><ul><li><strong>statID:</strong> <code>timesTied</code></li><li><strong>description:</strong> Number of times the game was tied (excluding the start)</li></ul></li><li><strong>Lead Changes</strong><ul><li><strong>statID:</strong> <code>leadChanges</code></li><li><strong>description:</strong> Number of times the winning team changed</li></ul></li></ul><h2 id="handball" tabindex="-1">Handball <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/stats#handball" aria-label="Permalink to &quot;Handball&quot;">​</a></h2><ul><li><strong>Goals</strong><ul><li><strong>statID:</strong> <code>points</code></li><li><strong>description:</strong> Goals scored</li></ul></li></ul><h2 id="tennis" tabindex="-1">Tennis <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/stats#tennis" aria-label="Permalink to &quot;Tennis&quot;">​</a></h2><ul><li><strong>Sets</strong><ul><li><strong>statID:</strong> <code>points</code></li><li><strong>description:</strong> Goals scored</li></ul></li><li><strong>Games</strong><ul><li><strong>statID:</strong> <code>games</code></li><li><strong>description:</strong> Games won</li></ul></li></ul><h2 id="golf" tabindex="-1">Golf <a class="header-anchor" href="https://sportsgameodds.com/docs/data-types/stats#golf" aria-label="Permalink to &quot;Golf&quot;">​</a></h2><ul><li><strong>To Par</strong><ul><li><strong>statID:</strong> <code>points</code></li><li><strong>description:</strong> To Par Score</li></ul></li></ul></div></div></main><footer class="VPDocFooter" data-v-ef3a4dda="" data-v-07d71ff1=""><!--[--><!--]--><!----><nav class="prev-next" aria-labelledby="doc-footer-aria-label" data-v-07d71ff1=""><span class="visually-hidden" id="doc-footer-aria-label" data-v-07d71ff1="">Pager</span><div class="pager" data-v-07d71ff1=""><a class="VPLink link pager-link prev" href="https://sportsgameodds.com/docs/data-types/leagues" data-v-07d71ff1=""><!--[--><span class="desc" data-v-07d71ff1="">Previous page</span><span class="title" data-v-07d71ff1="">Leagues (leagueID)</span><!--]--></a></div><div class="pager" data-v-07d71ff1=""><a class="VPLink link pager-link next" href="https://sportsgameodds.com/docs/data-types/stat-entity" data-v-07d71ff1=""><!--[--><span class="desc" data-v-07d71ff1="">Next page</span><span class="title" data-v-07d71ff1="">Stat Entity (statEntityID)</span><!--]--></a></div></nav></footer><!--[--><!--]--></div></div></div><!--[--><!--]--></div></div><footer class="VPFooter has-sidebar" data-v-c4daae71="" data-v-e3157d6d=""><div class="container" data-v-e3157d6d=""><!----><p class="copyright" data-v-e3157d6d="">Copyright (c) 2024</p></div></footer><!--[--><!--]--></div></div>
+    <script>window.__VP_HASH_MAP__=JSON.parse("{\"data-types_bookmakers.md\":\"CWZLLw4K\",\"data-types_leagues.md\":\"CZBMM_G2\",\"data-types_markets.md\":\"CxrZAa0X\",\"data-types_odds.md\":\"Dm4eXean\",\"data-types_periods.md\":\"DKi39JkS\",\"data-types_sports.md\":\"BRzy1o9U\",\"data-types_stat-entity.md\":\"uUUhVmHZ\",\"data-types_stats.md\":\"zRRA4EJM\",\"data-types_types-and-sides.md\":\"BvizJfL1\",\"explorer.md\":\"CPWQIj1m\",\"faq.md\":\"DtGGSiEu\",\"guides_data-batches.md\":\"Cv8nE1sV\",\"guides_fetching-teams.md\":\"CPju1e69\",\"guides_handling-odds.md\":\"G11CC-v6\",\"guides_more-examples.md\":\"BHXW0aTV\",\"guides_response-speed.md\":\"IRCCW57e\",\"help.md\":\"BOyXe8Pn\",\"index.md\":\"DLkzk2k6\",\"info_consensus-odds.md\":\"FY-bpKxS\",\"info_v1-to-v2.md\":\"CRydxNDa\",\"introduction.md\":\"BN42DcIu\",\"reference.md\":\"B1Tth4OH\",\"setup_getting-started.md\":\"Bx2ts3oV\",\"setup_rate-limiting.md\":\"CU96lOtx\",\"v1_data-types_bookmakers.md\":\"CSx4sXgz\",\"v1_data-types_leagues.md\":\"IfNjqPob\",\"v1_data-types_markets.md\":\"B7VeUS3V\",\"v1_data-types_odds.md\":\"DRwcbf7i\",\"v1_data-types_periods.md\":\"CJaNWJCG\",\"v1_data-types_sports.md\":\"_tBicMbv\",\"v1_data-types_stat-entity.md\":\"CqDGveE9\",\"v1_data-types_stats.md\":\"B06mTQFr\",\"v1_data-types_types-and-sides.md\":\"CeEztzDY\",\"v1_explorer.md\":\"Bp0CLP15\",\"v1_faq.md\":\"CY8iYWKE\",\"v1_guides_data-batches.md\":\"Bzz_GiPX\",\"v1_guides_fetching-teams.md\":\"C0_dhKSR\",\"v1_guides_handling-odds.md\":\"D9mZdJ9H\",\"v1_guides_more-examples.md\":\"CndG4Foo\",\"v1_guides_response-speed.md\":\"DCm3v1xn\",\"v1_help.md\":\"DqWZkSRU\",\"v1_index.md\":\"BNm_UJ_Q\",\"v1_info_consensus-odds.md\":\"YVpwxVBx\",\"v1_info_v1-to-v2.md\":\"Coq47Ae9\",\"v1_introduction.md\":\"C0Sv04RU\",\"v1_reference.md\":\"B26FLrsR\",\"v1_setup_getting-started.md\":\"BmUYPpH_\",\"v1_setup_rate-limiting.md\":\"BQDQaQd7\"}");window.__VP_SITE_DATA__=JSON.parse("{\"lang\":\"en-US\",\"dir\":\"ltr\",\"title\":\"SportsGameOdds API\",\"description\":\"Explore the SportsGameOdds API Documentation for detailed guides, tutorials, and resources to make the most of our betting odds API platform. Start learning today!\",\"base\":\"/docs/\",\"head\":[],\"router\":{\"prefetchLinks\":true},\"appearance\":\"dark\",\"themeConfig\":{\"socialLinks\":[{\"icon\":\"github\",\"link\":\"https://github.com/SportsGameOdds/sportsgameodds\"},{\"icon\":\"x\",\"link\":\"https://x.com/SportsGameOdds\"},{\"icon\":\"discord\",\"link\":\"https://discord.gg/HhP9E7ZZaE\"}],\"logo\":\"sgo-logo-small.png\",\"nav\":[{\"text\":\"Website\",\"link\":\"https://sportsgameodds.com\"},{\"text\":\"Guides\",\"link\":\"/introduction\"},{\"text\":\"Explorer\",\"link\":\"/explorer\"},{\"text\":\"Reference\",\"link\":\"/reference\"},{\"text\":\"Version\",\"items\":[{\"text\":\"v2\",\"link\":\"/v2\"},{\"text\":\"v1\",\"link\":\"/v1\"}]}],\"footer\":{\"message\":\"\",\"copyright\":\"Copyright (c) 2024\"},\"search\":{\"provider\":\"local\"},\"outline\":\"deep\",\"sidebarMenuLabel\":\"Docs\",\"returnToTopLabel\":\" \",\"sidebar\":{\"/\":[{\"text\":\"Reference\",\"link\":\"/reference\"},{\"text\":\"Data Explorer\",\"link\":\"/explorer\"},{\"text\":\"Basics\",\"items\":[{\"text\":\"Introduction\",\"link\":\"/introduction\"},{\"text\":\"Getting Started\",\"link\":\"/setup/getting-started\"},{\"text\":\"Rate Limiting\",\"link\":\"/setup/rate-limiting\"}]},{\"text\":\"Guides\",\"items\":[{\"text\":\"Getting Data in Batches\",\"link\":\"/guides/data-batches\"},{\"text\":\"Handling Odds\",\"link\":\"/guides/handling-odds\"},{\"text\":\"Fetching Teams\",\"link\":\"/guides/fetching-teams\"},{\"text\":\"Improving Response Times\",\"link\":\"/guides/response-speed\"},{\"text\":\"More Examples\",\"link\":\"/guides/more-examples\"}]},{\"text\":\"Data Types\",\"items\":[{\"text\":\"Markets\",\"link\":\"/data-types/markets\"},{\"text\":\"Bookmakers (bookmakerID)\",\"link\":\"/data-types/bookmakers\"},{\"text\":\"Sports (sportID)\",\"link\":\"/data-types/sports\"},{\"text\":\"Leagues (leagueID)\",\"link\":\"/data-types/leagues\"},{\"text\":\"Stats (statID)\",\"link\":\"/data-types/stats\"},{\"text\":\"Stat Entity (statEntityID)\",\"link\":\"/data-types/stat-entity\"},{\"text\":\"Periods (periodID)\",\"link\":\"/data-types/periods\"},{\"text\":\"Bet Types & Sides (betTypeID & sideID)\",\"link\":\"/data-types/types-and-sides\"},{\"text\":\"Putting it Together (oddID)\",\"link\":\"/data-types/odds\"}]},{\"text\":\"Other Info\",\"items\":[{\"text\":\"Consensus Odds\",\"link\":\"/info/consensus-odds\"},{\"text\":\"Upgrading to v2\",\"link\":\"/info/v1-to-v2\"}]},{\"text\":\"FAQ\",\"link\":\"/faq\"},{\"text\":\"Get Help\",\"link\":\"https://sportsgameodds.com/contact-us/\"},{\"text\":\"Website\",\"link\":\"https://sportsgameodds.com\"}],\"/v2/\":[{\"text\":\"Reference\",\"link\":\"/v2/reference\"},{\"text\":\"Data Explorer\",\"link\":\"/v2/explorer\"},{\"text\":\"Basics\",\"items\":[{\"text\":\"Introduction\",\"link\":\"/v2/introduction\"},{\"text\":\"Getting Started\",\"link\":\"/v2/setup/getting-started\"},{\"text\":\"Rate Limiting\",\"link\":\"/v2/setup/rate-limiting\"}]},{\"text\":\"Guides\",\"items\":[{\"text\":\"Getting Data in Batches\",\"link\":\"/v2/guides/data-batches\"},{\"text\":\"Handling Odds\",\"link\":\"/v2/guides/handling-odds\"},{\"text\":\"Fetching Teams\",\"link\":\"/v2/guides/fetching-teams\"},{\"text\":\"Improving Response Times\",\"link\":\"/v2/guides/response-speed\"},{\"text\":\"More Examples\",\"link\":\"/v2/guides/more-examples\"}]},{\"text\":\"Data Types\",\"items\":[{\"text\":\"Markets\",\"link\":\"/v2/data-types/markets\"},{\"text\":\"Bookmakers (bookmakerID)\",\"link\":\"/v2/data-types/bookmakers\"},{\"text\":\"Sports (sportID)\",\"link\":\"/v2/data-types/sports\"},{\"text\":\"Leagues (leagueID)\",\"link\":\"/v2/data-types/leagues\"},{\"text\":\"Stats (statID)\",\"link\":\"/v2/data-types/stats\"},{\"text\":\"Stat Entity (statEntityID)\",\"link\":\"/v2/data-types/stat-entity\"},{\"text\":\"Periods (periodID)\",\"link\":\"/v2/data-types/periods\"},{\"text\":\"Bet Types & Sides (betTypeID & sideID)\",\"link\":\"/v2/data-types/types-and-sides\"},{\"text\":\"Putting it Together (oddID)\",\"link\":\"/v2/data-types/odds\"}]},{\"text\":\"Other Info\",\"items\":[{\"text\":\"Consensus Odds\",\"link\":\"/v2/info/consensus-odds\"},{\"text\":\"Upgrading to v2\",\"link\":\"/v2/info/v1-to-v2\"}]},{\"text\":\"FAQ\",\"link\":\"/v2/faq\"},{\"text\":\"Get Help\",\"link\":\"https://sportsgameodds.com/contact-us/\"},{\"text\":\"Website\",\"link\":\"https://sportsgameodds.com\"}],\"/v1/\":[{\"text\":\"Reference\",\"link\":\"/v1/reference\"},{\"text\":\"Data Explorer\",\"link\":\"/v1/explorer\"},{\"text\":\"Basics\",\"items\":[{\"text\":\"Introduction\",\"link\":\"/v1/introduction\"},{\"text\":\"Getting Started\",\"link\":\"/v1/setup/getting-started\"},{\"text\":\"Rate Limiting\",\"link\":\"/v1/setup/rate-limiting\"}]},{\"text\":\"Guides\",\"items\":[{\"text\":\"Getting Data in Batches\",\"link\":\"/v1/guides/data-batches\"},{\"text\":\"Handling Odds\",\"link\":\"/v1/guides/handling-odds\"},{\"text\":\"Fetching Teams\",\"link\":\"/v1/guides/fetching-teams\"},{\"text\":\"Improving Response Times\",\"link\":\"/v1/guides/response-speed\"},{\"text\":\"More Examples\",\"link\":\"/v1/guides/more-examples\"}]},{\"text\":\"Data Types\",\"items\":[{\"text\":\"Markets\",\"link\":\"/v1/data-types/markets\"},{\"text\":\"Bookmakers (bookmakerID)\",\"link\":\"/v1/data-types/bookmakers\"},{\"text\":\"Sports (sportID)\",\"link\":\"/v1/data-types/sports\"},{\"text\":\"Leagues (leagueID)\",\"link\":\"/v1/data-types/leagues\"},{\"text\":\"Stats (statID)\",\"link\":\"/v1/data-types/stats\"},{\"text\":\"Stat Entity (statEntityID)\",\"link\":\"/v1/data-types/stat-entity\"},{\"text\":\"Periods (periodID)\",\"link\":\"/v1/data-types/periods\"},{\"text\":\"Bet Types & Sides (betTypeID & sideID)\",\"link\":\"/v1/data-types/types-and-sides\"},{\"text\":\"Putting it Together (oddID)\",\"link\":\"/v1/data-types/odds\"}]},{\"text\":\"Other Info\",\"items\":[{\"text\":\"Consensus Odds\",\"link\":\"/v1/info/consensus-odds\"},{\"text\":\"Upgrading to v2\",\"link\":\"/v1/info/v1-to-v2\"}]},{\"text\":\"FAQ\",\"link\":\"/v1/faq\"},{\"text\":\"Get Help\",\"link\":\"https://sportsgameodds.com/contact-us/\"},{\"text\":\"Website\",\"link\":\"https://sportsgameodds.com\"}]}},\"locales\":{},\"scrollOffset\":134,\"cleanUrls\":true}");</script>
+    
+  
+<div style="position: relative;" id="zp-9-3-3-apollo-root-apollo_everywhere"><div class="zp" data-has-tooltip-listener=""><div></div><div class="x_b61J5" data-disable-focus-trap="true"></div><div class="x_dQldU" aria-live="polite" aria-atomic="true" data-disable-focus-trap="true"></div><span data-name="tooltip-listener" aria-hidden="true" style="display: none;"></span></div></div></body><div id="select-text-to-keyword" data-v-app=""><!----><section class="fh-w-1 fh=h-1" style="position: fixed; z-index: 2147483647; left: 877.688px; top: 738.5px;"></section><!----></div></html>

@@ -1,0 +1,974 @@
+Using most recent CSV file: nba_player_props_2025-03-13_enhanced_stats.csv
+
+=== Finding All Best Props ===
+Analyzing props from nba_player_props_2025-03-13_enhanced_stats.csv...
+Excluding props containing: steals, blocks
+Minimum bookmakers: 5
+Number of props to return: 100
+Loaded 560 props from the CSV file
+Found 407 props with at least 5 bookmakers
+Found 358 props after excluding keywords
+Found 65 over props and 65 under props with EV between 2% and 80%
+Warning: Correcting inconsistent bet direction for Jalen Duren points
+  Fair line (15.0) > Book line (13.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4754, fair_line: 15.0, book_line: 13.5
+  bet_type: OVER, american_odds: -105.0
+  line_difference: 1.5, probability_adjustment: 0.15000000000000002
+  Final true_prob: 0.6254
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5246, fair_line: 15.0, book_line: 13.5
+  bet_type: OVER, american_odds: -130.0
+  line_difference: 1.5, probability_adjustment: 0.15000000000000002
+  Final true_prob: 0.6746
+Warning: Correcting inconsistent bet direction for Dalton Knecht points+rebounds+assists
+  Fair line (18.5) > Book line (17.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4704, fair_line: 18.5, book_line: 17.5
+  bet_type: OVER, american_odds: 103.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6204
+Warning: Correcting inconsistent bet direction for Marcus Smart assists
+  Fair line (3.5) > Book line (2.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4248, fair_line: 3.5, book_line: 2.5
+  bet_type: OVER, american_odds: 120.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.5748
+Warning: Correcting inconsistent bet direction for Marcus Smart points+assists
+  Fair line (12.5) > Book line (11.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4694, fair_line: 12.5, book_line: 11.5
+  bet_type: OVER, american_odds: 100.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6194
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5296, fair_line: 18.5, book_line: 17.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6295999999999999
+Warning: Correcting inconsistent bet direction for Austin Reaves rebounds+assists
+  Fair line (11.5) > Book line (10.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.483, fair_line: 11.5, book_line: 10.5
+  bet_type: OVER, american_odds: -105.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.583
+Warning: Correcting inconsistent bet direction for Nikola Vucevic rebounds
+  Fair line (9.5) > Book line (8.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.44, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: 111.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.59
+Warning: Correcting inconsistent bet direction for Dorian Finneysmith points+rebounds+assists
+  Fair line (14.5) > Book line (13.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4785, fair_line: 14.5, book_line: 13.5
+  bet_type: OVER, american_odds: -104.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5785
+Warning: Correcting inconsistent bet direction for Ziaire Williams points
+  Fair line (9.5) > Book line (8.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4727, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -102.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5727
+Warning: Correcting inconsistent bet direction for Cam Thomas rebounds+assists
+  Fair line (7.5) > Book line (6.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4578, fair_line: 7.5, book_line: 6.5
+  bet_type: OVER, american_odds: 103.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6078
+Warning: Correcting inconsistent bet direction for Tim Hardaway Jr points+rebounds
+  Fair line (13.5) > Book line (12.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4797, fair_line: 13.5, book_line: 12.5
+  bet_type: OVER, american_odds: -105.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5797
+Warning: Correcting inconsistent bet direction for Moses Moody points+rebounds+assists
+  Fair line (16.5) > Book line (15.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4797, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -105.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5797
+Warning: Correcting inconsistent bet direction for Richaun Holmes points
+  Fair line (9.5) > Book line (8.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4797, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -105.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5797
+Warning: Correcting inconsistent bet direction for Marcus Smart points
+  Fair line (9.5) > Book line (8.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4797, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -105.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5797
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.517, fair_line: 11.5, book_line: 10.5
+  bet_type: OVER, american_odds: -121.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.617
+Warning: Correcting inconsistent bet direction for Stephen Curry rebounds
+  Fair line (4.5) > Book line (3.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4518, fair_line: 4.5, book_line: 3.5
+  bet_type: OVER, american_odds: 105.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6018
+Warning: Correcting inconsistent bet direction for Tobias Harris points
+  Fair line (15.5) > Book line (14.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4888, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -109.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5888
+Warning: Correcting inconsistent bet direction for Keon Johnson points+rebounds
+  Fair line (13.5) > Book line (12.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4808, fair_line: 13.5, book_line: 12.5
+  bet_type: OVER, american_odds: -106.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5808
+Warning: Correcting inconsistent bet direction for Jordan Poole assists
+  Fair line (4.5) > Book line (3.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4597, fair_line: 4.5, book_line: 3.5
+  bet_type: OVER, american_odds: 102.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6097
+Warning: Correcting inconsistent bet direction for Dangelo Russell points+rebounds+assists
+  Fair line (22.5) > Book line (21.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4839, fair_line: 22.5, book_line: 21.5
+  bet_type: OVER, american_odds: -107.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5839
+Warning: Correcting inconsistent bet direction for Tim Hardaway Jr points
+  Fair line (10.5) > Book line (9.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4899, fair_line: 10.5, book_line: 9.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5899
+Warning: Correcting inconsistent bet direction for Cam Thomas points+assists
+  Fair line (28.5) > Book line (27.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4899, fair_line: 28.5, book_line: 27.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5899
+Warning: Correcting inconsistent bet direction for Kyshawn George points+rebounds+assists
+  Fair line (17.5) > Book line (16.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4899, fair_line: 17.5, book_line: 16.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5899
+Warning: Correcting inconsistent bet direction for Austin Reaves points+rebounds+assists
+  Fair line (34.5) > Book line (33.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4899, fair_line: 34.5, book_line: 33.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5899
+Warning: Correcting inconsistent bet direction for Damian Lillard points+rebounds+assists
+  Fair line (36.5) > Book line (35.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4899, fair_line: 36.5, book_line: 35.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5899
+Warning: Correcting inconsistent bet direction for Brook Lopez points+rebounds+assists
+  Fair line (19.5) > Book line (18.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4899, fair_line: 19.5, book_line: 18.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5899
+Warning: Correcting inconsistent bet direction for Cam Thomas points+rebounds+assists
+  Fair line (31.5) > Book line (30.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4899, fair_line: 31.5, book_line: 30.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5899
+Warning: Correcting inconsistent bet direction for Dangelo Russell points
+  Fair line (13.5) > Book line (12.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4899, fair_line: 13.5, book_line: 12.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5899
+Warning: Correcting inconsistent bet direction for Kyle Kuzma points+assists
+  Fair line (16.5) > Book line (15.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4899, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5899
+Warning: Correcting inconsistent bet direction for Buddy Hield points
+  Fair line (10.5) > Book line (9.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4814, fair_line: 10.5, book_line: 9.5
+  bet_type: OVER, american_odds: -106.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5814
+Warning: Correcting inconsistent bet direction for Corey Kispert points+assists
+  Fair line (13.5) > Book line (12.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4776, fair_line: 13.5, book_line: 12.5
+  bet_type: OVER, american_odds: -105.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5776
+Warning: Correcting inconsistent bet direction for Domantas Sabonis rebounds+assists
+  Fair line (18.5) > Book line (17.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4819, fair_line: 18.5, book_line: 17.5
+  bet_type: OVER, american_odds: -107.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5819
+Warning: Correcting inconsistent bet direction for Brook Lopez points
+  Fair line (12.5) > Book line (11.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.484, fair_line: 12.5, book_line: 11.5
+  bet_type: OVER, american_odds: -108.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.584
+Warning: Correcting inconsistent bet direction for Coby White points+rebounds+assists
+  Fair line (32.5) > Book line (31.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4875, fair_line: 32.5, book_line: 31.5
+  bet_type: OVER, american_odds: -109.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5875
+Warning: Correcting inconsistent bet direction for Kyle Kuzma points
+  Fair line (14.5) > Book line (13.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4875, fair_line: 14.5, book_line: 13.5
+  bet_type: OVER, american_odds: -109.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5875
+Warning: Correcting inconsistent bet direction for Kyshawn George points
+  Fair line (9.5) > Book line (8.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4845, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -108.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5845
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5112, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6112
+Warning: Correcting inconsistent bet direction for Jarred Vanderbilt points+assists
+  Fair line (9.5) > Book line (8.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4824, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -107.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5824
+Warning: Correcting inconsistent bet direction for Jordan Poole points+rebounds+assists
+  Fair line (28.5) > Book line (27.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4909, fair_line: 28.5, book_line: 27.5
+  bet_type: OVER, american_odds: -111.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5909
+Warning: Correcting inconsistent bet direction for Giannis Antetokounmpo points+rebounds+assists
+  Fair line (48.5) > Book line (47.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5, fair_line: 48.5, book_line: 47.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5, fair_line: 23.5, book_line: 22.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6
+Warning: Correcting inconsistent bet direction for Kyle Kuzma points+rebounds+assists
+  Fair line (23.5) > Book line (22.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5, fair_line: 23.5, book_line: 22.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6
+Warning: Correcting inconsistent bet direction for Dayron Sharpe points+rebounds+assists
+  Fair line (16.5) > Book line (15.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5, fair_line: 48.5, book_line: 47.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5215, fair_line: 14.5, book_line: 13.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6214999999999999
+Warning: Correcting inconsistent bet direction for Cam Thomas points
+  Fair line (24.5) > Book line (23.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.488, fair_line: 24.5, book_line: 23.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.588
+Warning: Correcting inconsistent bet direction for Damian Lillard points+rebounds
+  Fair line (29.5) > Book line (28.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4934, fair_line: 29.5, book_line: 28.5
+  bet_type: OVER, american_odds: -112.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5934
+Warning: Correcting inconsistent bet direction for Ziaire Williams points+rebounds+assists
+  Fair line (15.5) > Book line (14.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4865, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -109.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5865
+Warning: Correcting inconsistent bet direction for Keon Johnson points+assists
+  Fair line (11.5) > Book line (10.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4876, fair_line: 11.5, book_line: 10.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5876
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5101, fair_line: 19.5, book_line: 18.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6101
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5101, fair_line: 36.5, book_line: 35.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6101
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5101, fair_line: 13.5, book_line: 12.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6101
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5101, fair_line: 34.5, book_line: 33.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6101
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5101, fair_line: 10.5, book_line: 9.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6101
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5101, fair_line: 17.5, book_line: 16.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6101
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5101, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6101
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5101, fair_line: 31.5, book_line: 30.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6101
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5101, fair_line: 28.5, book_line: 27.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6101
+Warning: Correcting inconsistent bet direction for Stephen Curry points
+  Fair line (27.5) > Book line (26.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.499, fair_line: 27.5, book_line: 26.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.599
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5306, fair_line: 12.5, book_line: 11.5
+  bet_type: OVER, american_odds: -130.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6305999999999999
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5203, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6203
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5203, fair_line: 13.5, book_line: 12.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6203
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5203, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6203
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5203, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6203
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.501, fair_line: 27.5, book_line: 26.5
+  bet_type: OVER, american_odds: -116.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.601
+Warning: Correcting inconsistent bet direction for Malik Beasley points
+  Fair line (15.5) > Book line (14.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.494, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -113.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.594
+Warning: Correcting inconsistent bet direction for Luka Doncic points+rebounds
+  Fair line (41.5) > Book line (40.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4925, fair_line: 41.5, book_line: 40.5
+  bet_type: OVER, american_odds: -112.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5925
+Warning: Correcting inconsistent bet direction for Richaun Holmes points+rebounds+assists
+  Fair line (18.5) > Book line (17.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.496, fair_line: 18.5, book_line: 17.5
+  bet_type: OVER, american_odds: -114.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.596
+Warning: Correcting inconsistent bet direction for Domantas Sabonis points
+  Fair line (16.5) > Book line (15.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.496, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -114.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.596
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5091, fair_line: 28.5, book_line: 27.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6091
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5066, fair_line: 29.5, book_line: 28.5
+  bet_type: OVER, american_odds: -119.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6066
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5161, fair_line: 22.5, book_line: 21.5
+  bet_type: OVER, american_odds: -123.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6161
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5273, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -129.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6273
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5192, fair_line: 13.5, book_line: 12.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6192
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4965, fair_line: 12.5, book_line: 11.5
+  bet_type: OVER, american_odds: -114.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5965
+Warning: Correcting inconsistent bet direction for Dangelo Russell points+assists
+  Fair line (19.5) > Book line (18.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.493, fair_line: 19.5, book_line: 18.5
+  bet_type: OVER, american_odds: -113.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.593
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4975, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5975
+Warning: Correcting inconsistent bet direction for Richaun Holmes points+rebounds
+  Fair line (16.5) > Book line (15.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4847, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -109.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5847
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.504, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -118.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.604
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.504, fair_line: 18.5, book_line: 17.5
+  bet_type: OVER, american_odds: -118.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.604
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.495, fair_line: 19.5, book_line: 18.5
+  bet_type: OVER, american_odds: -114.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.595
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5125, fair_line: 32.5, book_line: 31.5
+  bet_type: OVER, american_odds: -122.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6124999999999999
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5125, fair_line: 14.5, book_line: 13.5
+  bet_type: OVER, american_odds: -122.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6124999999999999
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.506, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -119.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.606
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5186, fair_line: 10.5, book_line: 9.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6185999999999999
+Warning: Correcting inconsistent bet direction for Jordan Poole points+rebounds
+  Fair line (24.5) > Book line (23.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.497, fair_line: 24.5, book_line: 23.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.597
+Warning: Correcting inconsistent bet direction for Stephen Curry points+rebounds
+  Fair line (31.5) > Book line (30.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.497, fair_line: 31.5, book_line: 30.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.597
+Warning: Correcting inconsistent bet direction for Tim Hardaway Jr points+rebounds+assists
+  Fair line (15.5) > Book line (14.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5025, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -117.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6024999999999999
+Warning: Correcting inconsistent bet direction for Jimmy Butler rebounds+assists
+  Fair line (12.5) > Book line (11.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5035, fair_line: 12.5, book_line: 11.5
+  bet_type: OVER, american_odds: -118.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6034999999999999
+Warning: Correcting inconsistent bet direction for Matas Buzelis points+assists
+  Fair line (16.5) > Book line (15.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4853, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5853
+Warning: Correcting inconsistent bet direction for Malik Beasley points+rebounds
+  Fair line (18.5) > Book line (17.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4853, fair_line: 18.5, book_line: 17.5
+  bet_type: OVER, american_odds: -110.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5853
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.512, fair_line: 24.5, book_line: 23.5
+  bet_type: OVER, american_odds: -122.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.612
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5155, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -124.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6154999999999999
+Warning: Correcting inconsistent bet direction for Coby White points+rebounds
+  Fair line (27.5) > Book line (26.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4955, fair_line: 27.5, book_line: 26.5
+  bet_type: OVER, american_odds: -114.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5955
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5181, fair_line: 18.5, book_line: 17.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6181
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.516, fair_line: 12.5, book_line: 11.5
+  bet_type: OVER, american_odds: -124.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.616
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4966, fair_line: 7.5, book_line: 6.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5966
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5075, fair_line: 41.5, book_line: 40.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6074999999999999
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.503, fair_line: 31.5, book_line: 30.5
+  bet_type: OVER, american_odds: -118.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.603
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.503, fair_line: 24.5, book_line: 23.5
+  bet_type: OVER, american_odds: -118.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.603
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5124, fair_line: 11.5, book_line: 10.5
+  bet_type: OVER, american_odds: -122.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6123999999999999
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5135, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -123.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6134999999999999
+Warning: Correcting inconsistent bet direction for Khris Middleton points+rebounds+assists
+  Fair line (19.5) > Book line (18.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.505, fair_line: 19.5, book_line: 18.5
+  bet_type: OVER, american_odds: -119.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.605
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5176, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6175999999999999
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4961, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5961
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.507, fair_line: 19.5, book_line: 18.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.607
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5224, fair_line: 13.5, book_line: 12.5
+  bet_type: OVER, american_odds: -127.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6224
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5045, fair_line: 27.5, book_line: 26.5
+  bet_type: OVER, american_odds: -119.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6044999999999999
+Warning: Correcting inconsistent bet direction for Richaun Holmes rebounds
+  Fair line (7.5) > Book line (6.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5034, fair_line: 7.5, book_line: 6.5
+  bet_type: OVER, american_odds: -118.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6033999999999999
+Warning: Correcting inconsistent bet direction for Khris Middleton points+rebounds
+  Fair line (15.5) > Book line (14.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5039, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -119.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6039
+Warning: Correcting inconsistent bet direction for Khris Middleton points
+  Fair line (12.5) > Book line (11.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4951, fair_line: 12.5, book_line: 11.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5951
+Warning: Correcting inconsistent bet direction for Malik Beasley points+assists
+  Fair line (16.5) > Book line (15.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4951, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5951
+Warning: Correcting inconsistent bet direction for Jarred Vanderbilt points+rebounds+assists
+  Fair line (16.5) > Book line (15.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4951, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5951
+Warning: Correcting inconsistent bet direction for Jalen Duren points+assists
+  Fair line (17.5) > Book line (16.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4951, fair_line: 17.5, book_line: 16.5
+  bet_type: OVER, american_odds: -115.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.5951
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5049, fair_line: 12.5, book_line: 11.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6049
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5049, fair_line: 17.5, book_line: 16.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6049
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5049, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6049
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5049, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -120.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6049
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5153, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6153
+Warning: Correcting inconsistent bet direction for Buddy Hield points+rebounds+assists
+  Fair line (15.5) > Book line (14.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -118.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5, fair_line: 15.5, book_line: 14.5
+  bet_type: OVER, american_odds: -118.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5147, fair_line: 16.5, book_line: 15.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6147
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5147, fair_line: 18.5, book_line: 17.5
+  bet_type: OVER, american_odds: -125.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6147
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5422, fair_line: 7.5, book_line: 6.5
+  bet_type: OVER, american_odds: -140.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6422
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5752, fair_line: 3.5, book_line: 2.5
+  bet_type: OVER, american_odds: -160.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6752
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5403, fair_line: 4.5, book_line: 3.5
+  bet_type: OVER, american_odds: -140.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6403
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.56, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: -152.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.66
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.5482, fair_line: 4.5, book_line: 3.5
+  bet_type: OVER, american_odds: -145.0
+  line_difference: 1.0, probability_adjustment: 0.1
+  Final true_prob: 0.6482
+Found 65 props after filtering duplicates
+Exported 65 best props to best_props_today.csv
+
+=== Finding Plus Odds Props ===
+
+Analyzing PLUS ODDS props from nba_player_props_2025-03-13_enhanced_stats.csv...
+Excluding props containing: steals, blocks
+Minimum bookmakers: 5
+Number of props to return: 100
+Loaded 560 props from the CSV file
+Found 407 props with at least 5 bookmakers
+Found 358 props after excluding keywords
+Found 60 plus odds over props and 37 plus odds under props
+Warning: Correcting inconsistent bet direction for Dalton Knecht points+rebounds+assists
+  Fair line (18.5) > Book line (17.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4704, fair_line: 18.5, book_line: 17.5
+  bet_type: OVER, american_odds: 103.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6204
+Warning: Correcting inconsistent bet direction for Marcus Smart assists
+  Fair line (3.5) > Book line (2.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4248, fair_line: 3.5, book_line: 2.5
+  bet_type: OVER, american_odds: 120.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.5748
+Warning: Correcting inconsistent bet direction for Marcus Smart points+assists
+  Fair line (12.5) > Book line (11.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4694, fair_line: 12.5, book_line: 11.5
+  bet_type: OVER, american_odds: 100.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6194
+Warning: Correcting inconsistent bet direction for Nikola Vucevic rebounds
+  Fair line (9.5) > Book line (8.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.44, fair_line: 9.5, book_line: 8.5
+  bet_type: OVER, american_odds: 111.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.59
+Warning: Correcting inconsistent bet direction for Cam Thomas rebounds+assists
+  Fair line (7.5) > Book line (6.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4578, fair_line: 7.5, book_line: 6.5
+  bet_type: OVER, american_odds: 103.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6078
+Warning: Correcting inconsistent bet direction for Stephen Curry rebounds
+  Fair line (4.5) > Book line (3.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4518, fair_line: 4.5, book_line: 3.5
+  bet_type: OVER, american_odds: 105.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6018
+Warning: Correcting inconsistent bet direction for Jordan Poole assists
+  Fair line (4.5) > Book line (3.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4597, fair_line: 4.5, book_line: 3.5
+  bet_type: OVER, american_odds: 102.0
+  line_difference: 1.0, probability_adjustment: 0.15
+  Final true_prob: 0.6097
+Warning: Correcting inconsistent bet direction for Austin Reaves rebounds
+  Fair line (5.0) > Book line (4.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4254, fair_line: 5.0, book_line: 4.5
+  bet_type: OVER, american_odds: 120.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5004
+Warning: Correcting inconsistent bet direction for Tobias Harris rebounds+assists
+  Fair line (8.0) > Book line (7.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4459, fair_line: 8.0, book_line: 7.5
+  bet_type: OVER, american_odds: 110.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5209
+Warning: Correcting inconsistent bet direction for Jimmy Butler assists
+  Fair line (6.0) > Book line (5.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4573, fair_line: 6.0, book_line: 5.5
+  bet_type: OVER, american_odds: 105.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5323
+Warning: Correcting inconsistent bet direction for Stephen Curry assists
+  Fair line (6.0) > Book line (5.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4694, fair_line: 6.0, book_line: 5.5
+  bet_type: OVER, american_odds: 100.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5444
+Warning: Correcting inconsistent bet direction for Dorian Finneysmith threePointersMade
+  Fair line (2.0) > Book line (1.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4341, fair_line: 2.0, book_line: 1.5
+  bet_type: OVER, american_odds: 115.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5091
+Warning: Correcting inconsistent bet direction for Coby White assists
+  Fair line (5.0) > Book line (4.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4329, fair_line: 5.0, book_line: 4.5
+  bet_type: OVER, american_odds: 116.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5079
+Warning: Correcting inconsistent bet direction for Moses Moody threePointersMade
+  Fair line (2.0) > Book line (1.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4426, fair_line: 2.0, book_line: 1.5
+  bet_type: OVER, american_odds: 111.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5176
+Warning: Correcting inconsistent bet direction for Kyshawn George assists
+  Fair line (3.0) > Book line (2.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4548, fair_line: 3.0, book_line: 2.5
+  bet_type: OVER, american_odds: 105.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5297999999999999
+Warning: Correcting inconsistent bet direction for Malik Monk assists
+  Fair line (6.0) > Book line (5.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4492, fair_line: 6.0, book_line: 5.5
+  bet_type: OVER, american_odds: 108.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5242
+Warning: Correcting inconsistent bet direction for Damian Lillard assists
+  Fair line (7.0) > Book line (6.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4621, fair_line: 7.0, book_line: 6.5
+  bet_type: OVER, american_odds: 102.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.5371
+Warning: Correcting inconsistent bet direction for Dennis Schroder assists
+  Fair line (5.0) > Book line (4.5), changing bet from UNDER to OVER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.459, fair_line: 5.0, book_line: 4.5
+  bet_type: OVER, american_odds: 103.0
+  line_difference: 0.5, probability_adjustment: 0.075
+  Final true_prob: 0.534
+Warning: Correcting inconsistent bet direction for Isaiah Stewart rebounds+assists
+  Fair line (7.0) < Book line (7.5), changing bet from OVER to UNDER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4459, fair_line: 7.0, book_line: 7.5
+  bet_type: UNDER, american_odds: 110.0
+  line_difference: -0.5, probability_adjustment: -0.075
+  Final true_prob: 0.5209
+Warning: Correcting inconsistent bet direction for Domantas Sabonis assists
+  Fair line (5.0) < Book line (5.5), changing bet from OVER to UNDER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4488, fair_line: 5.0, book_line: 5.5
+  bet_type: UNDER, american_odds: 108.0
+  line_difference: -0.5, probability_adjustment: -0.075
+  Final true_prob: 0.5237999999999999
+Warning: Correcting inconsistent bet direction for Keegan Murray threePointersMade
+  Fair line (2.0) < Book line (2.5), changing bet from OVER to UNDER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.4059, fair_line: 2.0, book_line: 2.5
+  bet_type: UNDER, american_odds: 130.0
+  line_difference: -0.5, probability_adjustment: -0.075
+  Final true_prob: 0.4809
+Warning: Correcting inconsistent bet direction for Marcus Smart rebounds
+  Fair line (2.0) < Book line (2.5), changing bet from OVER to UNDER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.3984, fair_line: 2.0, book_line: 2.5
+  bet_type: UNDER, american_odds: 134.0
+  line_difference: -0.5, probability_adjustment: -0.075
+  Final true_prob: 0.4734
+Warning: Correcting inconsistent bet direction for Malik Beasley assists
+  Fair line (1.0) < Book line (1.5), changing bet from OVER to UNDER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.3655, fair_line: 1.0, book_line: 1.5
+  bet_type: UNDER, american_odds: 152.0
+  line_difference: -0.5, probability_adjustment: -0.075
+  Final true_prob: 0.4405
+Warning: Correcting inconsistent bet direction for Keegan Murray assists
+  Fair line (1.0) < Book line (1.5), changing bet from OVER to UNDER
+DEBUG - calculate_true_probability inputs:
+  raw_prob: 0.376, fair_line: 1.0, book_line: 1.5
+  bet_type: UNDER, american_odds: 145.0
+  line_difference: -0.5, probability_adjustment: -0.075
+  Final true_prob: 0.451
+Found 97 plus odds props after filtering duplicates
+Exported 97 plus odds props to plus_odds_props_today.csv

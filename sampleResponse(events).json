@@ -1,0 +1,35 @@
+{
+    "nextCursor": "n.1741563000000.oftFlEBbZlkfge9DZLqf", 
+    "success": true, 
+    "data": [
+        {
+            "eventID": "aSKckYlXxqF7fcnEil2E", 
+            "sportID": "BASKETBALL", 
+            "leagueID": "NBA", 
+            "odds": {}, 
+            "type": "match", 
+            "info": {}, 
+            "teams": {
+                "home": {
+                    "statEntityID": "home", 
+                    "names": {}, 
+                    "teamID": "TORONTO_RAPTORS_NBA", 
+                    "colors": {}
+                }, 
+                "away": {}
+            }, 
+            "status": {}, 
+            "players": {}, 
+            "results": { }
+        }, 
+        {}, 
+        {}, 
+        {}, 
+        {}, 
+        {}, 
+        {}, 
+        {}, 
+        {}, 
+        {}
+    ]
+}
