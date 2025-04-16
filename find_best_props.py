@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 import os
 from datetime import datetime
+import glob
 
 def filter_duplicate_props(combined_props):
     """
@@ -134,6 +135,11 @@ def find_best_props(csv_file, max_ev_threshold=80, min_ev_threshold=0, min_bookm
         for keyword in exclude_keywords:
             df_filtered = df_filtered[~df_filtered['prop_type'].str.contains(keyword, case=False)]
         print(f"Found {len(df_filtered)} props after excluding keywords")
+    
+    # Filter out props with unusually large line differences
+    max_line_diff = 2.0  # Maximum allowed difference between fair_line and book_line
+    df_filtered = df_filtered[abs(df_filtered['fair_line'] - df_filtered['book_line']) <= max_line_diff]
+    print(f"Found {len(df_filtered)} props after filtering out large line differences")
     
     # Create separate DataFrames for over and under props
     over_props = df_filtered.copy()
@@ -321,7 +327,7 @@ if __name__ == "__main__":
             top_props = find_best_props(
                 most_recent_csv,
                 min_ev_threshold=3,      # Only include props with positive EV
-                min_bookmakers=5,        # Maintain reduced bookmakers requirement
+                min_bookmakers=3,        # Maintain reduced bookmakers requirement
                 exclude_keywords=["steals", "blocks"],
                 num_props=100
             )
@@ -338,3 +344,74 @@ if __name__ == "__main__":
         print(f"An error occurred: {str(e)}")
         import traceback
         traceback.print_exc()
+
+# Find the latest enhanced stats file
+stats_files = glob.glob('*_enhanced_stats.csv')
+latest_file = max(stats_files, key=os.path.getmtime) if stats_files else None
+
+if not latest_file:
+    print("No enhanced stats file found")
+    exit(1)
+
+# Load the enhanced stats and best props files
+enhanced_df = pd.read_csv(latest_file)
+best_props_file = 'best_props_today.csv'
+
+if os.path.exists(best_props_file):
+    best_props_df = pd.read_csv(best_props_file)
+    print(f"Loaded {len(best_props_df)} best props from {best_props_file}")
+else:
+    print(f"Best props file {best_props_file} not found")
+    best_props_df = pd.DataFrame()
+
+# Check what props meet the EV threshold
+min_ev = 3.0
+over_props = enhanced_df[enhanced_df['over_ev'] >= min_ev].copy()
+under_props = enhanced_df[enhanced_df['under_ev'] >= min_ev].copy()
+
+print(f"Props with over EV >= {min_ev}: {len(over_props)}")
+print(f"Props with under EV >= {min_ev}: {len(under_props)}")
+
+# Check if the under props are in the best_props file
+if not best_props_df.empty and not under_props.empty:
+    # Try to match on player, prop_type, direction
+    for _, under_row in under_props.iterrows():
+        player_name = under_row['player']
+        prop_type = under_row['prop_type']
+        
+        matching_rows = best_props_df[
+            (best_props_df['player'] == player_name) & 
+            (best_props_df['prop_type'] == prop_type) &
+            (best_props_df['bet_type'] == 'UNDER')
+        ]
+        
+        if not matching_rows.empty:
+            print(f"Found matching under prop in best_props_today.csv: {player_name} - {prop_type}")
+        else:
+            print(f"Under prop NOT found in best_props_today.csv: {player_name} - {prop_type}")
+else:
+    print("Could not check for under props in best_props_today.csv")
+
+# Check for any code that might filter out under props
+print("\nPossible filters applied to props:")
+if 'bookmaker_count' in enhanced_df.columns:
+    print(f"Mean bookmaker count for all props: {enhanced_df['bookmaker_count'].mean():.2f}")
+    print(f"Mean bookmaker count for over props with EV >= {min_ev}: {over_props['bookmaker_count'].mean() if not over_props.empty else 'N/A'}")
+    print(f"Mean bookmaker count for under props with EV >= {min_ev}: {under_props['bookmaker_count'].mean() if not under_props.empty else 'N/A'}")
+
+if 'over_bookmakers' in enhanced_df.columns and 'under_bookmakers' in enhanced_df.columns:
+    print(f"Mean over bookmakers: {enhanced_df['over_bookmakers'].mean():.2f}")
+    print(f"Mean under bookmakers: {enhanced_df['under_bookmakers'].mean():.2f}")
+    
+    if not over_props.empty:
+        print(f"Mean over bookmakers for props with over EV >= {min_ev}: {over_props['over_bookmakers'].mean():.2f}")
+    
+    if not under_props.empty:
+        print(f"Mean under bookmakers for props with under EV >= {min_ev}: {under_props['under_bookmakers'].mean():.2f}")
+
+# Look at the distribution of bet types in best_props
+if not best_props_df.empty and 'bet_type' in best_props_df.columns:
+    bet_type_counts = best_props_df['bet_type'].value_counts()
+    print("\nBet type distribution in best_props_today.csv:")
+    for bet_type, count in bet_type_counts.items():
+        print(f"{bet_type}: {count} ({count/len(best_props_df)*100:.1f}%)")

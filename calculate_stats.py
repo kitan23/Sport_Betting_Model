@@ -864,7 +864,16 @@ def export_stats_to_csv(props_df: pd.DataFrame, output_file: str = None) -> str:
                 # For UNDER bets:
                 # If fair_line > book_line, true probability should be LOWER (subtract adjustment)
                 # If fair_line < book_line, true probability should be HIGHER (add adjustment)
-                true_under_prob = no_vig_under_prob - probability_adjustment
+                if line_difference > 0:
+                    # Fair line > book line: LOWER probability (subtract adjustment)
+                    true_under_prob = no_vig_under_prob - probability_adjustment
+                elif line_difference < 0:
+                    # Fair line < book line: HIGHER probability (add adjustment)
+                    true_under_prob = no_vig_under_prob + probability_adjustment
+                else:
+                    # No difference, use no-vig probability
+                    true_under_prob = no_vig_under_prob
+                
                 true_under_prob = max(0.15, min(0.85, true_under_prob))  # More balanced clamping between 15% and 85%
                 
                 # Calculate EV
@@ -994,6 +1003,6 @@ def get_median_odds(bookmaker_data: str, direction: str = 'over') -> Dict:
 
 if __name__ == "__main__":
     # Example usage
-    csv_file = "nba_player_props_2025-03-20.csv"
+    csv_file = "nba_player_props_2025-04-16.csv"
     
     main(csv_file)
