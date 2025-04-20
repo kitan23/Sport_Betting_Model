@@ -292,6 +292,7 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
         
         # Group bookmakers by line
         bookmakers_by_line = {}
+        all_bookmakers_info = []
         
         for bookie, data in bookmaker_data.items():
             if bookie == target_bookmaker or not isinstance(data, dict) or not data.get('available', False):
@@ -315,24 +316,36 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
                 decimal_odds = convert_american_to_decimal(american_odds)
                 
                 if decimal_odds is not None:
+                    bookie_info = {
+                        'bookmaker': bookie,
+                        'american_odds': american_odds,
+                        'decimal_odds': decimal_odds,
+                        'line': float(bookie_line)
+                    }
+                    
+                    # Add to all bookmakers list for reference
+                    all_bookmakers_info.append(bookie_info)
+                    
                     # Round line to nearest 0.5 to group similar lines
                     rounded_line = round(float(bookie_line) * 2) / 2
                     
                     if rounded_line not in bookmakers_by_line:
                         bookmakers_by_line[rounded_line] = []
                         
-                    bookmakers_by_line[rounded_line].append({
-                        'bookmaker': bookie,
-                        'american_odds': american_odds,
-                        'decimal_odds': decimal_odds,
-                        'line': float(bookie_line)
-                    })
+                    bookmakers_by_line[rounded_line].append(bookie_info)
             except Exception as e:
                 continue
         
         # Skip if no other bookmakers found
         if not bookmakers_by_line:
             continue
+            
+        # Create a string with all bookmaker lines for reference
+        other_bookmakers_lines = []
+        for bookie_info in sorted(all_bookmakers_info, key=lambda x: x['bookmaker']):
+            other_bookmakers_lines.append(f"{bookie_info['bookmaker']}: {bookie_info['line']} @ {'+' if bookie_info['american_odds'] > 0 else ''}{int(bookie_info['american_odds'])}")
+        
+        other_lines_str = "; ".join(other_bookmakers_lines)
             
         # Find which line has the most bookmakers
         most_common_line = max(bookmakers_by_line.keys(), key=lambda x: len(bookmakers_by_line[x]))
@@ -382,7 +395,7 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
                     'edge': edge,
                     'num_bookmakers': len(most_common_line_bookmakers) + 1,
                     'comparison_type': 'same line comparison',
-                    'line_difference': line_diff
+                    'other_bookmakers_lines': other_lines_str
                 })
         else:
             # This is a line shopping opportunity, check if it's reasonable
@@ -438,7 +451,8 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
                         'edge': line_edge,
                         'num_bookmakers': len(most_common_line_bookmakers) + 1,
                         'comparison_type': 'line shopping - OVER value',
-                        'recommendation': 'BET OVER on lower line'
+                        'recommendation': 'BET OVER on lower line',
+                        'other_bookmakers_lines': other_lines_str
                     })
             
             # For UNDER props:
@@ -489,7 +503,8 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
                         'edge': line_edge,
                         'num_bookmakers': len(most_common_line_bookmakers) + 1,
                         'comparison_type': 'line shopping - UNDER value',
-                        'recommendation': 'BET UNDER on higher line'
+                        'recommendation': 'BET UNDER on higher line',
+                        'other_bookmakers_lines': other_lines_str
                     })
     
     print(f"\nProcessed {processed_count} valid props with bookmaker data")
