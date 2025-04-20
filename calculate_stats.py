@@ -1003,6 +1003,6 @@ def get_median_odds(bookmaker_data: str, direction: str = 'over') -> Dict:
 
 if __name__ == "__main__":
     # Example usage
-    csv_file = "nba_player_props_2025-04-16.csv"
+    csv_file = "nba_player_props_2025-04-20.csv"
     
     main(csv_file)
