@@ -269,7 +269,22 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
         
         # Get the odds and line for target bookmaker
         target_odds = target_book_info.get('odds', None)
-        target_line = target_book_info.get('overUnder', None)
+        
+        # FIXED: Get line with fallbacks for different field names in the JSON
+        # Try 'overUnder' first, then check for 'line' and 'total'
+        target_line = None
+        for line_field in ['overUnder', 'line', 'total', 'value']:
+            if line_field in target_book_info and target_book_info[line_field] is not None:
+                target_line = target_book_info[line_field]
+                break
+        
+        # If we're dealing with a Points prop specifically, check for 'points' field too
+        if target_line is None and 'points' in prop_type.lower():
+            # Try additional fields that might contain the points line
+            for points_field in ['points', 'playerTotal', 'pointsHandicap']:
+                if points_field in target_book_info and target_book_info[points_field] is not None:
+                    target_line = target_book_info[points_field]
+                    break
         
         if target_odds is None or target_line is None:
             continue
@@ -287,6 +302,11 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
             except:
                 continue
         
+        # Sanity check for points props - if line is very low, it might be wrong data
+        if 'points' in prop_type.lower() and target_line < 10:
+            # This is likely an error - NBA players rarely have point lines under 10
+            continue
+        
         target_american_odds = float(target_odds)
         target_decimal_odds = convert_american_to_decimal(target_american_odds)
         
@@ -300,7 +320,21 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
             
             try:
                 bookie_odds = data.get('odds', None)
-                bookie_line = data.get('overUnder', None)
+                
+                # FIXED: Get line with fallbacks for different field names in the JSON
+                bookie_line = None
+                for line_field in ['overUnder', 'line', 'total', 'value']:
+                    if line_field in data and data[line_field] is not None:
+                        bookie_line = data[line_field]
+                        break
+                
+                # If we're dealing with a Points prop specifically, check for 'points' field too
+                if bookie_line is None and 'points' in prop_type.lower():
+                    # Try additional fields that might contain the points line
+                    for points_field in ['points', 'playerTotal', 'pointsHandicap']:
+                        if points_field in data and data[points_field] is not None:
+                            bookie_line = data[points_field]
+                            break
                 
                 if bookie_odds is None or bookie_line is None:
                     continue
@@ -311,6 +345,11 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
                     
                 if isinstance(bookie_line, str):
                     bookie_line = float(bookie_line)
+                
+                # Sanity check for points props - if line is very low, it might be wrong data
+                if 'points' in prop_type.lower() and bookie_line < 10:
+                    # This is likely an error - NBA players rarely have point lines under 10
+                    continue
                 
                 american_odds = float(bookie_odds)
                 decimal_odds = convert_american_to_decimal(american_odds)
