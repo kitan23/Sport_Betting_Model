@@ -1,4 +1,10 @@
 # Environment variables
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
 .env
 .env.local
 
