@@ -364,7 +364,7 @@ async def refresh_props_data():
                     print(f"  • Game {idx+1}/{len(games_df)}: {away_team} @ {home_team} (ID: {event_id})")
                     
                     # Get player props for this game
-                    props_df = dp.get_player_props(event_id)
+                    props_df = dp.get_player_props(event_id, home_team, away_team)
                     
                     if not props_df.empty:
                         # Process the props

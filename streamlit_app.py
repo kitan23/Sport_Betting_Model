@@ -15,7 +15,7 @@ import os
 # Constants
 # For Streamlit Cloud deployment - make API URL configurable through environment variable
 # with a fallback to a deployed API URL (you'll need to deploy your FastAPI service separately)
-API_URL = os.environ.get("API_URL", "https://your-deployed-api-url.com")
+API_URL = os.environ.get("API_URL", "https://sport-betting-model.onrender.com")
 COOLDOWN_SECONDS = 600  # 10 minutes
 
 # Set to True when running locally, False for Streamlit Cloud
