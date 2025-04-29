@@ -330,7 +330,7 @@ async def refresh_props_data():
     # Refresh if data is None or older than 5 minutes
     if (latest_props_file is None or 
         latest_props_time is None or 
-        (current_time - latest_props_time).total_seconds() > 300 or
+        (current_time - latest_props_time).total_seconds() > 600 or
         not os.path.exists(latest_props_file)):
         
         print("\n🔄 Generating fresh props data...")
