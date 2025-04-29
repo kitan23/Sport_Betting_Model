@@ -11,11 +11,14 @@ from datetime import datetime, timedelta
 import time
 import json
 import os
+import urllib.parse
 
 # Constants
 # For Streamlit Cloud deployment - make API URL configurable through environment variable
 # with a fallback to a deployed API URL (you'll need to deploy your FastAPI service separately)
 API_URL = os.environ.get("API_URL", "https://sport-betting-model.onrender.com")
+# Remove trailing slash if present to avoid double slash issues
+API_URL = API_URL.rstrip('/')
 COOLDOWN_SECONDS = 600  # 10 minutes
 
 # Set to True when running locally, False for Streamlit Cloud
@@ -47,6 +50,14 @@ SPORTSBOOKS = [
 
 # Default popular bookmakers to show at the top of the list
 DEFAULT_BOOKMAKERS = ["draftkings", "fanduel", "fanatics", "betmgm", "caesars"]
+
+# Helper function to build API URL paths properly
+def build_api_url(endpoint):
+    """Build a properly formatted API URL by ensuring no double slashes"""
+    # Ensure endpoint starts with a slash
+    if not endpoint.startswith('/'):
+        endpoint = '/' + endpoint
+    return API_URL + endpoint
 
 def load_cached_data():
     """Load cached data from session state or file depending on environment"""
@@ -283,9 +294,10 @@ def main():
 def check_api_connection():
     """Check if the API is accessible"""
     try:
-        response = requests.get(f"{API_URL}/", timeout=5)
+        response = requests.get(build_api_url('/'), timeout=5)
         return response.status_code == 200
-    except Exception:
+    except Exception as e:
+        print(f"API connection error: {str(e)}")
         return False
 
 def get_value_plays(bookmaker: str, min_edge: float, force_local: bool = False):
@@ -318,7 +330,7 @@ def get_value_plays(bookmaker: str, min_edge: float, force_local: bool = False):
                 
                 # Find value plays using compare_bookmakers
                 response = requests.post(
-                    f"{API_URL}/value-plays/{bookmaker}",
+                    build_api_url(f"/value-plays/{bookmaker}"),
                     params={"min_edge": min_edge},
                     json={"use_cached": True}
                 )
@@ -348,13 +360,13 @@ def get_value_plays(bookmaker: str, min_edge: float, force_local: bool = False):
                     return
             
             # If we don't have the raw data locally, try getting latest file path from API
-            response = requests.get(f"{API_URL}/latest-props-file")
+            response = requests.get(build_api_url("/latest-props-file"))
             if response.status_code == 200:
                 file_info = response.json()
                 
                 # Now get value plays for the new bookmaker using the existing file
                 response = requests.get(
-                    f"{API_URL}/value-plays/{bookmaker}",
+                    build_api_url(f"/value-plays/{bookmaker}"),
                     params={"min_edge": min_edge}
                 )
                 
@@ -380,8 +392,11 @@ def get_value_plays(bookmaker: str, min_edge: float, force_local: bool = False):
             # If we couldn't use local data, fall back to regular API call
         
         # Regular API call for initial or refreshed data
+        value_plays_url = build_api_url(f"/value-plays/{bookmaker}")
+        print(f"Requesting value plays from: {value_plays_url}")
+        
         response = requests.get(
-            f"{API_URL}/value-plays/{bookmaker}",
+            value_plays_url,
             params={"min_edge": min_edge}
         )
         
@@ -395,7 +410,7 @@ def get_value_plays(bookmaker: str, min_edge: float, force_local: bool = False):
             
             # Try to save raw props data to session state by fetching the CSV file
             try:
-                latest_file_response = requests.get(f"{API_URL}/latest-props-file")
+                latest_file_response = requests.get(build_api_url("/latest-props-file"))
                 if latest_file_response.status_code == 200:
                     file_info = latest_file_response.json()
                     # For Streamlit Cloud, we don't save the actual file path since we can't access it
@@ -418,6 +433,7 @@ def get_value_plays(bookmaker: str, min_edge: float, force_local: bool = False):
             st.error(f"Error getting value plays: {response.text}")
     except Exception as e:
         st.error(f"Error connecting to API: {str(e)}")
+        print(f"Detailed API error: {str(e)}")
 
 def display_value_plays(value_plays: dict):
     """Display the value plays in a nice format"""
