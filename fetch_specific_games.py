@@ -241,12 +241,11 @@ def fetch_and_append_games(event_ids: List[str], output_csv: str = None) -> str:
 if __name__ == "__main__":
     # List of event IDs for games that failed to fetch due to rate limiting
     event_ids = [
-        "1OqC4dHRpxB7PIpyfjrq", 
-        "OUQ9jdDAFi1oLMbXNdUD"
+        "ppwvEzsFQ6V1tS0oONvs"
     ]
     
     # Specify the CSV file to append to
-    csv_file = "nba_player_props_2025-03-15.csv"
+    csv_file = "nba_player_props_2025-03-28.csv"
     
     print(f"Fetching player props for {len(event_ids)} games and appending to {csv_file}...")
     output_file = fetch_and_append_games(event_ids, csv_file)

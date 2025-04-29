@@ -21,7 +21,7 @@ HEADERS = {
 
 def make_api_request(endpoint: str, params: Dict = None) -> Dict:
     url = f"{BASE_URL}/{endpoint}"
-    print(f"Making request to: {url}")
+    print(f"API Request: {endpoint} - {params.get('eventID', '') if params else ''}")
     try:
         response = requests.get(url, headers=HEADERS, params=params)
         response.raise_for_status()
@@ -42,31 +42,28 @@ def get_upcoming_nba_games() -> pd.DataFrame:
     # Get current time in UTC (API timezone)
     current_time_utc = datetime.now(timezone.utc)
     
-    # Calculate 24 hours from now in UTC
-    end_time_utc = current_time_utc + timedelta(hours=24)
-
-    # Calculate 12 hours from now in UTC
-    end_time_utc_12 = current_time_utc + timedelta(hours=15)
+    # Calculate hours from now in UTC
+    end_time_utc_12 = current_time_utc + timedelta(hours=24)
     
     # Format times for API
     starts_after = current_time_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
-    starts_before = end_time_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
     starts_before_12 = end_time_utc_12.strftime("%Y-%m-%dT%H:%M:%SZ")
+    
     # Set up parameters for API request
     params = {
         "leagueID": "NBA",
         "startsAfter": starts_after,
-        "startsBefore": starts_before,
+        "startsBefore": starts_before_12,
         "limit": 100
     }
     
-    print(f"Fetching upcoming NBA games with params: {params}")
+    print(f"\n📅 Fetching upcoming NBA games (next 24 hours)...")
     response = make_api_request("events", params)
     
     if response.get("success"):
         events_data = response.get("data", [])
         if events_data:
-            print(f"Found {len(events_data)} upcoming NBA games")
+            print(f"✅ Found {len(events_data)} upcoming NBA games")
             
             # Process the events data to ensure it has the fields we need
             processed_events = []
@@ -98,10 +95,10 @@ def get_upcoming_nba_games() -> pd.DataFrame:
             
             return pd.DataFrame(processed_events)
         else:
-            print("No upcoming NBA games found in the next 24 hours")
+            print("❌ No upcoming NBA games found in the next 24 hours")
             return pd.DataFrame()
     else:
-        print(f"Error fetching NBA events: {response.get('error')}")
+        print(f"❌ Error fetching NBA events: {response.get('error')}")
         return pd.DataFrame()
 
 def get_player_props(event_id: str) -> pd.DataFrame:
@@ -109,13 +106,13 @@ def get_player_props(event_id: str) -> pd.DataFrame:
         "eventID": event_id
     }
     
-    print(f"Fetching player props for event {event_id}")
+    print(f"🏀 Fetching player props data for event ID: {event_id}")
     response = make_api_request("events", params)
     
     if response.get("success"):
         events_data = response.get("data", [])
         if not events_data:
-            print("No event data found")
+            print("❌ No event data found")
             return pd.DataFrame()
             
         event = events_data[0]
@@ -144,9 +141,10 @@ def get_player_props(event_id: str) -> pd.DataFrame:
                     
                     player_props.append(prop)
         
+        print(f"✅ Found {len(player_props)} player props")
         return pd.DataFrame(player_props)
     else:
-        print(f"Error fetching event: {response.get('error')}")
+        print(f"❌ Error fetching event: {response.get('error')}")
         return pd.DataFrame()
 
 def parse_player_id(player_id: str) -> str:
@@ -232,11 +230,11 @@ def main():
     games_df = get_upcoming_nba_games()
     
     if games_df.empty:
-        print("No upcoming NBA games found")
+        print("❌ No upcoming NBA games found")
         return
     
     # Display the games
-    print("\nUpcoming NBA Games (Note: Times are placeholders):")
+    print("\n📋 Upcoming NBA Games (Note: Times are placeholders):")
     for _, game in games_df.iterrows():
         try:
             # Convert UTC time to EST (these are placeholder times)
@@ -247,11 +245,11 @@ def main():
             home_team = extract_team_name(game['homeTeam'])
             away_team = extract_team_name(game['awayTeam'])
             
-            print(f"{game_time_est.strftime('%Y-%m-%d %I:%M %p EST')}: {away_team} @ {home_team}")
+            print(f"  • {game_time_est.strftime('%Y-%m-%d %I:%M %p EST')}: {away_team} @ {home_team} (ID: {game['eventID']})")
         except Exception as e:
-            print(f"Error displaying game: {e}")
+            print(f"❌ Error displaying game: {e}")
     
-    print("\nFetching player props for all games...")
+    print("\n🔍 Collecting player props for all games...")
     all_props = []
     
     for _, game in games_df.iterrows():
@@ -262,14 +260,12 @@ def main():
             home_team = extract_team_name(game['homeTeam'])
             away_team = extract_team_name(game['awayTeam'])
             
-            print(f"\nFetching player props for Game {event_id}: {away_team} @ {home_team}...")
+            print(f"\n📊 Processing game: {away_team} @ {home_team} (ID: {event_id})")
             props_df = get_player_props(event_id)
             
             if props_df.empty:
-                print(f"No player props found for {away_team} @ {home_team}")
+                print(f"❌ No player props found for {away_team} @ {home_team}")
                 continue
-            
-            print(f"Found {len(props_df)} player props for {away_team} @ {home_team}")
             
             # Process the props
             processed_props = process_player_props(props_df)
@@ -286,11 +282,13 @@ def main():
                 
                 # Print summary
                 player_counts = processed_props['player_name'].value_counts()
-                print(f"\nPlayer Props Summary for {away_team} @ {home_team}:")
-                for player, count in player_counts.items():
-                    print(f"- {player}: {count} props")
+                most_common_players = player_counts.nlargest(5)
+                print(f"  • Found props for {len(player_counts)} players")
+                print(f"  • Top players: {', '.join([f'{player} ({count})' for player, count in most_common_players.items()])}")
+            else:
+                print("❌ Failed to process player props")
         except Exception as e:
-            print(f"Error processing game {event_id}: {e}")
+            print(f"❌ Error processing game {event_id}: {e}")
     
     if all_props:
         # Combine all props into a single DataFrame
@@ -299,9 +297,9 @@ def main():
         # Save to CSV
         output_file = f"nba_player_props_{datetime.now().strftime('%Y-%m-%d')}.csv"
         combined_props.to_csv(output_file, index=False)
-        print(f"\nSaved all player props to {output_file}")
+        print(f"\n✅ Saved {len(combined_props)} player props to {output_file}")
     else:
-        print("\nNo player props found for any games")
+        print("\n❌ No player props found for any games")
 
 if __name__ == "__main__":
     main()  # Run with EST timezone

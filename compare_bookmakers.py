@@ -555,7 +555,20 @@ def find_value_plays_raw(props_df: pd.DataFrame, target_bookmaker: str, min_edge
     
     # Convert to DataFrame and sort by edge
     result_df = pd.DataFrame(results)
-    result_df = result_df.sort_values('edge', ascending=False)
+    
+    # Calculate EV right after creating the DataFrame
+    if 'target_odds' in result_df.columns and 'edge' in result_df.columns:
+        result_df['implied_prob'] = result_df['target_odds'].apply(
+            lambda x: calculate_implied_probability(convert_american_to_decimal(x))
+        )
+        result_df['ev_percentage'] = result_df.apply(
+            lambda row: round((row['edge'] / 100) / row['implied_prob'] * 100, 2) 
+            if pd.notna(row['implied_prob']) and row['implied_prob'] > 0 else 0, 
+            axis=1
+        )
+    
+    # Sort by EV percentage instead of edge
+    result_df = result_df.sort_values('ev_percentage', ascending=False)
     
     return result_df
 
@@ -617,6 +630,19 @@ def format_for_export(value_plays: pd.DataFrame) -> pd.DataFrame:
     """
     # Create a copy to avoid modifying the original
     export_df = value_plays.copy()
+    
+    # Calculate EV (Expected Value) based on edge and implied probability
+    if 'edge' in export_df.columns and 'target_odds' in export_df.columns:
+        export_df['implied_prob'] = export_df['target_odds'].apply(
+            lambda x: calculate_implied_probability(convert_american_to_decimal(x))
+        )
+        export_df['ev_percentage'] = export_df.apply(
+            lambda row: round((row['edge'] / 100) / row['implied_prob'] * 100, 2) if pd.notna(row['implied_prob']) and row['implied_prob'] > 0 else None, 
+            axis=1
+        )
+        export_df['ev_formatted'] = export_df['ev_percentage'].apply(
+            lambda x: f"{x:.2f}%" if pd.notna(x) else ""
+        )
     
     # Format odds with + sign for positive American odds
     if 'target_odds' in export_df.columns:
@@ -842,20 +868,20 @@ def main():
     
     print(f"\nAnalysis complete! Results exported to: {csv_path}")
     
-    # Print top value plays regardless of verbosity
-    top_plays = value_plays.nlargest(5, 'edge')
-    print("\nTOP 5 VALUE PLAYS:")
+    # Print top value plays sorted by EV instead of edge
+    top_plays = value_plays.nlargest(5, 'ev_percentage')
+    print("\nTOP 5 VALUE PLAYS BY EV:")
     for idx, play in top_plays.iterrows():
         if 'compared_to' in play and pd.notna(play['compared_to']):
             # Line shopping play
             print(f"{play['player']} - {play['prop_type']} {play['direction']} (Line: {play['line']})")
             print(f"  Compare to {play['compared_to']} (Line: {play['compared_line']})")
-            print(f"  Edge: {play['edge']:.2f}%, Recommendation: {play.get('recommendation', '')}")
+            print(f"  EV: {play.get('ev_percentage', 0):.2f}%, Edge: {play['edge']:.2f}%, Recommendation: {play.get('recommendation', '')}")
         else:
             # Same line play
             print(f"{play['player']} - {play['prop_type']} {play['line']} {play['direction']}")
             print(f"  {play['target_bookmaker']}: {'+' if play['target_odds'] > 0 else ''}{int(play['target_odds'])}")
-            print(f"  Edge: {play['edge']:.2f}%")
+            print(f"  EV: {play.get('ev_percentage', 0):.2f}%, Edge: {play['edge']:.2f}%")
         print()
 
 if __name__ == "__main__":
