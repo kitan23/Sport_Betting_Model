@@ -18,6 +18,11 @@ import os
 import tempfile
 import numpy as np
 
+# Get the CSV storage path from environment variable or use default
+CSV_STORAGE_PATH = os.environ.get("CSV_STORAGE_PATH", ".")
+# Create the directory if it doesn't exist
+os.makedirs(CSV_STORAGE_PATH, exist_ok=True)
+
 app = FastAPI(title="Sports Betting Model API")
 
 # Enable CORS
@@ -303,8 +308,8 @@ async def refresh_props_data():
         
         print("\n🔄 Generating fresh props data...")
         
-        # Create a temporary directory for the output
-        csv_file = f"nba_player_props_{current_time.strftime('%Y-%m-%d_%H%M%S')}.csv"
+        # Create the CSV file path using the storage path from environment
+        csv_file = os.path.join(CSV_STORAGE_PATH, f"nba_player_props_{current_time.strftime('%Y-%m-%d_%H%M%S')}.csv")
         
         try:
             # Get upcoming games

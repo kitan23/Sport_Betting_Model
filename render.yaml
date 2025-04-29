@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: sports-betting-api
+    runtime: python
+    buildCommand: pip install -r backend_requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.0
+      - key: SPORTSGAMEODDS_API_KEY
+        sync: false # This means Render will prompt you to input the value during deployment
+      - key: SPORTSGAMEODDS_BASE_URL
+        value: https://api.sportsgameodds.com/v2
+      # Add this if you want file storage for CSV files
+      - key: CSV_STORAGE_PATH
+        value: ./data 
