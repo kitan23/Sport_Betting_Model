@@ -35,17 +35,17 @@ def make_api_request(endpoint: str, params: Dict = None) -> Dict:
 
 def get_upcoming_nba_games() -> pd.DataFrame:
     current_time_utc = datetime.now(timezone.utc)
-    end_time_utc_12 = current_time_utc + timedelta(hours=24)
+    end_time_utc_12 = current_time_utc + timedelta(hours = 24)
     starts_after = current_time_utc.strftime("%Y-%m-%d")
-    starts_before_12 = end_time_utc_12.strftime("%Y-%m-%d")
+    starts_before_24 = end_time_utc_12.strftime("%Y-%m-%d")
 
     print("START TIME", starts_after)
-    print("END TIME", starts_before_12)
+    print("END TIME", starts_before_24)
 
     params = {
         "leagueID": "NBA",
         "startsAfter": starts_after,
-        "startsBefore": starts_before_12,
+        "startsBefore": starts_before_24,
         "limit": 100
     }
 
@@ -226,34 +226,39 @@ def main():
     print("\n🔍 Collecting player props for all games...")
     all_props = []
 
+
+    # EXCEPT FOR THESE GAME IDs
+    EXCEPT_EVENT_IDs = ['ppwvEzsFQ6V1tS0oONvs']
+
     for _, game in games_df.iterrows():
         try:
             event_id = game['eventID']
             home_team = extract_team_name(game['homeTeam'])
             away_team = extract_team_name(game['awayTeam'])
-            print(f"\n📊 Processing game: {away_team} @ {home_team} (ID: {event_id})")
-            props_df = get_player_props(event_id, home_team, away_team)
+            if event_id not in EXCEPT_EVENT_IDs:
+                print(f"\n📊 Processing game: {away_team} @ {home_team} (ID: {event_id})")
+                props_df = get_player_props(event_id, home_team, away_team)
 
-            if props_df.empty:
-                print(f"❌ No player props found for {away_team} @ {home_team}")
-                continue
+                if props_df.empty:
+                    print(f"❌ No player props found for {away_team} @ {home_team}")
+                    continue
 
-            processed_props = process_player_props(props_df)
-            if not processed_props.empty:
-                processed_props['home_team'] = home_team
-                processed_props['away_team'] = away_team
-                processed_props['game'] = f"{away_team} @ {home_team}"
-                processed_props['game_number'] = event_id
-                processed_props['event_id'] = event_id
+                processed_props = process_player_props(props_df)
+                if not processed_props.empty:
+                    processed_props['home_team'] = home_team
+                    processed_props['away_team'] = away_team
+                    processed_props['game'] = f"{away_team} @ {home_team}"
+                    processed_props['game_number'] = event_id
+                    processed_props['event_id'] = event_id
 
-                all_props.append(processed_props)
+                    all_props.append(processed_props)
 
-                player_counts = processed_props['player_name'].value_counts()
-                most_common_players = player_counts.nlargest(5)
-                print(f"  • Found props for {len(player_counts)} players")
-                print(f"  • Top players: {', '.join([f'{player} ({count})' for player, count in most_common_players.items()])}")
-            else:
-                print("❌ Failed to process player props")
+                    player_counts = processed_props['player_name'].value_counts()
+                    most_common_players = player_counts.nlargest(5)
+                    print(f"  • Found props for {len(player_counts)} players")
+                    print(f"  • Top players: {', '.join([f'{player} ({count})' for player, count in most_common_players.items()])}")
+                else:
+                    print("❌ Failed to process player props")
         except Exception as e:
             print(f"❌ Error processing game {event_id}: {e}")
 

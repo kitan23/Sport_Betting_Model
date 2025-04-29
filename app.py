@@ -288,6 +288,33 @@ async def post_value_plays(
         print(f"❌ Error finding value plays with POST: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/health")
+async def health_check():
+    """Simple health check endpoint"""
+    current_time = datetime.now()
+    
+    # Check data directory
+    storage_status = "ok" if os.path.exists(CSV_STORAGE_PATH) and os.access(CSV_STORAGE_PATH, os.W_OK) else "error"
+    
+    # Check latest props file
+    props_status = "ok" if latest_props_file and os.path.exists(latest_props_file) else "not_available"
+    props_age_minutes = None
+    if latest_props_time:
+        props_age_minutes = int((current_time - latest_props_time).total_seconds() / 60)
+    
+    return {
+        "status": "healthy",
+        "timestamp": current_time.strftime("%Y-%m-%d %H:%M:%S"),
+        "storage": {
+            "path": CSV_STORAGE_PATH,
+            "status": storage_status
+        },
+        "latest_props": {
+            "status": props_status,
+            "age_minutes": props_age_minutes
+        }
+    }
+
 async def refresh_props_data():
     """
     Run data_processing.py to get fresh props data and save to CSV.
