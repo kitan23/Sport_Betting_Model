@@ -7,7 +7,7 @@ It follows the standard workflow:
 2. compare_bookmakers.py analyzes the CSV for a specific bookmaker
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 from typing import List, Dict, Optional
@@ -175,6 +175,112 @@ async def get_value_plays(bookmaker: str, min_edge: float = 2.0):
             }
     except Exception as e:
         print(f"❌ Error finding value plays: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/latest-props-file")
+async def get_latest_props_file():
+    """Get the path to the latest props file without refreshing the data"""
+    global latest_props_file, latest_props_time
+    
+    if not latest_props_file or not os.path.exists(latest_props_file):
+        raise HTTPException(status_code=404, detail="No props data available")
+        
+    age_seconds = (datetime.now() - latest_props_time).total_seconds() if latest_props_time else 0
+    
+    return {
+        "file_path": latest_props_file,
+        "last_updated": latest_props_time.strftime("%Y-%m-%d %H:%M:%S") if latest_props_time else None,
+        "age_minutes": int(age_seconds / 60)
+    }
+
+@app.post("/value-plays/{bookmaker}")
+async def post_value_plays(
+    bookmaker: str, 
+    min_edge: float = 2.0, 
+    request_data: Optional[Dict] = Body(None)
+):
+    """
+    Alternative endpoint to get value plays that can use cached data
+    
+    This endpoint allows the frontend to send a POST request with the use_cached flag
+    to analyze existing props data with a different bookmaker during cooldown periods.
+    """
+    try:
+        use_cached = False
+        if request_data and "use_cached" in request_data:
+            use_cached = request_data["use_cached"]
+        
+        # Always use the latest props file
+        props_file = latest_props_file
+        
+        if not props_file or not os.path.exists(props_file):
+            if use_cached:
+                # If we're trying to use cached data but there is none, return an error
+                raise HTTPException(
+                    status_code=404, 
+                    detail="No cached props data available."
+                )
+            else:
+                # Otherwise fetch new data
+                props_file = await refresh_props_data()
+                
+                if not props_file:
+                    raise HTTPException(
+                        status_code=404, 
+                        detail="Failed to fetch props data."
+                    )
+        
+        # Read the props data CSV
+        print(f"📊 Using props from {props_file} for bookmaker {bookmaker}")
+        props_df = cb.analyze_csv_structure(props_file)
+        
+        # Find value plays
+        value_plays = cb.find_value_plays_raw(props_df, bookmaker, min_edge)
+        
+        # Calculate stats and format response
+        if not value_plays.empty:
+            # Convert to dict for JSON serialization and sanitize NaN values
+            sanitized_plays = sanitize_for_json(value_plays.to_dict(orient='records'))
+            
+            # Add summary statistics
+            stats = {}
+            if 'edge' in value_plays.columns:
+                avg_edge = float(value_plays['edge'].mean())
+                max_edge = float(value_plays['edge'].max())
+                min_edge = float(value_plays['edge'].min())
+                stats.update({
+                    "avg_edge": 0.0 if pd.isna(avg_edge) else avg_edge,
+                    "max_edge": 0.0 if pd.isna(max_edge) else max_edge,
+                    "min_edge": 0.0 if pd.isna(min_edge) else min_edge,
+                })
+            
+            if 'ev_percentage' in value_plays.columns:
+                avg_ev = float(value_plays['ev_percentage'].mean())
+                max_ev = float(value_plays['ev_percentage'].max())
+                stats.update({
+                    "avg_ev": 0.0 if pd.isna(avg_ev) else avg_ev,
+                    "max_ev": 0.0 if pd.isna(max_ev) else max_ev,
+                })
+            
+            response = {
+                "bookmaker": bookmaker,
+                "min_edge": min_edge,
+                "total_plays": len(sanitized_plays),
+                "plays": sanitized_plays,
+                "stats": stats
+            }
+            
+            return sanitize_for_json(response)
+        else:
+            print(f"ℹ️ No value plays found for {bookmaker} with min edge of {min_edge}%")
+            return {
+                "bookmaker": bookmaker,
+                "min_edge": min_edge,
+                "total_plays": 0,
+                "plays": []
+            }
+    except Exception as e:
+        print(f"❌ Error finding value plays with POST: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 async def refresh_props_data():

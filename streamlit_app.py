@@ -13,30 +13,81 @@ import json
 import os
 
 # Constants
-API_URL = "http://localhost:8000"
-COOLDOWN_SECONDS = 300  # 5 minutes
-CACHE_FILE = "streamlit_cache.json"
+# For Streamlit Cloud deployment - make API URL configurable through environment variable
+# with a fallback to a deployed API URL (you'll need to deploy your FastAPI service separately)
+API_URL = os.environ.get("API_URL", "https://your-deployed-api-url.com")
+COOLDOWN_SECONDS = 600  # 10 minutes
+
+# Set to True when running locally, False for Streamlit Cloud
+LOCAL_DEV_MODE = False
 
 # Available sportsbooks
-SPORTSBOOKS = ["Fanatics", "FanDuel", "DraftKings"]
+SPORTSBOOKS = [
+    "ballybet",
+    "bet365",
+    "betmgm",
+    "betonline",
+    "betparx",
+    "betrivers",
+    "bookmakereu",
+    "bovada",
+    "caesars",
+    "draftkings",
+    "espnbet",
+    "fanatics",
+    "fanduel",
+    "fliff",
+    "fourwinds",
+    "hardrockbet",
+    "pinnacle",
+    "prizepicks",
+    "prophetexchange",
+    "underdog",
+]
+
+# Default popular bookmakers to show at the top of the list
+DEFAULT_BOOKMAKERS = ["draftkings", "fanduel", "fanatics", "betmgm", "caesars"]
 
 def load_cached_data():
-    """Load cached data from file if it exists"""
-    if os.path.exists(CACHE_FILE):
-        try:
-            with open(CACHE_FILE, 'r') as f:
-                data = json.load(f)
+    """Load cached data from session state or file depending on environment"""
+    if not LOCAL_DEV_MODE:
+        # In Streamlit Cloud, use session state for persistent data
+        if 'cache_data' in st.session_state:
+            data = st.session_state.cache_data
+            
+            # Convert timestamp string back to datetime if needed
+            if 'last_refresh' in data and data['last_refresh'] and isinstance(data['last_refresh'], str):
+                data['last_refresh_dt'] = datetime.strptime(data['last_refresh'], "%Y-%m-%d %H:%M:%S")
                 
-                # Convert timestamp string back to datetime
-                if 'last_refresh' in data and data['last_refresh']:
-                    data['last_refresh_dt'] = datetime.strptime(data['last_refresh'], "%Y-%m-%d %H:%M:%S")
-                return data
-        except Exception as e:
-            st.error(f"Error loading cached data: {e}")
-    return {}
+            # Ensure backward compatibility
+            if 'selected_bookmaker' in data and 'current_bookmaker' not in data:
+                data['current_bookmaker'] = data['selected_bookmaker']
+                
+            return data
+        return {}
+    else:
+        # Local development mode - use file
+        CACHE_FILE = "streamlit_cache.json"
+        if os.path.exists(CACHE_FILE):
+            try:
+                with open(CACHE_FILE, 'r') as f:
+                    data = json.load(f)
+                    
+                    # Convert timestamp string back to datetime
+                    if 'last_refresh' in data and data['last_refresh']:
+                        data['last_refresh_dt'] = datetime.strptime(data['last_refresh'], "%Y-%m-%d %H:%M:%S")
+                    
+                    # Ensure backward compatibility
+                    if 'selected_bookmaker' in data and 'current_bookmaker' not in data:
+                        data['current_bookmaker'] = data['selected_bookmaker']
+                        
+                    return data
+            except Exception as e:
+                st.error(f"Error loading cached data: {e}")
+        return {}
 
 def save_cache_data(data):
-    """Save data to cache file"""
+    """Save data to cache in session state or file depending on environment"""
     try:
         # Create a copy of the data to avoid modifying the original
         cache_data = data.copy()
@@ -45,8 +96,22 @@ def save_cache_data(data):
         if 'last_refresh_dt' in cache_data:
             del cache_data['last_refresh_dt']  # Remove the datetime object
             
-        with open(CACHE_FILE, 'w') as f:
-            json.dump(cache_data, f)
+        # Save the previous selected bookmaker for tracking
+        if 'previous_selected_bookmaker' not in cache_data and 'selected_bookmaker' in cache_data:
+            cache_data['previous_selected_bookmaker'] = cache_data['selected_bookmaker']
+            
+        # Update the cache to use current_bookmaker
+        if 'selected_bookmaker' in cache_data:
+            cache_data['current_bookmaker'] = cache_data['selected_bookmaker']
+        
+        if not LOCAL_DEV_MODE:
+            # In Streamlit Cloud, use session state
+            st.session_state.cache_data = cache_data
+        else:
+            # Local development mode - use file
+            CACHE_FILE = "streamlit_cache.json"
+            with open(CACHE_FILE, 'w') as f:
+                json.dump(cache_data, f)
     except Exception as e:
         st.error(f"Error saving cached data: {e}")
 
@@ -80,6 +145,14 @@ def main():
     # Add information about current limitations and future plans
     st.info("ℹ️ **Note:** This tool currently fetches upcoming NBA games for the next 24 hours only. Future versions will allow selecting specific dates and times.")
     
+    # Display API connection status
+    api_status = check_api_connection()
+    if api_status:
+        st.success(f"✅ Connected to API: {API_URL}")
+    else:
+        st.error(f"❌ Cannot connect to API: {API_URL}")
+        st.warning("Please check the API URL configuration or ensure the API server is running.")
+    
     # Load cached data on initial load
     if 'initialized' not in st.session_state:
         cached_data = load_cached_data()
@@ -88,16 +161,40 @@ def main():
         st.session_state.last_refresh = cached_data.get('last_refresh')
         st.session_state.last_refresh_dt = cached_data.get('last_refresh_dt')
         st.session_state.value_plays = cached_data.get('value_plays')
+        st.session_state.current_bookmaker = cached_data.get('selected_bookmaker')  # Change to current_bookmaker
+        st.session_state.previous_selected_bookmaker = cached_data.get('selected_bookmaker')
+        st.session_state.is_switching_bookmakers = False  # Flag to track when we're switching bookmakers
+        
+        # Initialize cache_data if not present
+        if 'cache_data' not in st.session_state:
+            st.session_state.cache_data = {}
+            
         st.session_state.initialized = True
+    
+    # Define callback for bookmaker selection change
+    def on_bookmaker_change():
+        if st.session_state.selected_bookmaker != st.session_state.previous_selected_bookmaker:
+            st.session_state.is_switching_bookmakers = True
+            st.session_state.current_bookmaker = st.session_state.selected_bookmaker  # Update current_bookmaker
     
     # Sidebar for controls
     with st.sidebar:
         st.header("Controls")
         
-        # Sportsbook selection
+        # Sportsbook selection with popular options at top
+        bookmaker_options = DEFAULT_BOOKMAKERS + [b for b in sorted(SPORTSBOOKS) if b not in DEFAULT_BOOKMAKERS]
+        
+        # If we're in cooldown but changing bookmaker, handle differently
+        previous_bookmaker = st.session_state.get('previous_selected_bookmaker')
+        
+        # Sportsbook selection - using on_change callback
         selected_bookmaker = st.selectbox(
             "Select Sportsbook",
-            SPORTSBOOKS
+            bookmaker_options,
+            format_func=lambda x: x.capitalize(),
+            index=bookmaker_options.index(previous_bookmaker) if previous_bookmaker in bookmaker_options else 0,
+            key="selected_bookmaker",
+            on_change=on_bookmaker_change
         )
         
         # Minimum edge slider
@@ -106,8 +203,23 @@ def main():
             min_value=0.0,
             max_value=10.0,
             value=2.0,
-            step=0.5
+            step=0.5,
+            key="min_edge"
         )
+        
+        # Handle bookmaker change process in main flow
+        if st.session_state.is_switching_bookmakers:
+            # Show loading message when switching bookmakers
+            with st.spinner(f"🔄 Switching to {selected_bookmaker.capitalize()}..."):
+                # Process the bookmaker change
+                get_value_plays(selected_bookmaker, min_edge, force_local=True)
+                
+                # Update tracking state
+                st.session_state.previous_selected_bookmaker = selected_bookmaker
+                st.session_state.is_switching_bookmakers = False
+                
+                # Force rerun to update UI immediately
+                st.rerun()
         
         # Get props button with cooldown
         cooldown_active = button_cooldown_active()
@@ -117,9 +229,13 @@ def main():
             remaining_mins = int(cooldown_remaining // 60)
             remaining_secs = int(cooldown_remaining % 60)
             st.warning(f"⏳ Please wait {remaining_mins}m {remaining_secs}s before refreshing")
-            st.button("Get Props", disabled=True)
+            st.button("Get Fresh Props", disabled=True)
+            
+            # Add a note about switching bookmakers
+            st.caption("You can switch bookmakers while waiting by selecting a different option above")
         else:
-            if st.button("Get Props"):
+            # Only show button when not in middle of switching bookmakers
+            if st.button("Get Fresh Props"):
                 with st.spinner("Fetching props data..."):
                     get_value_plays(selected_bookmaker, min_edge)
         
@@ -139,6 +255,11 @@ def main():
     
     # Main content area - use full width for the value plays
     st.header("Value Plays")
+    current_bookmaker = st.session_state.get('current_bookmaker', None)
+    
+    if current_bookmaker:
+        st.subheader(f"Results for {current_bookmaker.capitalize()}")
+        
     if st.session_state.value_plays:
         result_container = st.container()
         with result_container:
@@ -159,9 +280,106 @@ def main():
     else:
         st.info("Select a sportsbook and click 'Get Props' to see results")
 
-def get_value_plays(bookmaker: str, min_edge: float):
-    """Get value plays for the selected bookmaker"""
+def check_api_connection():
+    """Check if the API is accessible"""
     try:
+        response = requests.get(f"{API_URL}/", timeout=5)
+        return response.status_code == 200
+    except Exception:
+        return False
+
+def get_value_plays(bookmaker: str, min_edge: float, force_local: bool = False):
+    """
+    Get value plays for the selected bookmaker
+    
+    Args:
+        bookmaker: Name of the bookmaker to analyze
+        min_edge: Minimum edge percentage to consider
+        force_local: Force using locally cached data without API refresh
+    """
+    try:
+        is_switching = force_local and bookmaker != st.session_state.get('previous_selected_bookmaker')
+        
+        if is_switching:
+            # Log when we're switching bookmakers
+            print(f"Switching from {st.session_state.get('previous_selected_bookmaker', 'None')} to {bookmaker}")
+            st.info(f"Analyzing data for {bookmaker.capitalize()}...")
+        
+        # Update session state immediately to reflect the current selection
+        st.session_state.current_bookmaker = bookmaker
+        
+        # For bookmaker switches during cooldown, use the latest props file without refreshing
+        if force_local and 'last_props_data_time' in st.session_state:
+            print(f"Using locally cached props data for {bookmaker}")
+            
+            # Get props dataframe from session state
+            if 'raw_props_df' in st.session_state and not st.session_state.raw_props_df.empty:
+                raw_props_df = st.session_state.raw_props_df
+                
+                # Find value plays using compare_bookmakers
+                response = requests.post(
+                    f"{API_URL}/value-plays/{bookmaker}",
+                    params={"min_edge": min_edge},
+                    json={"use_cached": True}
+                )
+                
+                if response.status_code != 200:
+                    # For Streamlit Cloud, we won't have local calculation fallback since we 
+                    # don't have direct access to the comparison module
+                    st.error(f"Error analyzing data for {bookmaker}: API returned status {response.status_code}")
+                    return
+                else:
+                    # Update display values but keep the last refresh time from the original props fetch
+                    st.session_state.value_plays = response.json()
+                    
+                    # Save to cache with updated bookmaker
+                    cache_data = {
+                        'value_plays': st.session_state.value_plays,
+                        'last_refresh': st.session_state.last_refresh,
+                        'selected_bookmaker': bookmaker,
+                        'current_bookmaker': bookmaker,
+                        'previous_selected_bookmaker': bookmaker
+                    }
+                    save_cache_data(cache_data)
+                    
+                    if is_switching:
+                        st.success(f"Switched to {bookmaker.capitalize()} successfully!")
+                    
+                    return
+            
+            # If we don't have the raw data locally, try getting latest file path from API
+            response = requests.get(f"{API_URL}/latest-props-file")
+            if response.status_code == 200:
+                file_info = response.json()
+                
+                # Now get value plays for the new bookmaker using the existing file
+                response = requests.get(
+                    f"{API_URL}/value-plays/{bookmaker}",
+                    params={"min_edge": min_edge}
+                )
+                
+                if response.status_code == 200:
+                    # Update session state but keep original refresh time
+                    st.session_state.value_plays = response.json()
+                    
+                    # Save to cache with updated bookmaker
+                    cache_data = {
+                        'value_plays': st.session_state.value_plays,
+                        'last_refresh': st.session_state.last_refresh,
+                        'selected_bookmaker': bookmaker,
+                        'current_bookmaker': bookmaker,
+                        'previous_selected_bookmaker': bookmaker
+                    }
+                    save_cache_data(cache_data)
+                    
+                    if is_switching:
+                        st.success(f"Switched to {bookmaker.capitalize()} successfully!")
+                    
+                    return
+            
+            # If we couldn't use local data, fall back to regular API call
+        
+        # Regular API call for initial or refreshed data
         response = requests.get(
             f"{API_URL}/value-plays/{bookmaker}",
             params={"min_edge": min_edge}
@@ -173,12 +391,25 @@ def get_value_plays(bookmaker: str, min_edge: float):
             st.session_state.value_plays = response.json()
             st.session_state.last_refresh = current_time.strftime("%Y-%m-%d %H:%M:%S")
             st.session_state.last_refresh_dt = current_time
+            st.session_state.last_props_data_time = current_time
+            
+            # Try to save raw props data to session state by fetching the CSV file
+            try:
+                latest_file_response = requests.get(f"{API_URL}/latest-props-file")
+                if latest_file_response.status_code == 200:
+                    file_info = latest_file_response.json()
+                    # For Streamlit Cloud, we don't save the actual file path since we can't access it
+                    st.session_state.latest_props_info = file_info
+            except Exception as e:
+                print(f"Could not get latest props file: {e}")
             
             # Cache the data - only save JSON serializable values
             cache_data = {
                 'value_plays': st.session_state.value_plays,
-                'last_refresh': st.session_state.last_refresh
-                # Don't include last_refresh_dt as it's not JSON serializable
+                'last_refresh': st.session_state.last_refresh,
+                'selected_bookmaker': bookmaker,
+                'current_bookmaker': bookmaker,
+                'previous_selected_bookmaker': bookmaker
             }
             save_cache_data(cache_data)
             

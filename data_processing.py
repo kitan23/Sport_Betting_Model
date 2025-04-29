@@ -40,10 +40,10 @@ def get_upcoming_nba_games() -> pd.DataFrame:
         DataFrame containing upcoming NBA games
     """
     # Get current time in UTC (API timezone)
-    current_time_utc = datetime.now(timezone.utc)
+    current_time_utc = datetime.now(timezone.utc) - timedelta(hours=3)
     
     # Calculate hours from now in UTC
-    end_time_utc_12 = current_time_utc + timedelta(hours=24)
+    end_time_utc_12 = current_time_utc + timedelta(hours=4)
     
     # Format times for API
     starts_after = current_time_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
