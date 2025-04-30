@@ -318,7 +318,7 @@ async def health_check():
 async def refresh_props_data():
     """
     Run data_processing.py to get fresh props data and save to CSV.
-    Refreshes if data is older than 5 minutes.
+    Refreshes if data is older than 10 minutes.
     
     Returns:
         Path to the CSV file containing props data
@@ -327,7 +327,7 @@ async def refresh_props_data():
     
     current_time = datetime.now()
     
-    # Refresh if data is None or older than 5 minutes
+    # Refresh if data is None or older than 10 minutes
     if (latest_props_file is None or 
         latest_props_time is None or 
         (current_time - latest_props_time).total_seconds() > 600 or

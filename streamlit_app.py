@@ -147,6 +147,40 @@ def get_cooldown_remaining():
     remaining = COOLDOWN_SECONDS - elapsed.total_seconds()
     return max(0, remaining)
 
+def sync_with_backend_refresh_time():
+    """
+    Sync the local cooldown timer with the backend's data refresh time.
+    This is useful when the page is refreshed to ensure the cooldown
+    timer displays the correct remaining time.
+    """
+    if 'last_refresh_dt' not in st.session_state:
+        return
+        
+    try:
+        # Get health status from backend
+        response = requests.get(build_api_url("/health"))
+        if response.status_code == 200:
+            health_data = response.json()
+            if 'latest_props' in health_data and 'age_minutes' in health_data['latest_props']:
+                # Backend's props age in minutes
+                backend_age_minutes = health_data['latest_props']['age_minutes'] or 0
+                
+                # Calculate the earliest refresh time
+                current_time = datetime.now()
+                backend_refresh_time = current_time - timedelta(minutes=backend_age_minutes)
+                
+                # Update local refresh time if backend data is newer
+                if backend_refresh_time > st.session_state.last_refresh_dt:
+                    st.session_state.last_refresh_dt = backend_refresh_time
+                    st.session_state.last_refresh = backend_refresh_time.strftime("%Y-%m-%d %H:%M:%S")
+                    
+                    # Update cache
+                    if 'cache_data' in st.session_state:
+                        st.session_state.cache_data['last_refresh'] = st.session_state.last_refresh
+                        
+    except Exception as e:
+        print(f"Error syncing with backend: {e}")
+
 def main():
     st.set_page_config(
         page_title="Sports Betting Model",
@@ -180,7 +214,7 @@ def main():
             st.session_state.last_refresh_dt = datetime.strptime(cached_data.get('last_refresh'), "%Y-%m-%d %H:%M:%S")
         else:
             st.session_state.last_refresh_dt = None
-        
+            
         st.session_state.value_plays = cached_data.get('value_plays')
         st.session_state.current_bookmaker = cached_data.get('current_bookmaker', cached_data.get('selected_bookmaker'))
         st.session_state.previous_selected_bookmaker = cached_data.get('selected_bookmaker')
@@ -191,6 +225,9 @@ def main():
             st.session_state.cache_data = {}
             
         st.session_state.initialized = True
+        
+        # Sync with backend after initialization
+        sync_with_backend_refresh_time()
     
     # Define callback for bookmaker selection change
     def on_bookmaker_change():
@@ -280,6 +317,10 @@ def main():
     # Main content area - use full width for the value plays
     st.header("Value Plays")
     current_bookmaker = st.session_state.get('current_bookmaker', None)
+    
+    # Always sync with backend when displaying cooldown timer
+    if 'initialized' in st.session_state and 'last_refresh_dt' in st.session_state:
+        sync_with_backend_refresh_time()
     
     if current_bookmaker:
         st.subheader(f"Results for {current_bookmaker.capitalize()}")
@@ -420,6 +461,23 @@ def get_value_plays(bookmaker: str, min_edge: float, force_local: bool = False):
             st.session_state.last_refresh = current_time.strftime("%Y-%m-%d %H:%M:%S")
             st.session_state.last_refresh_dt = current_time
             st.session_state.last_props_data_time = current_time
+            
+            # Get the backend's refresh time from health endpoint to sync
+            try:
+                health_response = requests.get(build_api_url("/health"))
+                if health_response.status_code == 200:
+                    health_data = health_response.json()
+                    if 'latest_props' in health_data and 'age_minutes' in health_data['latest_props']:
+                        # The backend's props data age is in minutes, convert back to a datetime
+                        backend_age_minutes = health_data['latest_props']['age_minutes'] or 0
+                        # Calculate the backend's refresh time
+                        backend_refresh_time = current_time - timedelta(minutes=backend_age_minutes)
+                        # Update our refresh time to match (if newer)
+                        if backend_refresh_time > st.session_state.last_refresh_dt:
+                            st.session_state.last_refresh_dt = backend_refresh_time
+                            st.session_state.last_refresh = backend_refresh_time.strftime("%Y-%m-%d %H:%M:%S")
+            except Exception as e:
+                print(f"Could not sync with backend refresh time: {e}")
             
             # Try to save raw props data to session state by fetching the CSV file
             try:
