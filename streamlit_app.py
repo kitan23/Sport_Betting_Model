@@ -103,6 +103,10 @@ def save_cache_data(data):
         # Create a copy of the data to avoid modifying the original
         cache_data = data.copy()
         
+        # Ensure last_refresh is saved if it exists in session state
+        if 'last_refresh' not in cache_data and 'last_refresh' in st.session_state:
+            cache_data['last_refresh'] = st.session_state.last_refresh
+            
         # Convert datetime objects to strings
         if 'last_refresh_dt' in cache_data:
             del cache_data['last_refresh_dt']  # Remove the datetime object
@@ -170,9 +174,15 @@ def main():
         
         # Initialize session state with cached data
         st.session_state.last_refresh = cached_data.get('last_refresh')
-        st.session_state.last_refresh_dt = cached_data.get('last_refresh_dt')
+        
+        # Convert the string timestamp to datetime object if it exists
+        if 'last_refresh' in cached_data and cached_data.get('last_refresh'):
+            st.session_state.last_refresh_dt = datetime.strptime(cached_data.get('last_refresh'), "%Y-%m-%d %H:%M:%S")
+        else:
+            st.session_state.last_refresh_dt = None
+        
         st.session_state.value_plays = cached_data.get('value_plays')
-        st.session_state.current_bookmaker = cached_data.get('selected_bookmaker')  # Change to current_bookmaker
+        st.session_state.current_bookmaker = cached_data.get('current_bookmaker', cached_data.get('selected_bookmaker'))
         st.session_state.previous_selected_bookmaker = cached_data.get('selected_bookmaker')
         st.session_state.is_switching_bookmakers = False  # Flag to track when we're switching bookmakers
         
@@ -240,13 +250,16 @@ def main():
             remaining_mins = int(cooldown_remaining // 60)
             remaining_secs = int(cooldown_remaining % 60)
             st.warning(f"⏳ Please wait {remaining_mins}m {remaining_secs}s before refreshing")
-            st.button("Get Fresh Props", disabled=True)
+            
+            # The button exists but is disabled
+            refresh_button = st.button("Get Fresh Props", disabled=True, key="refresh_disabled")
             
             # Add a note about switching bookmakers
             st.caption("You can switch bookmakers while waiting by selecting a different option above")
         else:
             # Only show button when not in middle of switching bookmakers
-            if st.button("Get Fresh Props"):
+            refresh_button = st.button("Get Fresh Props", key="refresh_enabled")
+            if refresh_button:
                 with st.spinner("Fetching props data..."):
                     get_value_plays(selected_bookmaker, min_edge)
         
