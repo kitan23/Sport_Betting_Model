@@ -15,7 +15,7 @@ import os
 from typing import Dict, List, Any, Optional, Union
 
 # Get environment variables with defaults for local development
-API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "f368467e5c8ec70161ce40549e899406")
+API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "84a16c82fc52d68f5b26fdf844528016")
 BASE_URL = os.environ.get("SPORTSGAMEODDS_BASE_URL", "https://api.sportsgameodds.com/v2")
 HEADERS = {
     "X-Api-Key": API_KEY
@@ -34,13 +34,18 @@ def make_api_request(endpoint: str, params: Dict = None) -> Dict:
         return {"success": False, "error": str(e)}
 
 def get_upcoming_nba_games() -> pd.DataFrame:
+    # Current time in UTC
     current_time_utc = datetime.now(timezone.utc)
-    end_time_utc_12 = current_time_utc + timedelta(hours = 24)
-    starts_after = current_time_utc.strftime("%Y-%m-%d")
-    starts_before_24 = end_time_utc_12.strftime("%Y-%m-%d")
-
-    print("START TIME", starts_after)
-    print("END TIME", starts_before_24)
+    
+    # Add 24 hours
+    end_time_utc_24 = current_time_utc + timedelta(hours=24)
+    
+    # Format to ISO 8601 (with Z for UTC)
+    starts_after = current_time_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
+    starts_before_24 = end_time_utc_24.strftime("%Y-%m-%dT%H:%M:%SZ")
+    
+    print("START TIME (UTC):", starts_after)
+    print("END TIME (UTC):", starts_before_24)
 
     params = {
         "leagueID": "NBA",
