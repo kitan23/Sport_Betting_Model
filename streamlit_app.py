@@ -283,6 +283,13 @@ def main():
         cooldown_active = button_cooldown_active()
         cooldown_remaining = get_cooldown_remaining()
         
+        # Sync with backend for accurate cooldown timing
+        if 'initialized' in st.session_state and 'last_refresh_dt' in st.session_state:
+            sync_with_backend_refresh_time()
+            # Recalculate cooldown after syncing
+            cooldown_active = button_cooldown_active()
+            cooldown_remaining = get_cooldown_remaining()
+        
         if cooldown_active:
             remaining_mins = int(cooldown_remaining // 60)
             remaining_secs = int(cooldown_remaining % 60)
@@ -338,6 +345,8 @@ def main():
             with status_col3:
                 # Auto-refresh countdown
                 if cooldown_active:
+                    # Recalculate cooldown remaining after syncing
+                    cooldown_remaining = get_cooldown_remaining()
                     st.caption(f"Next refresh available in: {int(cooldown_remaining // 60)}m {int(cooldown_remaining % 60)}s")
         
         # Display value plays with full width
