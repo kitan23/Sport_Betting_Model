@@ -19,7 +19,7 @@ import urllib.parse
 API_URL = os.environ.get("API_URL", "https://sport-betting-model.onrender.com")
 # Remove trailing slash if present to avoid double slash issues
 API_URL = API_URL.rstrip('/')
-COOLDOWN_SECONDS = 600  # 10 minutes
+COOLDOWN_SECONDS = 180  # 3 minutes
 
 # Set to True when running locally, False for Streamlit Cloud
 LOCAL_DEV_MODE = False
