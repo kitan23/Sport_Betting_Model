@@ -17,11 +17,19 @@ from datetime import datetime
 import os
 import tempfile
 import numpy as np
+from enum import Enum
 
 # Get the CSV storage path from environment variable or use default
 CSV_STORAGE_PATH = os.environ.get("CSV_STORAGE_PATH", ".")
 # Create the directory if it doesn't exist
 os.makedirs(CSV_STORAGE_PATH, exist_ok=True)
+
+# Define supported sports
+class Sport(str, Enum):
+    NBA = "NBA"
+    WNBA = "WNBA"
+    MLB = "MLB"
+    NHL = "NHL"
 
 app = FastAPI(title="Sports Betting Model API")
 
@@ -34,55 +42,56 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Global variable to track latest props data file
-latest_props_file = None
-latest_props_time = None
+# Global variables to track latest props data files for each sport
+latest_props_files = {sport: None for sport in Sport}
+latest_props_times = {sport: None for sport in Sport}
 
 @app.get("/")
 async def root():
     """Root endpoint returning API status"""
     return {"status": "active", "message": "Sports Betting Model API is running"}
 
-@app.get("/bookmakers")
-async def get_bookmakers():
-    """Get list of available bookmakers"""
+@app.get("/bookmakers/{sport}")
+async def get_bookmakers(sport: Sport = Sport.NBA):
+    """Get list of available bookmakers for a specific sport"""
     try:
         # Ensure we have fresh data
-        props_file = await refresh_props_data()
+        props_file = await refresh_props_data(sport)
         
         if not props_file or not os.path.exists(props_file):
-            raise HTTPException(status_code=500, detail="No props data available")
+            raise HTTPException(status_code=500, detail=f"No props data available for {sport}")
             
         # Read the CSV file
         props_df = pd.read_csv(props_file)
         
         # Extract bookmakers using compare_bookmakers.py function
-        print(f"🔍 Extracting available bookmakers from props file...")
+        print(f"🔍 Extracting available bookmakers from props file for {sport}...")
         bookmakers = cb.extract_bookmaker_from_raw_props(props_df)
-        print(f"✅ Found {len(bookmakers)} bookmakers")
+        print(f"✅ Found {len(bookmakers)} bookmakers for {sport}")
         
         return {"bookmakers": bookmakers}
     except Exception as e:
-        print(f"❌ Error getting bookmakers: {str(e)}")
+        print(f"❌ Error getting bookmakers for {sport}: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/value-plays/{bookmaker}")
-async def get_value_plays(bookmaker: str, min_edge: float = 2.0):
+@app.get("/value-plays/{bookmaker}/{sport}")
+async def get_value_plays(bookmaker: str, sport: Sport = Sport.NBA, min_edge: float = 2.0):
     """
-    Get value plays for a specific bookmaker
+    Get value plays for a specific bookmaker and sport
     
     Args:
         bookmaker: Name of the bookmaker to analyze
+        sport: Sport to analyze (NBA, WNBA, MLB, NHL)
         min_edge: Minimum edge percentage to consider (default: 2.0)
     """
     try:
-        print(f"\n🔍 Getting value plays for {bookmaker} (min edge: {min_edge}%)")
+        print(f"\n🔍 Getting value plays for {bookmaker} in {sport} (min edge: {min_edge}%)")
         
         # Ensure we have fresh data
-        props_file = await refresh_props_data()
+        props_file = await refresh_props_data(sport)
         
         if not props_file or not os.path.exists(props_file):
-            raise HTTPException(status_code=500, detail="No props data available")
+            raise HTTPException(status_code=500, detail=f"No props data available for {sport}")
             
         print(f"📊 Analyzing props from {props_file}")
         
@@ -128,7 +137,7 @@ async def get_value_plays(bookmaker: str, min_edge: float = 2.0):
             # Format the data for better display
             formatted_data = cb.format_for_export(value_plays)
             
-            print(f"✅ Found {len(sanitized_plays)} value plays for {bookmaker}")
+            print(f"✅ Found {len(sanitized_plays)} value plays for {bookmaker} in {sport}")
             
             # Categorize value plays for summary
             same_line_plays = value_plays[value_plays['comparison_type'] == 'same line comparison'] if 'comparison_type' in value_plays.columns else pd.DataFrame()
@@ -163,6 +172,7 @@ async def get_value_plays(bookmaker: str, min_edge: float = 2.0):
             # Make sure the entire response is sanitized
             response = {
                 "bookmaker": bookmaker,
+                "sport": sport,
                 "min_edge": min_edge,
                 "total_plays": len(sanitized_plays),
                 "plays": sanitized_plays,
@@ -171,9 +181,10 @@ async def get_value_plays(bookmaker: str, min_edge: float = 2.0):
             
             return sanitize_for_json(response)
         else:
-            print(f"ℹ️ No value plays found for {bookmaker} with min edge of {min_edge}%")
+            print(f"ℹ️ No value plays found for {bookmaker} in {sport} with min edge of {min_edge}%")
             return {
                 "bookmaker": bookmaker,
+                "sport": sport,
                 "min_edge": min_edge,
                 "total_plays": 0,
                 "plays": []
@@ -182,25 +193,27 @@ async def get_value_plays(bookmaker: str, min_edge: float = 2.0):
         print(f"❌ Error finding value plays: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/latest-props-file")
-async def get_latest_props_file():
-    """Get the path to the latest props file without refreshing the data"""
-    global latest_props_file, latest_props_time
+@app.get("/latest-props-file/{sport}")
+async def get_latest_props_file(sport: Sport = Sport.NBA):
+    """Get the path to the latest props file for a specific sport without refreshing the data"""
+    global latest_props_files, latest_props_times
     
-    if not latest_props_file or not os.path.exists(latest_props_file):
-        raise HTTPException(status_code=404, detail="No props data available")
+    if not latest_props_files[sport] or not os.path.exists(latest_props_files[sport]):
+        raise HTTPException(status_code=404, detail=f"No props data available for {sport}")
         
-    age_seconds = (datetime.now() - latest_props_time).total_seconds() if latest_props_time else 0
+    age_seconds = (datetime.now() - latest_props_times[sport]).total_seconds() if latest_props_times[sport] else 0
     
     return {
-        "file_path": latest_props_file,
-        "last_updated": latest_props_time.strftime("%Y-%m-%d %H:%M:%S") if latest_props_time else None,
-        "age_minutes": int(age_seconds / 60)
+        "file_path": latest_props_files[sport],
+        "last_updated": latest_props_times[sport].strftime("%Y-%m-%d %H:%M:%S") if latest_props_times[sport] else None,
+        "age_minutes": int(age_seconds / 60),
+        "sport": sport
     }
 
-@app.post("/value-plays/{bookmaker}")
+@app.post("/value-plays/{bookmaker}/{sport}")
 async def post_value_plays(
-    bookmaker: str, 
+    bookmaker: str,
+    sport: Sport = Sport.NBA, 
     min_edge: float = 2.0, 
     request_data: Optional[Dict] = Body(None)
 ):
@@ -215,28 +228,28 @@ async def post_value_plays(
         if request_data and "use_cached" in request_data:
             use_cached = request_data["use_cached"]
         
-        # Always use the latest props file
-        props_file = latest_props_file
+        # Always use the latest props file for the specified sport
+        props_file = latest_props_files[sport]
         
         if not props_file or not os.path.exists(props_file):
             if use_cached:
                 # If we're trying to use cached data but there is none, return an error
                 raise HTTPException(
                     status_code=404, 
-                    detail="No cached props data available."
+                    detail=f"No cached props data available for {sport}."
                 )
             else:
                 # Otherwise fetch new data
-                props_file = await refresh_props_data()
+                props_file = await refresh_props_data(sport)
                 
                 if not props_file:
                     raise HTTPException(
                         status_code=404, 
-                        detail="Failed to fetch props data."
+                        detail=f"Failed to fetch props data for {sport}."
                     )
         
         # Read the props data CSV
-        print(f"📊 Using props from {props_file} for bookmaker {bookmaker}")
+        print(f"📊 Using props from {props_file} for bookmaker {bookmaker} in {sport}")
         props_df = cb.analyze_csv_structure(props_file)
         
         # Find value plays
@@ -269,6 +282,7 @@ async def post_value_plays(
             
             response = {
                 "bookmaker": bookmaker,
+                "sport": sport,
                 "min_edge": min_edge,
                 "total_plays": len(sanitized_plays),
                 "plays": sanitized_plays,
@@ -277,9 +291,10 @@ async def post_value_plays(
             
             return sanitize_for_json(response)
         else:
-            print(f"ℹ️ No value plays found for {bookmaker} with min edge of {min_edge}%")
+            print(f"ℹ️ No value plays found for {bookmaker} in {sport} with min edge of {min_edge}%")
             return {
                 "bookmaker": bookmaker,
+                "sport": sport,
                 "min_edge": min_edge,
                 "total_plays": 0,
                 "plays": []
@@ -296,11 +311,22 @@ async def health_check():
     # Check data directory
     storage_status = "ok" if os.path.exists(CSV_STORAGE_PATH) and os.access(CSV_STORAGE_PATH, os.W_OK) else "error"
     
-    # Check latest props file
-    props_status = "ok" if latest_props_file and os.path.exists(latest_props_file) else "not_available"
-    props_age_minutes = None
-    if latest_props_time:
-        props_age_minutes = int((current_time - latest_props_time).total_seconds() / 60)
+    # Check latest props files for each sport
+    props_status = {}
+    for sport in Sport:
+        sport_props_file = latest_props_files[sport]
+        sport_props_time = latest_props_times[sport]
+        
+        status = "ok" if sport_props_file and os.path.exists(sport_props_file) else "not_available"
+        props_age_minutes = None
+        if sport_props_time:
+            props_age_minutes = int((current_time - sport_props_time).total_seconds() / 60)
+        
+        props_status[sport] = {
+            "status": status,
+            "age_minutes": props_age_minutes,
+            "file_path": sport_props_file
+        }
     
     return {
         "status": "healthy",
@@ -309,47 +335,53 @@ async def health_check():
             "path": CSV_STORAGE_PATH,
             "status": storage_status
         },
-        "latest_props": {
-            "status": props_status,
-            "age_minutes": props_age_minutes
-        }
+        "latest_props": props_status
     }
 
-async def refresh_props_data():
+async def refresh_props_data(sport: Sport = Sport.NBA):
     """
-    Run data_processing.py to get fresh props data and save to CSV.
-    Refreshes if data is older than 10 minutes.
+    Run data_processing.py to get fresh props data and save to CSV for a specific sport.
+    Refreshes if data is older than 3 minutes.
     
+    Args:
+        sport: Sport to fetch data for (NBA, WNBA, MLB, NHL)
+        
     Returns:
         Path to the CSV file containing props data
     """
-    global latest_props_file, latest_props_time
+    global latest_props_files, latest_props_times
     
     current_time = datetime.now()
     
-    # Refresh if data is None or older than 10 minutes
-    if (latest_props_file is None or 
-        latest_props_time is None or 
-        (current_time - latest_props_time).total_seconds() > 180 or
-        not os.path.exists(latest_props_file)):
+    # Refresh if data is None or older than 3 minutes
+    if (latest_props_files[sport] is None or 
+        latest_props_times[sport] is None or 
+        (current_time - latest_props_times[sport]).total_seconds() > 180 or
+        not os.path.exists(latest_props_files[sport])):
         
-        print("\n🔄 Generating fresh props data...")
+        print(f"\n🔄 Generating fresh props data for {sport}...")
         
         # Create the CSV file path using the storage path from environment
-        csv_file = os.path.join(CSV_STORAGE_PATH, f"nba_player_props_{current_time.strftime('%Y-%m-%d_%H%M%S')}.csv")
+        csv_file = os.path.join(CSV_STORAGE_PATH, f"{sport.lower()}_player_props_{current_time.strftime('%Y-%m-%d_%H%M%S')}.csv")
         
         try:
-            # Get upcoming games
-            print("📅 Step 1: Fetching upcoming NBA games...")
-            games_df = dp.get_upcoming_nba_games()
+            # Get upcoming games for the specified sport
+            print(f"📅 Step 1: Fetching upcoming {sport} games...")
+            games_df = dp.get_upcoming_games(str(sport.value))
             
             if games_df.empty:
-                raise HTTPException(status_code=500, detail="No upcoming games found")
+                raise HTTPException(status_code=500, detail=f"No upcoming {sport} games found")
+            
+            # Limit MLB games to a maximum of 4 to conserve API calls
+            game_limit = 4 if sport == Sport.MLB else len(games_df)
+            if sport == Sport.MLB and len(games_df) > game_limit:
+                print(f"⚾ Limiting MLB games to {game_limit} (out of {len(games_df)} available)")
+                games_df = games_df.head(game_limit)
                 
             # Get props for all games
             all_props = []
             
-            print(f"🏀 Step 2: Fetching player props for {len(games_df)} games...")
+            print(f"🏀 Step 2: Fetching player props for {len(games_df)} {sport} games...")
             
             # Process each game to get player props
             for idx, game in games_df.iterrows():
@@ -357,14 +389,14 @@ async def refresh_props_data():
                     event_id = game['eventID']
                     
                     # Extract team names using the function directly from data_processing
-                    from data_processing import extract_team_name
-                    home_team = extract_team_name(game['homeTeam'])
-                    away_team = extract_team_name(game['awayTeam'])
+                    # Note that we need to pass the league to extract_team_name
+                    home_team = dp.extract_team_name(game['homeTeam'], str(sport.value))
+                    away_team = dp.extract_team_name(game['awayTeam'], str(sport.value))
                     
                     print(f"  • Game {idx+1}/{len(games_df)}: {away_team} @ {home_team} (ID: {event_id})")
                     
                     # Get player props for this game
-                    props_df = dp.get_player_props(event_id, home_team, away_team)
+                    props_df = dp.get_player_props(event_id, home_team, away_team, str(sport.value))
                     
                     if not props_df.empty:
                         # Process the props
@@ -377,6 +409,7 @@ async def refresh_props_data():
                             processed_props['game'] = f"{away_team} @ {home_team}"
                             processed_props['game_number'] = event_id
                             processed_props['event_id'] = event_id
+                            processed_props['league'] = str(sport.value)
                             
                             prop_count = len(processed_props)
                             all_props.append(processed_props)
@@ -386,38 +419,38 @@ async def refresh_props_data():
                     else:
                         print(f"    ⚠️ No raw props found for this game")
                 except Exception as e:
-                    print(f"    ❌ Error processing game {event_id}: {e}")
+                    print(f"    ❌ Error processing {sport} game {event_id}: {e}")
                     continue
             
             if all_props:
                 # Combine all props
-                print("\n📊 Step 3: Combining and saving player props...")
+                print(f"\n📊 Step 3: Combining and saving {sport} player props...")
                 combined_props = pd.concat(all_props, ignore_index=True)
                 
                 # Save to CSV
                 combined_props.to_csv(csv_file, index=False)
                 
                 total_props = len(combined_props)
-                print(f"✅ Generated {total_props} props and saved to {csv_file}")
+                print(f"✅ Generated {total_props} {sport} props and saved to {csv_file}")
                 
                 # Update global variables
-                latest_props_file = csv_file
-                latest_props_time = current_time
+                latest_props_files[sport] = csv_file
+                latest_props_times[sport] = current_time
                 
                 return csv_file
             else:
-                print("❌ No props found for any games")
-                raise HTTPException(status_code=500, detail="No props found for any games")
+                print(f"❌ No props found for any {sport} games")
+                raise HTTPException(status_code=500, detail=f"No props found for any {sport} games")
         
         except Exception as e:
-            print(f"❌ Error generating props data: {e}")
+            print(f"❌ Error generating {sport} props data: {e}")
             raise HTTPException(status_code=500, detail=str(e))
     else:
-        age_seconds = (current_time - latest_props_time).total_seconds()
-        print(f"ℹ️ Using existing props file: {latest_props_file} (age: {int(age_seconds/60)} minutes)")
+        age_seconds = (current_time - latest_props_times[sport]).total_seconds()
+        print(f"ℹ️ Using existing {sport} props file: {latest_props_files[sport]} (age: {int(age_seconds/60)} minutes)")
     
     # Return existing file if it's still fresh
-    return latest_props_file
+    return latest_props_files[sport]
 
 # Add a new helper function at the top level to handle NaN values in JSON
 def sanitize_for_json(obj):

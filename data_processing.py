@@ -15,11 +15,16 @@ import os
 from typing import Dict, List, Any, Optional, Union
 
 # Get environment variables with defaults for local development
-API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "84a16c82fc52d68f5b26fdf844528016")
+# API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "9d6008c1f8233f9ffac3aeaefd903b61")
+API_KEY = "9d6008c1f8233f9ffac3aeaefd903b61"
 BASE_URL = os.environ.get("SPORTSGAMEODDS_BASE_URL", "https://api.sportsgameodds.com/v2")
 HEADERS = {
     "X-Api-Key": API_KEY
 }
+
+# Define supported leagues
+# LEAGUES = ["NBA", "WNBA", "MLB", "NHL"]
+LEAGUES = ["NBA"]
 
 def make_api_request(endpoint: str, params: Dict = None) -> Dict:
     url = f"{BASE_URL}/{endpoint}"
@@ -33,7 +38,7 @@ def make_api_request(endpoint: str, params: Dict = None) -> Dict:
         print(f"API Request Error: {e}")
         return {"success": False, "error": str(e)}
 
-def get_upcoming_nba_games() -> pd.DataFrame:
+def get_upcoming_games(league: str = "NBA") -> pd.DataFrame:
     # Current time in UTC
     current_time_utc = datetime.now(timezone.utc)
     
@@ -48,19 +53,19 @@ def get_upcoming_nba_games() -> pd.DataFrame:
     print("END TIME (UTC):", starts_before_24)
 
     params = {
-        "leagueID": "NBA",
+        "leagueID": league,
         "startsAfter": starts_after,
         "startsBefore": starts_before_24,
         "limit": 100
     }
 
-    print(f"\n📅 Fetching upcoming NBA games (next 24 hours)...")
+    print(f"\n📅 Fetching upcoming {league} games (next 24 hours)...")
     response = make_api_request("events", params)
 
     if response.get("success"):
         events_data = response.get("data", [])
         if events_data:
-            print(f"✅ Found {len(events_data)} upcoming NBA games")
+            print(f"✅ Found {len(events_data)} upcoming {league} games")
             processed_events = []
             for event in events_data:
                 event_id = event.get("eventID", "")
@@ -77,6 +82,7 @@ def get_upcoming_nba_games() -> pd.DataFrame:
                     "startTime": start_time,
                     "homeTeam": home_team,
                     "awayTeam": away_team,
+                    "league": league,
                     "rawData": event
                 }
 
@@ -84,13 +90,13 @@ def get_upcoming_nba_games() -> pd.DataFrame:
 
             return pd.DataFrame(processed_events)
         else:
-            print("❌ No upcoming NBA games found in the next 24 hours")
+            print(f"❌ No upcoming {league} games found in the next 24 hours")
             return pd.DataFrame()
     else:
-        print(f"❌ Error fetching NBA events: {response.get('error')}")
+        print(f"❌ Error fetching {league} events: {response.get('error')}")
         return pd.DataFrame()
 
-def get_player_props(event_id: str, home_team: str, away_team: str) -> pd.DataFrame:
+def get_player_props(event_id: str, home_team: str, away_team: str, league: str) -> pd.DataFrame:
     params = {
         "eventID": event_id
     }
@@ -108,8 +114,9 @@ def get_player_props(event_id: str, home_team: str, away_team: str) -> pd.DataFr
         odds_dict = event.get("odds", {})
         player_props = []
 
+        league_suffix = f"_{league}"
         for odd_id, odd_data in odds_dict.items():
-            if "PLAYER" in odd_id or "_NBA" in odd_id:
+            if "PLAYER" in odd_id or league_suffix in odd_id:
                 parts = odd_id.split("-")
                 if len(parts) >= 3:
                     prop_type = parts[0]
@@ -121,7 +128,8 @@ def get_player_props(event_id: str, home_team: str, away_team: str) -> pd.DataFr
                         "prop_type": prop_type,
                         "player_id": player_id,
                         "direction": direction,
-                        "eventID": event_id
+                        "eventID": event_id,
+                        "league": league
                     }
 
                     if odd_data:
@@ -136,12 +144,13 @@ def get_player_props(event_id: str, home_team: str, away_team: str) -> pd.DataFr
         print(f"❌ Error fetching event: {response.get('error')}")
         return pd.DataFrame()
 
-def parse_player_id(player_id: str) -> str:
+def parse_player_id(player_id: str, league: str) -> str:
     if not player_id or not isinstance(player_id, str):
         return "Unknown"
 
     name_parts = player_id.split("_")
-    if len(name_parts) >= 3 and name_parts[-1] == "NBA":
+    league_suffix = league
+    if len(name_parts) >= 3 and name_parts[-1] == league_suffix:
         name_parts = name_parts[:-2]
 
     name = " ".join(name_parts).title()
@@ -152,15 +161,22 @@ def process_player_props(props_df: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame()
 
     processed_df = props_df.copy()
-    if "player_id" in processed_df.columns:
-        processed_df["player_name"] = processed_df["player_id"].apply(parse_player_id)
+    if "player_id" in processed_df.columns and "league" in processed_df.columns:
+        processed_df["player_name"] = processed_df.apply(
+            lambda row: parse_player_id(row["player_id"], row["league"]), axis=1
+        )
 
     if "oddID" in processed_df.columns and "prop_type" not in processed_df.columns:
         processed_df["prop_details"] = processed_df["oddID"].apply(lambda x: x.split("-"))
         processed_df["prop_type"] = processed_df["prop_details"].apply(lambda x: x[0] if len(x) > 0 else "Unknown")
         processed_df["player_id"] = processed_df["prop_details"].apply(lambda x: x[1] if len(x) > 1 else "Unknown")
         processed_df["direction"] = processed_df["prop_details"].apply(lambda x: x[-1] if len(x) > 2 else "Unknown")
-        processed_df["player_name"] = processed_df["player_id"].apply(parse_player_id)
+        
+        if "league" in processed_df.columns:
+            processed_df["player_name"] = processed_df.apply(
+                lambda row: parse_player_id(row["player_id"], row["league"]), axis=1
+            )
+        
         processed_df.drop("prop_details", axis=1, inplace=True)
 
     if "americanOdds" in processed_df.columns:
@@ -189,7 +205,7 @@ def calculate_implied_probability(decimal_odds):
 
     return round(1 / float(decimal_odds), 4)
 
-def extract_team_name(team_data: Dict) -> str:
+def extract_team_name(team_data: Dict, league: str) -> str:
     if not team_data:
         return "Unknown"
 
@@ -205,44 +221,53 @@ def extract_team_name(team_data: Dict) -> str:
     team_id = team_data.get("teamID", "")
     if team_id:
         parts = team_id.split("_")
-        if len(parts) >= 2 and parts[-1] == "NBA":
+        league_suffix = league
+        if len(parts) >= 2 and parts[-1] == league_suffix:
             parts = parts[:-1]
             return " ".join(parts).title()
 
     return "Unknown"
 
 def main():
-    games_df = get_upcoming_nba_games()
-    if games_df.empty:
-        print("❌ No upcoming NBA games found")
+    all_games_df = pd.DataFrame()
+    
+    # Get games for each league
+    for league in LEAGUES:
+        games_df = get_upcoming_games(league)
+        if not games_df.empty:
+            all_games_df = pd.concat([all_games_df, games_df], ignore_index=True)
+    
+    if all_games_df.empty:
+        print("❌ No upcoming games found for any league")
         return
 
-    print("\n📋 Upcoming NBA Games (Note: Times are placeholders):")
-    for _, game in games_df.iterrows():
+    print("\n📋 Upcoming Games (Note: Times are placeholders):")
+    for _, game in all_games_df.iterrows():
         try:
             game_time_utc = datetime.strptime(game['startTime'], "%Y-%m-%dT%H:%M:%SZ")
             game_time_est = game_time_utc.replace(tzinfo=timezone.utc).astimezone(timezone(timedelta(hours=-5)))
-            home_team = extract_team_name(game['homeTeam'])
-            away_team = extract_team_name(game['awayTeam'])
-            print(f"  • {game_time_est.strftime('%Y-%m-%d %I:%M %p EST')}: {away_team} @ {home_team} (ID: {game['eventID']})")
+            league = game['league']
+            home_team = extract_team_name(game['homeTeam'], league)
+            away_team = extract_team_name(game['awayTeam'], league)
+            print(f"  • [{league}] {game_time_est.strftime('%Y-%m-%d %I:%M %p EST')}: {away_team} @ {home_team} (ID: {game['eventID']})")
         except Exception as e:
             print(f"❌ Error displaying game: {e}")
 
     print("\n🔍 Collecting player props for all games...")
     all_props = []
 
-
     # EXCEPT FOR THESE GAME IDs
     EXCEPT_EVENT_IDs = ['ppwvEzsFQ6V1tS0oONvs']
 
-    for _, game in games_df.iterrows():
+    for _, game in all_games_df.iterrows():
         try:
             event_id = game['eventID']
-            home_team = extract_team_name(game['homeTeam'])
-            away_team = extract_team_name(game['awayTeam'])
+            league = game['league']
+            home_team = extract_team_name(game['homeTeam'], league)
+            away_team = extract_team_name(game['awayTeam'], league)
             if event_id not in EXCEPT_EVENT_IDs:
-                print(f"\n📊 Processing game: {away_team} @ {home_team} (ID: {event_id})")
-                props_df = get_player_props(event_id, home_team, away_team)
+                print(f"\n📊 Processing {league} game: {away_team} @ {home_team} (ID: {event_id})")
+                props_df = get_player_props(event_id, home_team, away_team, league)
 
                 if props_df.empty:
                     print(f"❌ No player props found for {away_team} @ {home_team}")
@@ -255,6 +280,7 @@ def main():
                     processed_props['game'] = f"{away_team} @ {home_team}"
                     processed_props['game_number'] = event_id
                     processed_props['event_id'] = event_id
+                    processed_props['league'] = league
 
                     all_props.append(processed_props)
 
@@ -269,9 +295,20 @@ def main():
 
     if all_props:
         combined_props = pd.concat(all_props, ignore_index=True)
-        output_file = f"nba_player_props_{datetime.now().strftime('%Y-%m-%d')}.csv"
-        combined_props.to_csv(output_file, index=False)
-        print(f"\n✅ Saved {len(combined_props)} player props to {output_file}")
+        timestamp = datetime.now().strftime('%Y-%m-%d')
+        
+        # Save all combined props
+        all_output_file = f"basketball_player_props_{timestamp}.csv"
+        combined_props.to_csv(all_output_file, index=False)
+        print(f"\n✅ Saved {len(combined_props)} total player props to {all_output_file}")
+        
+        # Also save separate files for each league
+        for league in LEAGUES:
+            league_props = combined_props[combined_props['league'] == league]
+            if not league_props.empty:
+                league_output_file = f"{league.lower()}_player_props_{timestamp}.csv"
+                league_props.to_csv(league_output_file, index=False)
+                print(f"✅ Saved {len(league_props)} {league} player props to {league_output_file}")
     else:
         print("\n❌ No player props found for any games")
 
