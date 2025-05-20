@@ -13,10 +13,19 @@ from datetime import datetime, timedelta, timezone
 import time
 import os
 from typing import Dict, List, Any, Optional, Union
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Debug prints to check environment variables
+# print("Current working directory:", os.getcwd())
+# print("Environment variables loaded:")
+# print("SPORTSGAMEODDS_API_KEY:", os.environ.get("SPORTSGAMEODDS_API_KEY"))
+# print("SPORTSGAMEODDS_BASE_URL:", os.environ.get("SPORTSGAMEODDS_BASE_URL"))
 
 # Get environment variables with defaults for local development
-# API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "9d6008c1f8233f9ffac3aeaefd903b61")
-API_KEY = "9d6008c1f8233f9ffac3aeaefd903b61"
+API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "54d3becdef2171632a399753a3a85f5d")
 BASE_URL = os.environ.get("SPORTSGAMEODDS_BASE_URL", "https://api.sportsgameodds.com/v2")
 HEADERS = {
     "X-Api-Key": API_KEY
