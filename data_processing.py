@@ -18,16 +18,24 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-# Debug prints to check environment variables
-# print("Current working directory:", os.getcwd())
-# print("Environment variables loaded:")
-# print("SPORTSGAMEODDS_API_KEY:", os.environ.get("SPORTSGAMEODDS_API_KEY"))
-# print("SPORTSGAMEODDS_BASE_URL:", os.environ.get("SPORTSGAMEODDS_BASE_URL"))
+# Debug prints to check environment variables (only in development)
+if os.environ.get("ENVIRONMENT") != "production":
+    print("Current working directory:", os.getcwd())
+    print("Environment variables loaded:")
+    print("SPORTSGAMEODDS_API_KEY:", os.environ.get("SPORTSGAMEODDS_API_KEY", "Not found"))
+    print("SPORTSGAMEODDS_BASE_URL:", os.environ.get("SPORTSGAMEODDS_BASE_URL", "Not found"))
 
 # Get environment variables with defaults for local development
-# API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "54d3becdef2171632a399753a3a85f5d")
-API_KEY = "4268a87ef12b94b56a94046f47ecc1e2"
+API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "4268a87ef12b94b56a94046f47ecc1e2")
 BASE_URL = os.environ.get("SPORTSGAMEODDS_BASE_URL", "https://api.sportsgameodds.com/v2")
+
+# Log the API key being used (mask it for security)
+if API_KEY:
+    masked_key = API_KEY[:8] + "..." + API_KEY[-4:] if len(API_KEY) > 12 else "***"
+    print(f"Using API key: {masked_key}")
+else:
+    print("WARNING: No API key found!")
+
 HEADERS = {
     "X-Api-Key": API_KEY
 }
@@ -39,13 +47,25 @@ LEAGUES = ["NBA", "WNBA", "MLB", "NHL", "INTERNATIONAL", "MLS", "PREMIER_LEAGUE"
 def make_api_request(endpoint: str, params: Dict = None) -> Dict:
     url = f"{BASE_URL}/{endpoint}"
     print(f"API Request: {endpoint} - {params.get('eventID', '') if params else ''}")
+    print(f"Full URL: {url}")
     try:
         response = requests.get(url, headers=HEADERS, params=params)
+        print(f"Response status: {response.status_code}")
+        
+        if response.status_code == 403:
+            print("403 Forbidden - This could be due to:")
+            print("  - Invalid API key")
+            print("  - API key doesn't have permission for this endpoint")
+            print("  - Rate limiting")
+            print("  - Subscription level doesn't include this league")
+        
         response.raise_for_status()
         time.sleep(1)
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f"API Request Error: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            print(f"Response content: {e.response.text}")
         return {"success": False, "error": str(e)}
 
 def get_upcoming_games(league: str = "NBA") -> pd.DataFrame:

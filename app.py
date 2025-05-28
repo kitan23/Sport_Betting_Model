@@ -18,11 +18,20 @@ import os
 import tempfile
 import numpy as np
 from enum import Enum
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Get the CSV storage path from environment variable or use default
 CSV_STORAGE_PATH = os.environ.get("CSV_STORAGE_PATH", ".")
 # Create the directory if it doesn't exist
 os.makedirs(CSV_STORAGE_PATH, exist_ok=True)
+
+# Debug logging for environment variables (only in development)
+if os.environ.get("ENVIRONMENT") != "production":
+    print(f"Environment: {os.environ.get('ENVIRONMENT', 'development')}")
+    print(f"CSV_STORAGE_PATH: {CSV_STORAGE_PATH}")
 
 # Define supported sports
 class Sport(str, Enum):

@@ -13,6 +13,10 @@ import json
 import os
 import urllib.parse
 from enum import Enum
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Define Sport enum to match the backend
 class Sport(str, Enum):
@@ -41,13 +45,18 @@ SPORT_ICONS = {
 # For Streamlit Cloud deployment - make API URL configurable through environment variable
 # with a fallback to a deployed API URL (you'll need to deploy your FastAPI service separately)
 API_URL = os.environ.get("API_URL", "http://localhost:8000")
-# API_URL = "http://localhost:8000"
 # Remove trailing slash if present to avoid double slash issues
 API_URL = API_URL.rstrip('/')
 COOLDOWN_SECONDS = 180  # 3 minutes
 
 # Set to True when running locally, False for Streamlit Cloud
-LOCAL_DEV_MODE = False
+LOCAL_DEV_MODE = os.environ.get("ENVIRONMENT") != "production"
+
+# Debug logging for environment variables (only in development)
+if LOCAL_DEV_MODE:
+    print(f"Environment: {os.environ.get('ENVIRONMENT', 'development')}")
+    print(f"API_URL: {API_URL}")
+    print(f"LOCAL_DEV_MODE: {LOCAL_DEV_MODE}")
 
 # Default bookmakers to show at the top of the list
 DEFAULT_BOOKMAKERS = [
