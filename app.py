@@ -30,6 +30,10 @@ class Sport(str, Enum):
     WNBA = "WNBA"
     MLB = "MLB"
     NHL = "NHL"
+    INTERNATIONAL = "INTERNATIONAL"
+    MLS = "MLS"
+    PREMIER_LEAGUE = "PREMIER_LEAGUE"
+    CHAMPIONS_LEAGUE = "CHAMPIONS_LEAGUE"
 
 app = FastAPI(title="Sports Betting Model API")
 

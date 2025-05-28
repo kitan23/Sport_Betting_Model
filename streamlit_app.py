@@ -20,13 +20,21 @@ class Sport(str, Enum):
     WNBA = "WNBA"
     MLB = "MLB"
     NHL = "NHL"
+    INTERNATIONAL = "INTERNATIONAL"
+    MLS = "MLS"
+    PREMIER_LEAGUE = "PREMIER_LEAGUE"
+    CHAMPIONS_LEAGUE = "CHAMPIONS_LEAGUE"
 
 # Constants for UI
 SPORT_ICONS = {
     Sport.NBA: "🏀",
     Sport.WNBA: "🏀",
     Sport.MLB: "⚾",
-    Sport.NHL: "🏒"
+    Sport.NHL: "🏒",
+    Sport.INTERNATIONAL: "⚽",
+    Sport.MLS: "⚽",
+    Sport.PREMIER_LEAGUE: "⚽",
+    Sport.CHAMPIONS_LEAGUE: "⚽"
 }
 
 # Constants
@@ -236,7 +244,8 @@ def sync_with_backend_refresh_time(sport: Sport = Sport.NBA):
                     backend_refresh_time = current_time - timedelta(minutes=backend_age_minutes)
                     
                     # Update local refresh time if backend data is newer
-                    if backend_refresh_time > st.session_state[f'last_refresh_dt_{sport}']:
+                    if (st.session_state[f'last_refresh_dt_{sport}'] is None or 
+                        backend_refresh_time > st.session_state[f'last_refresh_dt_{sport}']):
                         st.session_state[f'last_refresh_dt_{sport}'] = backend_refresh_time
                         st.session_state[f'last_refresh_{sport}'] = backend_refresh_time.strftime("%Y-%m-%d %H:%M:%S")
                         
@@ -315,7 +324,7 @@ def main():
         with cols[i]:
             selected = st.session_state.active_sport == sport
             if st.button(
-                f"{SPORT_ICONS[sport]} {sport}", 
+                f"{SPORT_ICONS[sport]} {sport.value}", 
                 key=f"sport_select_{sport}",
                 use_container_width=True,
                 type="primary" if selected else "secondary"
@@ -328,7 +337,7 @@ def main():
     
     # Display content for the active sport
     active_sport = st.session_state.active_sport
-    st.header(f"{SPORT_ICONS[active_sport]} {active_sport} Value Plays")
+    st.header(f"{SPORT_ICONS[active_sport]} {active_sport.value} Value Plays")
     
     # Define callback for bookmaker selection change
     def on_bookmaker_change():
@@ -338,13 +347,15 @@ def main():
     
     # Add information about current limitations for active sport
     if active_sport == Sport.MLB:
-        st.info(f"ℹ️ **Note:** For {active_sport}, data is limited to the next 4 games to optimize API usage. Games are sorted by start time.")
+        st.info(f"ℹ️ **Note:** For {active_sport.value}, data is limited to the next 4 games to optimize API usage. Games are sorted by start time.")
+    elif active_sport in [Sport.INTERNATIONAL, Sport.MLS, Sport.PREMIER_LEAGUE, Sport.CHAMPIONS_LEAGUE]:
+        st.info(f"ℹ️ **Note:** For {active_sport.value} ⚽, this tool fetches upcoming matches for the next 24 hours. Soccer betting markets may include match result, over/under goals, and player props.")
     else:
-        st.info(f"ℹ️ **Note:** This tool fetches upcoming {active_sport} games for the next 24 hours only.")
+        st.info(f"ℹ️ **Note:** This tool fetches upcoming {active_sport.value} games for the next 24 hours only.")
     
     # Sidebar for controls for active sport
     with st.sidebar:
-        st.header(f"{SPORT_ICONS[active_sport]} {active_sport} Controls")
+        st.header(f"{SPORT_ICONS[active_sport]} {active_sport.value} Controls")
         
         # Sportsbook selection with popular options at top
         bookmaker_options = DEFAULT_BOOKMAKERS + [b for b in sorted(SPORTSBOOKS) if b not in DEFAULT_BOOKMAKERS]
@@ -403,15 +414,15 @@ def main():
             st.warning(f"⏳ Please wait {remaining_mins}m {remaining_secs}s before refreshing")
             
             # The button exists but is disabled
-            refresh_button = st.button(f"Get Fresh {active_sport} Props", disabled=True, key=f"refresh_disabled_{active_sport}")
+            refresh_button = st.button(f"Get Fresh {active_sport.value} Props", disabled=True, key=f"refresh_disabled_{active_sport}")
             
             # Add a note about switching bookmakers
             st.caption("You can switch bookmakers while waiting by selecting a different option above")
         else:
             # Only show button when not in middle of switching bookmakers
-            refresh_button = st.button(f"Get Fresh {active_sport} Props", key=f"refresh_enabled_{active_sport}")
+            refresh_button = st.button(f"Get Fresh {active_sport.value} Props", key=f"refresh_enabled_{active_sport}")
             if refresh_button:
-                with st.spinner(f"Fetching {active_sport} props data..."):
+                with st.spinner(f"Fetching {active_sport.value} props data..."):
                     get_value_plays(selected_bookmaker, min_edge, sport=active_sport)
         
         # Add statistics in the sidebar for active sport
@@ -461,7 +472,7 @@ def main():
         # Display the value plays
         display_value_plays(value_plays, active_sport)
     else:
-        st.info(f"No {active_sport} data available yet. Click 'Get Fresh {active_sport} Props' to fetch data.")
+        st.info(f"No {active_sport.value} data available yet. Click 'Get Fresh {active_sport.value} Props' to fetch data.")
         
         # Add a placeholder for future results
         st.caption("Results will appear here after fetching props data.")
@@ -570,7 +581,7 @@ def get_value_plays(bookmaker: str, min_edge: float, force_local: bool = False, 
                             backend_age_minutes = sport_data['age_minutes']
                             # Calculate the backend's refresh time
                             backend_refresh_time = current_time - timedelta(minutes=backend_age_minutes)
-                            # Update our refresh time to match (if newer)
+                            # Update local refresh time if backend data is newer
                             if (st.session_state[f'last_refresh_dt_{sport}'] is None or 
                                 backend_refresh_time > st.session_state[f'last_refresh_dt_{sport}']):
                                 st.session_state[f'last_refresh_dt_{sport}'] = backend_refresh_time
@@ -661,9 +672,9 @@ def display_value_plays(value_plays: dict, sport: Sport = Sport.NBA):
     bookmaker = value_plays.get('bookmaker', 'unknown')
     
     st.download_button(
-        label=f"Download {sport} Value Plays CSV",
+        label=f"Download {sport.value} Value Plays CSV",
         data=csv,
-        file_name=f"{sport.lower()}_{bookmaker}_value_plays_{current_time}.csv",
+        file_name=f"{sport.value.lower()}_{bookmaker}_value_plays_{current_time}.csv",
         mime="text/csv"
     )
 

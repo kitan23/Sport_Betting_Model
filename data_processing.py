@@ -25,15 +25,16 @@ load_dotenv()
 # print("SPORTSGAMEODDS_BASE_URL:", os.environ.get("SPORTSGAMEODDS_BASE_URL"))
 
 # Get environment variables with defaults for local development
-API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "54d3becdef2171632a399753a3a85f5d")
+# API_KEY = os.environ.get("SPORTSGAMEODDS_API_KEY", "54d3becdef2171632a399753a3a85f5d")
+API_KEY = "4268a87ef12b94b56a94046f47ecc1e2"
 BASE_URL = os.environ.get("SPORTSGAMEODDS_BASE_URL", "https://api.sportsgameodds.com/v2")
 HEADERS = {
     "X-Api-Key": API_KEY
 }
 
 # Define supported leagues
-# LEAGUES = ["NBA", "WNBA", "MLB", "NHL"]
-LEAGUES = ["NBA"]
+LEAGUES = ["NBA", "WNBA", "MLB", "NHL", "INTERNATIONAL", "MLS", "PREMIER_LEAGUE", "CHAMPIONS_LEAGUE"]
+# LEAGUES = ["NBA"]
 
 def make_api_request(endpoint: str, params: Dict = None) -> Dict:
     url = f"{BASE_URL}/{endpoint}"
