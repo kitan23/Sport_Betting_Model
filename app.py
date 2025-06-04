@@ -43,6 +43,9 @@ class Sport(str, Enum):
     MLS = "MLS"
     PREMIER_LEAGUE = "PREMIER_LEAGUE"
     CHAMPIONS_LEAGUE = "CHAMPIONS_LEAGUE"
+    ATP = "ATP"
+    ITF = "ITF"
+    WTA = "WTA"
 
 app = FastAPI(title="Sports Betting Model API")
 
@@ -390,7 +393,11 @@ async def refresh_props_data(sport: Sport = Sport.NBA):
             if sport == Sport.MLB and len(games_df) > game_limit:
                 print(f"⚾ Limiting MLB games to {game_limit} (out of {len(games_df)} available)")
                 games_df = games_df.head(game_limit)
-                
+            
+            # For tennis matches, add a note about the number of matches
+            if sport in [Sport.ATP, Sport.ITF, Sport.WTA]:
+                print(f"🎾 Processing {len(games_df)} {sport} tennis matches")
+            
             # Get props for all games
             all_props = []
             

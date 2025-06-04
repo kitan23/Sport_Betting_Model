@@ -28,6 +28,9 @@ class Sport(str, Enum):
     MLS = "MLS"
     PREMIER_LEAGUE = "PREMIER_LEAGUE"
     CHAMPIONS_LEAGUE = "CHAMPIONS_LEAGUE"
+    ATP = "ATP"
+    ITF = "ITF"
+    WTA = "WTA"
 
 # Constants for UI
 SPORT_ICONS = {
@@ -38,7 +41,10 @@ SPORT_ICONS = {
     Sport.INTERNATIONAL: "⚽",
     Sport.MLS: "⚽",
     Sport.PREMIER_LEAGUE: "⚽",
-    Sport.CHAMPIONS_LEAGUE: "⚽"
+    Sport.CHAMPIONS_LEAGUE: "⚽",
+    Sport.ATP: "🎾",
+    Sport.ITF: "🎾",
+    Sport.WTA: "🎾"
 }
 
 # Constants
@@ -359,6 +365,8 @@ def main():
         st.info(f"ℹ️ **Note:** For {active_sport.value}, data is limited to the next 4 games to optimize API usage. Games are sorted by start time.")
     elif active_sport in [Sport.INTERNATIONAL, Sport.MLS, Sport.PREMIER_LEAGUE, Sport.CHAMPIONS_LEAGUE]:
         st.info(f"ℹ️ **Note:** For {active_sport.value} ⚽, this tool fetches upcoming matches for the next 24 hours. Soccer betting markets may include match result, over/under goals, and player props.")
+    elif active_sport in [Sport.ATP, Sport.ITF, Sport.WTA]:
+        st.info(f"ℹ️ **Note:** For {active_sport.value} 🎾, this tool fetches upcoming tennis matches for the next 24 hours. Tennis betting markets may include match winner, set betting, and game totals.")
     else:
         st.info(f"ℹ️ **Note:** This tool fetches upcoming {active_sport.value} games for the next 24 hours only.")
     
